@@ -210,29 +210,51 @@ a {
 }
 
 /* Sponsor modal subtle transitions (fade backdrop + scale panel) */
-#sponsorModal {
+#sponsorModal,
+#curtoCircuitoModal,
+#solidworksModal,
+#elipseModal {
+  position: fixed;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
   opacity: 0;
   transition: opacity 0.2s ease-out;
 }
 
-#sponsorModal > div {
+#sponsorModal > div,
+#curtoCircuitoModal > div,
+#solidworksModal > div,
+#elipseModal > div {
   opacity: 0;
   transform: translateY(6px) scale(0.98);
   transition: opacity 0.2s ease-out, transform 0.2s ease-out;
 }
 
-#sponsorModal.is-open {
+#sponsorModal.is-open,
+#curtoCircuitoModal.is-open,
+#solidworksModal.is-open,
+#elipseModal.is-open {
   opacity: 1;
 }
 
-#sponsorModal.is-open > div {
+#sponsorModal.is-open > div,
+#curtoCircuitoModal.is-open > div,
+#solidworksModal.is-open > div,
+#elipseModal.is-open > div {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
 
 @media (prefers-reduced-motion: reduce) {
   #sponsorModal,
-  #sponsorModal > div {
+  #sponsorModal > div,
+  #curtoCircuitoModal,
+  #curtoCircuitoModal > div,
+  #solidworksModal,
+  #solidworksModal > div,
+  #elipseModal,
+  #elipseModal > div {
     transition: none;
   }
 }

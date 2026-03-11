@@ -1,14 +1,28 @@
 // script.js
-window.addEventListener("load", function () {
-  const splash = document.getElementById("splash");
+const SPLASH_FADE_MS = 500;
+const SPLASH_EARLY_HIDE_DELAY_MS = 120;
+let splashWasHidden = false;
 
-  if (splash) {
-    splash.style.opacity = "0";
-    setTimeout(() => {
-      splash.style.display = "none";
-    }, 1000); // Match the transition duration
-  }
+function hideSplash() {
+  if (splashWasHidden) return;
+  const splash = document.getElementById("splash");
+  if (!splash) return;
+
+  splashWasHidden = true;
+  splash.style.opacity = "0";
+
+  window.setTimeout(() => {
+    splash.style.display = "none";
+  }, SPLASH_FADE_MS);
+}
+
+// Hide as soon as HTML is ready (doesn't wait heavy images/videos/CDNs)
+window.addEventListener("DOMContentLoaded", () => {
+  window.setTimeout(hideSplash, SPLASH_EARLY_HIDE_DELAY_MS);
 });
+
+// Keep a fallback for slow devices/network
+window.addEventListener("load", hideSplash);
 
 // Parallax effect for hero section
 let spiderCurrentTop = 80; // Posição inicial da aranha
@@ -101,78 +115,90 @@ if (scrollRight && sponsorsContainer) {
   });
 }
 
-// Sponsorship Modal functionality
-const sponsorModal = document.getElementById("sponsorModal");
-const openSponsorModalBtn = document.getElementById("openSponsorModal");
-const closeSponsorModalBtn = document.getElementById("closeSponsorModal");
-const modalContactBtn = document.getElementById("modalContactBtn");
-
 const MODAL_TRANSITION_MS = 200;
 const prefersReducedMotion =
   window.matchMedia &&
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-function openSponsorModal() {
-  if (!sponsorModal) return;
+function setupModal({ modalId, openBtnId, closeBtnId, extraCloseBtnIds = [] }) {
+  const modalEl = document.getElementById(modalId);
+  const openBtn = document.getElementById(openBtnId);
+  const closeBtn = document.getElementById(closeBtnId);
 
-  sponsorModal.classList.remove("hidden");
-  sponsorModal.classList.add("flex");
+  if (!modalEl) return;
 
-  if (prefersReducedMotion) {
-    sponsorModal.classList.add("is-open");
-  } else {
-    // Next frame so the transition can animate from opacity 0.
-    requestAnimationFrame(() => sponsorModal.classList.add("is-open"));
-  }
+  function open() {
+    modalEl.classList.remove("hidden");
+    modalEl.classList.add("flex");
 
-  // Re-render feather icons in modal
-  setTimeout(() => feather.replace(), 10);
-}
-
-function closeSponsorModal() {
-  if (!sponsorModal) return;
-
-  sponsorModal.classList.remove("is-open");
-
-  if (prefersReducedMotion) {
-    sponsorModal.classList.add("hidden");
-    sponsorModal.classList.remove("flex");
-    return;
-  }
-
-  window.setTimeout(() => {
-    sponsorModal.classList.add("hidden");
-    sponsorModal.classList.remove("flex");
-  }, MODAL_TRANSITION_MS);
-}
-
-if (openSponsorModalBtn && sponsorModal) {
-  openSponsorModalBtn.addEventListener("click", () => {
-    openSponsorModal();
-  });
-}
-
-if (closeSponsorModalBtn && sponsorModal) {
-  closeSponsorModalBtn.addEventListener("click", () => {
-    closeSponsorModal();
-  });
-}
-
-// Close modal when clicking outside
-if (sponsorModal) {
-  sponsorModal.addEventListener("click", (e) => {
-    if (e.target === sponsorModal) {
-      closeSponsorModal();
+    if (prefersReducedMotion) {
+      modalEl.classList.add("is-open");
+    } else {
+      requestAnimationFrame(() => modalEl.classList.add("is-open"));
     }
+
+    window.setTimeout(() => {
+      if (typeof feather !== "undefined" && feather.replace) feather.replace();
+    }, 10);
+  }
+
+  function close() {
+    modalEl.classList.remove("is-open");
+
+    if (prefersReducedMotion) {
+      modalEl.classList.add("hidden");
+      modalEl.classList.remove("flex");
+      return;
+    }
+
+    window.setTimeout(() => {
+      modalEl.classList.add("hidden");
+      modalEl.classList.remove("flex");
+    }, MODAL_TRANSITION_MS);
+  }
+
+  if (openBtn) openBtn.addEventListener("click", open);
+  if (closeBtn) closeBtn.addEventListener("click", close);
+
+  extraCloseBtnIds.forEach((id) => {
+    const extraBtn = document.getElementById(id);
+    if (extraBtn) extraBtn.addEventListener("click", close);
+  });
+
+  // Close when clicking outside the panel
+  modalEl.addEventListener("click", (e) => {
+    if (e.target === modalEl) close();
+  });
+
+  // Close on ESC
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    if (modalEl.classList.contains("hidden")) return;
+    close();
   });
 }
 
-// Close modal when contact button is clicked
-if (modalContactBtn && sponsorModal) {
-  modalContactBtn.addEventListener("click", () => {
-    closeSponsorModal();
-  });
-}
+// Sponsorship Modal functionality
+setupModal({
+  modalId: "sponsorModal",
+  openBtnId: "openSponsorModal",
+  closeBtnId: "closeSponsorModal",
+  extraCloseBtnIds: ["modalContactBtn"],
+});
+
+// SolidWorks Modal
+setupModal({
+  modalId: "solidworksModal",
+  openBtnId: "openSolidworksModal",
+  closeBtnId: "closeSolidworksModal",
+});
+
+// Elipse Modal
+setupModal({
+  modalId: "elipseModal",
+  openBtnId: "openElipseModal",
+  closeBtnId: "closeElipseModal",
+});
 
 // About carousel functionality
 (function initAboutCarousel() {

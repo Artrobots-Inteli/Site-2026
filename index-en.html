@@ -43,7 +43,7 @@
     <!-- Splash Screen -->
     <div
       id="splash"
-      class="fixed inset-0 z-50 flex items-center justify-center bg-dark transition-opacity duration-1000"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-dark transition-opacity duration-500"
     >
       <div class="text-center animate-pulse">
         <img
@@ -97,13 +97,13 @@
           Inteli Robotics Club
         </p>
         <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8 text-gray-300">
-          Innovation, competition and excellence in robotics
+          OPEN SELECTION PROCESS! SIGN UP
         </p>
         <a
-          href="#about"
+          href="https://forms.gle/swRL4KXsU4TNNZgZA"
           class="bg-accent hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 inline-flex items-center"
         >
-          Meet us <i data-feather="arrow-down" class="ml-2"></i>
+          SIGN UP FOR THE SELECTION PROCESS
         </a>
       </div>
     </section>
@@ -267,9 +267,10 @@
             >
               <i data-feather="cpu"></i>
             </div>
-            <h3 class="text-xl font-bold mb-2">Software</h3>
-            <p class="text-gray-300">
-              Control systems, computer vision, and AI development.
+            <h3 class="text-xl font-bold mb-2">Computing</h3>
+              <p class="text-gray-300">
+              Led by our director: Felipe Caiafa. <br />
+              The Computing Area is responsible for developing the logic of the robots, computer vision, and artificial intelligence.
             </p>
           </div>
           <div
@@ -282,7 +283,8 @@
             </div>
             <h3 class="text-xl font-bold mb-2">Electrical</h3>
             <p class="text-gray-300">
-              Designing and implementing electronics and power systems.
+              Led by our director: Nicolli Venino. <br />
+              The Electrical Area is responsible for designing and implementing electronics and power systems.
             </p>
           </div>
           <div
@@ -295,7 +297,8 @@
             </div>
             <h3 class="text-xl font-bold mb-2">Mechanical</h3>
             <p class="text-gray-300">
-              Designing and building mechanical structures and motion systems.
+              Led by our director: Carlos Ícaro<br />
+              The Mechanical Area is responsible for designing and building mechanical structures and motion systems.
             </p>
           </div>
           <div
@@ -308,6 +311,7 @@
             </div>
             <h3 class="text-xl font-bold mb-2">Marketing</h3>
             <p class="text-gray-300">
+              Led by our director: Emanuelly Dias. <br>
               Outreach, fundraising, and social media management.
             </p>
           </div>
@@ -451,7 +455,7 @@
     <section id="sponsors" class="py-20 bg-primary relative overflow-hidden">
       <div class="absolute top-0 left-0 w-full h-full opacity-10">
         <div
-          class="absolute inset-0 bg-[url('https://static.photos/abstract/1200x630/6')] bg-cover bg-center animate-pulse"
+          class="absolute inset-0 bg-[url('assets/inteliescada.webp')] bg-cover bg-center animate-pulse"
         ></div>
       </div>
       <div class="container mx-auto safe-container relative">
@@ -461,60 +465,73 @@
           OUR PARTNERS
         </h2>
 
-        <div class="sponsors-container w-full overflow-x-auto pb-4">
+
+          <div class="sponsors-container w-full overflow-x-auto pb-4">
           <div class="sponsors-grid inline-flex gap-12 px-4">
-            <div
-              class="sponsor-item min-w-[200px] h-24 bg-gray-700 rounded-lg flex items-center justify-center p-4 glow-on-hover transform transition-all duration-300 hover:scale-105"
+            <button
+              id="openSolidworksModal"
+              type="button"
+              class="sponsor-item min-w-[300px] h-36 bg-gray-700 rounded-lg flex items-center justify-center p-3 glow-on-hover transform transition-all duration-300 hover:scale-105 text-left"
+              aria-haspopup="dialog"
+              aria-controls="solidworksModal"
+            >
+              <span class="sr-only"
+                >SolidWorks</span
+              >
+              <img
+                src="assets/solidoworks.svg"
+                alt="SolidWorks"
+                class="h-[120px] w-auto max-w-full rounded-md"
+                loading="lazy"
+              />
+            </button>
+            <button
+              id="openElipseModal"
+              type="button"
+              class="sponsor-item min-w-[300px] h-36 bg-gray-700 rounded-lg flex items-center justify-center p-3 glow-on-hover transform transition-all duration-300 hover:scale-105"
+              aria-haspopup="dialog"
+              aria-controls="elipseModal"
             >
               <img
-                src="https://via.placeholder.com/200x80?text=Sponsor+1"
-                alt="Sponsor 1"
-                class="max-h-full max-w-full"
+                src="assets/elipselogo.png"
+                alt="Elipse Software"
+                class="h-[120px] w-auto"
               />
-            </div>
+            </button>
             <div
-              class="sponsor-item min-w-[200px] h-24 bg-gray-700 rounded-lg flex items-center justify-center p-4 glow-on-hover transform transition-all duration-300 hover:scale-105"
-            >
-              <img
-                src="https://via.placeholder.com/200x80?text=Sponsor+2"
-                alt="Sponsor 2"
-                class="max-h-full max-w-full"
-              />
-            </div>
-            <div
-              class="sponsor-item min-w-[200px] h-24 bg-gray-700 rounded-lg flex items-center justify-center p-4 glow-on-hover transform transition-all duration-300 hover:scale-105"
+              class="sponsor-item min-w-[300px] h-36 bg-gray-700 rounded-lg flex items-center justify-center p-3 glow-on-hover transform transition-all duration-300 hover:scale-105"
             >
               <img
                 src="https://via.placeholder.com/200x80?text=Sponsor+3"
                 alt="Sponsor 3"
-                class="max-h-full max-w-full"
+                class="h-[120px] w-auto"
               />
             </div>
             <div
-              class="sponsor-item min-w-[200px] h-24 bg-gray-700 rounded-lg flex items-center justify-center p-4 glow-on-hover transform transition-all duration-300 hover:scale-105"
+              class="sponsor-item min-w-[300px] h-36 bg-gray-700 rounded-lg flex items-center justify-center p-3 glow-on-hover transform transition-all duration-300 hover:scale-105"
             >
               <img
                 src="https://via.placeholder.com/200x80?text=Sponsor+4"
                 alt="Sponsor 4"
-                class="max-h-full max-w-full"
+                class="h-[120px] w-auto"
               />
             </div>
             <div
-              class="sponsor-item min-w-[200px] h-24 bg-gray-700 rounded-lg flex items-center justify-center p-4 glow-on-hover transform transition-all duration-300 hover:scale-105"
+              class="sponsor-item min-w-[300px] h-36 bg-gray-700 rounded-lg flex items-center justify-center p-3 glow-on-hover transform transition-all duration-300 hover:scale-105"
             >
               <img
                 src="https://via.placeholder.com/200x80?text=Sponsor+5"
                 alt="Sponsor 5"
-                class="max-h-full max-w-full"
+                class="h-[120px] w-auto"
               />
             </div>
             <div
-              class="sponsor-item min-w-[200px] h-24 bg-gray-700 rounded-lg flex items-center justify-center p-4 glow-on-hover transform transition-all duration-300 hover:scale-105"
+              class="sponsor-item min-w-[300px] h-36 bg-gray-700 rounded-lg flex items-center justify-center p-3 glow-on-hover transform transition-all duration-300 hover:scale-105"
             >
               <img
                 src="https://via.placeholder.com/200x80?text=Sponsor+6"
                 alt="Sponsor 6"
-                class="max-h-full max-w-full"
+                class="h-[120px] w-auto"
               />
             </div>
           </div>
@@ -637,7 +654,7 @@
             class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-700"
           >
             <img
-              src="assets/diretorProjetos.jpg"
+              src="assets/diretorProjetos.jpeg"
               alt="Gabriel Scatolin"
               class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-teal"
             />
@@ -653,30 +670,30 @@
           <div
             class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-700"
           >
-            <div
-              class="w-32 h-32 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full mx-auto mb-4 flex items-center justify-center border-4 border-purple-600"
-            >
-              <i data-feather="share-2" class="w-12 h-12"></i>
-            </div>
+            <img
+              src="assets/diretoraMarketing.jpeg"
+              alt="Emanuelly Dias"
+              class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-purple-600"
+            />
             <h3 class="text-xl font-bold text-center mb-1">
               Marketing Director
             </h3>
-            <p class="text-gray-300 text-center font-medium">TBD</p>
+            <p class="text-gray-300 text-center font-medium">Emanuelly Dias</p>
           </div>
 
           <!-- Diretor de Mecânica -->
           <div
             class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-700"
           >
-            <div
-              class="w-32 h-32 bg-gradient-to-br from-gray-600 to-gray-800 rounded-full mx-auto mb-4 flex items-center justify-center border-4 border-gray-600"
-            >
-              <i data-feather="tool" class="w-12 h-12"></i>
-            </div>
+              <img
+              src="assets/diretorMecanica.jpeg"
+              alt="Carlos Paiva"
+              class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-purple-600"
+            />
             <h3 class="text-xl font-bold text-center mb-1">
               Mechanical Director
             </h3>
-            <p class="text-gray-300 text-center font-medium">TBD</p>
+            <p class="text-gray-300 text-center font-medium">Carlos Ícaro</p>
           </div>
         </div>
 
@@ -705,185 +722,203 @@
           Follow our upcoming events, competitions, and meetings
         </p>
 
-        <div class="max-w-5xl mx-auto">
-          <!-- Calendar Grid -->
-          <div class="bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
-            <!-- Month Header -->
-            <div
-              class="bg-gradient-to-r from-secondary to-accent p-6 flex justify-between items-center"
-            >
-              <button
-                class="hover:bg-white hover:bg-opacity-20 p-2 rounded-lg transition"
-              >
-                <i data-feather="chevron-left" class="w-6 h-6"></i>
-              </button>
-              <h3 class="text-2xl font-bold">CALENDAR 2026</h3>
-              <button
-                class="hover:bg-white hover:bg-opacity-20 p-2 rounded-lg transition"
-              >
-                <i data-feather="chevron-right" class="w-6 h-6"></i>
-              </button>
+       <div class="max-w-5xl mx-auto">
+  <!-- Calendar Grid -->
+  <div class="bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
+    <!-- Month Header -->
+    <div
+      class="bg-gradient-to-r from-secondary to-accent p-6 flex justify-between items-center"
+    >
+      <button
+        class="hover:bg-white hover:bg-opacity-20 p-2 rounded-lg transition"
+      >
+        <i data-feather="chevron-left" class="w-6 h-6"></i>
+      </button>
+      <h3 class="text-2xl font-bold">CALENDAR 2026</h3>
+      <button
+        class="hover:bg-white hover:bg-opacity-20 p-2 rounded-lg transition"
+      >
+        <i data-feather="chevron-right" class="w-6 h-6"></i>
+      </button>
+    </div>
+
+    <!-- Events List -->
+    <div class="p-6 space-y-4">
+      <!-- Event 1 -->
+      <div
+        class="bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition-all duration-300 border-l-4 border-accent"
+      >
+        <div class="flex items-start justify-between">
+          <div class="flex items-start space-x-4">
+            <div class="bg-accent rounded-lg p-3 text-center min-w-[60px]">
+              <div class="text-2xl font-bold">04</div>
+              <div class="text-xs">MAR</div>
             </div>
-
-            <!-- Events List -->
-            <div class="p-6 space-y-4">
-              <!-- Event 1: January -->
-              <div
-                class="bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition-all duration-300 border-l-4 border-accent"
-              >
-                <div class="flex items-start justify-between">
-                  <div class="flex items-start space-x-4">
-                    <div
-                      class="bg-accent rounded-lg p-3 text-center min-w-[60px]"
-                    >
-                      <div class="text-2xl font-bold">30</div>
-                      <div class="text-xs">JAN</div>
-                    </div>
-                    <div>
-                      <h4 class="text-lg font-bold mb-1">
-                        Freshers onboarding
-                      </h4>
-                      <p class="text-gray-300 text-sm mb-2">
-                        Club presentation for Inteli's new students.
-                      </p>
-                      <div
-                        class="flex items-center text-gray-400 text-sm space-x-4"
-                      >
-                        <span class="flex items-center"
-                          ><i data-feather="clock" class="w-4 h-4 mr-1"></i>
-                          14:00</span
-                        >
-                        <span class="flex items-center"
-                          ><i data-feather="map-pin" class="w-4 h-4 mr-1"></i>
-                          Main Auditorium</span
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Event 2: February -->
-              <div
-                class="bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition-all duration-300 border-l-4 border-accent"
-              >
-                <div class="flex items-start justify-between">
-                  <div class="flex items-start space-x-4">
-                    <div
-                      class="bg-accent rounded-lg p-3 text-center min-w-[60px]"
-                    >
-                      <div class="text-2xl font-bold">15</div>
-                      <div class="text-xs">FEB</div>
-                    </div>
-                    <div>
-                      <h4 class="text-lg font-bold mb-1">Members meeting</h4>
-                      <p class="text-gray-300 text-sm mb-2">
-                        Preparation for the selection process.
-                      </p>
-                      <div
-                        class="flex items-center text-gray-400 text-sm space-x-4"
-                      >
-                        <span class="flex items-center"
-                          ><i data-feather="clock" class="w-4 h-4 mr-1"></i>
-                          16:00</span
-                        >
-                        <span class="flex items-center"
-                          ><i data-feather="map-pin" class="w-4 h-4 mr-1"></i>
-                          Room B203</span
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Event 3: March -->
-              <div
-                class="bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition-all duration-300 border-l-4 border-accent"
-              >
-                <div class="flex items-start justify-between">
-                  <div class="flex items-start space-x-4">
-                    <div
-                      class="bg-accent rounded-lg p-3 text-center min-w-[60px]"
-                    >
-                      <div class="text-2xl font-bold">01</div>
-                      <div class="text-xs">MAR</div>
-                    </div>
-                    <div>
-                      <h4 class="text-lg font-bold mb-1">
-                        Selection process opens
-                      </h4>
-                      <p class="text-gray-300 text-sm mb-2">
-                        Applications open for new members.
-                      </p>
-                      <div
-                        class="flex items-center text-gray-400 text-sm space-x-4"
-                      >
-                        <span class="flex items-center"
-                          ><i data-feather="clock" class="w-4 h-4 mr-1"></i>
-                          09:00</span
-                        >
-                        <span class="flex items-center"
-                          ><i data-feather="map-pin" class="w-4 h-4 mr-1"></i>
-                          Online</span
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Event 4: April -->
-              <div
-                class="bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition-all duration-300 border-l-4 border-accent"
-              >
-                <div class="flex items-start justify-between">
-                  <div class="flex items-start space-x-4">
-                    <div
-                      class="bg-accent rounded-lg p-3 text-center min-w-[60px]"
-                    >
-                      <div class="text-2xl font-bold">10</div>
-                      <div class="text-xs">APR</div>
-                    </div>
-                    <div>
-                      <h4 class="text-lg font-bold mb-1">
-                        Onboarding for new members
-                      </h4>
-                      <p class="text-gray-300 text-sm mb-2">
-                        Integration and overview of club activities.
-                      </p>
-                      <div
-                        class="flex items-center text-gray-400 text-sm space-x-4"
-                      >
-                        <span class="flex items-center"
-                          ><i data-feather="clock" class="w-4 h-4 mr-1"></i>
-                          10:00</span
-                        >
-                        <span class="flex items-center"
-                          ><i data-feather="map-pin" class="w-4 h-4 mr-1"></i>
-                          Room C101</span
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div>
+              <h4 class="text-lg font-bold mb-1">
+                Recruitment Process Opens
+              </h4>
+              <p class="text-gray-300 text-sm mb-2">
+                The club will open its recruitment process for Inteli students
+              </p>
+              <div class="flex items-center text-gray-400 text-sm space-x-4">
+                <span class="flex items-center">
+                  <i data-feather="clock" class="w-4 h-4 mr-1"></i>
+                  10:00
+                </span>
+                <span class="flex items-center">
+                  <i data-feather="map-pin" class="w-4 h-4 mr-1"></i>
+                  Form
+                </span>
               </div>
             </div>
-          </div>
-
-          <!-- Google Calendar Integration -->
-          <div class="mt-8 text-center">
-            <a
-              href="#"
-              class="inline-flex items-center bg-secondary hover:bg-opacity-80 text-white font-bold py-3 px-8 rounded-full transition duration-300"
-            >
-              <i data-feather="calendar" class="mr-2"></i>
-              Add to Google Calendar
-            </a>
           </div>
         </div>
       </div>
-    </section>
+
+      <!-- Event 2 -->
+      <div
+        class="bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition-all duration-300 border-l-4 border-accent"
+      >
+        <div class="flex items-start justify-between">
+          <div class="flex items-start space-x-4">
+            <div class="bg-accent rounded-lg p-3 text-center min-w-[60px]">
+              <div class="text-2xl font-bold">18</div>
+              <div class="text-xs">MAR</div>
+            </div>
+            <div>
+              <h4 class="text-lg font-bold mb-1">
+                Open Class – 3D Modeling
+              </h4>
+              <p class="text-gray-300 text-sm mb-2">
+                Class with Director Carlos Ícaro
+              </p>
+              <div class="flex items-center text-gray-400 text-sm space-x-4">
+                <span class="flex items-center">
+                  <i data-feather="clock" class="w-4 h-4 mr-1"></i>
+                  13:00
+                </span>
+                <span class="flex items-center">
+                  <i data-feather="map-pin" class="w-4 h-4 mr-1"></i>
+                  Atelier 10
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Event 3 -->
+      <div
+        class="bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition-all duration-300 border-l-4 border-accent"
+      >
+        <div class="flex items-start justify-between">
+          <div class="flex items-start space-x-4">
+            <div class="bg-accent rounded-lg p-3 text-center min-w-[60px]">
+              <div class="text-2xl font-bold">19</div>
+              <div class="text-xs">MAR</div>
+            </div>
+            <div>
+              <h4 class="text-lg font-bold mb-1">
+                Open Class – Introduction to Electronics and Soldering
+              </h4>
+              <p class="text-gray-300 text-sm mb-2">
+                Class with Director Nicolli Venino
+              </p>
+              <div class="flex items-center text-gray-400 text-sm space-x-4">
+                <span class="flex items-center">
+                  <i data-feather="clock" class="w-4 h-4 mr-1"></i>
+                  13:00
+                </span>
+                <span class="flex items-center">
+                  <i data-feather="map-pin" class="w-4 h-4 mr-1"></i>
+                  M01
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Event 4 -->
+      <div
+        class="bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition-all duration-300 border-l-4 border-accent"
+      >
+        <div class="flex items-start justify-between">
+          <div class="flex items-start space-x-4">
+            <div class="bg-accent rounded-lg p-3 text-center min-w-[60px]">
+              <div class="text-2xl font-bold">25</div>
+              <div class="text-xs">MAR</div>
+            </div>
+            <div>
+              <h4 class="text-lg font-bold mb-1">
+                Open Class – Introduction to C++
+              </h4>
+              <p class="text-gray-300 text-sm mb-2">
+                Class with Director Felipe Caiafa
+              </p>
+              <div class="flex items-center text-gray-400 text-sm space-x-4">
+                <span class="flex items-center">
+                  <i data-feather="clock" class="w-4 h-4 mr-1"></i>
+                  13:00
+                </span>
+                <span class="flex items-center">
+                  <i data-feather="map-pin" class="w-4 h-4 mr-1"></i>
+                  Atelier 10
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Event 5 -->
+      <div
+        class="bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition-all duration-300 border-l-4 border-accent"
+      >
+        <div class="flex items-start justify-between">
+          <div class="flex items-start space-x-4">
+            <div class="bg-accent rounded-lg p-3 text-center min-w-[60px]">
+              <div class="text-2xl font-bold">26</div>
+              <div class="text-xs">MAR</div>
+            </div>
+            <div>
+              <h4 class="text-lg font-bold mb-1">
+                Recruitment Process Closes
+              </h4>
+              <p class="text-gray-300 text-sm mb-2">
+                Last day to apply
+              </p>
+              <div class="flex items-center text-gray-400 text-sm space-x-4">
+                <span class="flex items-center">
+                  <i data-feather="clock" class="w-4 h-4 mr-1"></i>
+                  23:59
+                </span>
+                <span class="flex items-center">
+                  <i data-feather="map-pin" class="w-4 h-4 mr-1"></i>
+                  Online
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Google Calendar Integration -->
+  <div class="mt-8 text-center">
+    <a
+      href="#"
+      class="inline-flex items-center bg-secondary hover:bg-opacity-80 text-white font-bold py-3 px-8 rounded-full transition duration-300"
+    >
+      <i data-feather="calendar" class="mr-2"></i>
+      Add to Google Calendar
+    </a>
+  </div>
+</div>
+
+  </section>
 
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-dark">
@@ -1129,6 +1164,149 @@
               >
                 Contact us <i data-feather="mail" class="ml-2"></i>
               </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SolidWorks Modal -->
+    <div
+      id="solidworksModal"
+      class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="solidworksModalTitle"
+    >
+      <div class="bg-white text-dark rounded-xl max-w-2xl w-full relative">
+        <button
+          id="closeSolidworksModal"
+          class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition"
+          aria-label="Close"
+        >
+          <i data-feather="x" class="w-8 h-8"></i>
+        </button>
+
+        <div class="p-8">
+          <div class="flex justify-center mb-6">
+            <div class="bg-white rounded-md px-4 py-3">
+              <img
+                src="assets/solidoworks.svg"
+                alt="SolidWorks"
+                class="w-64 md:w-80 h-auto"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <h2
+            id="solidworksModalTitle"
+            class="text-2xl md:text-3xl font-bold mb-2 font-display text-primary"
+          >
+            SolidWorks
+          </h2>
+          <p class="text-gray mb-6">
+            A 3D CAD and simulation platform widely used in engineering,
+            manufacturing, and education for product development.
+          </p>
+
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <i
+                data-feather="map-pin"
+                class="w-5 h-5 mr-3 text-secondary flex-shrink-0 mt-0.5"
+              ></i>
+              <div>
+                <div class="font-bold text-primary">Location</div>
+                <div class="text-gray">Velizy-Villacoublay, France</div>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <i
+                data-feather="mail"
+                class="w-5 h-5 mr-3 text-secondary flex-shrink-0 mt-0.5"
+              ></i>
+              <div>
+                <div class="font-bold text-primary">Email</div>
+                <a
+                  href="mailto:info@3ds.com"
+                  class="text-secondary hover:text-accent underline break-all"
+                >
+                  info@3ds.com
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Elipse Modal -->
+    <div
+      id="elipseModal"
+      class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="elipseModalTitle"
+    >
+      <div class="bg-white text-dark rounded-xl max-w-2xl w-full relative">
+        <button
+          id="closeElipseModal"
+          class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition"
+          aria-label="Close"
+        >
+          <i data-feather="x" class="w-8 h-8"></i>
+        </button>
+
+        <div class="p-8">
+          <div class="flex justify-center mb-6">
+            <div class="bg-white rounded-md px-4 py-3">
+              <img
+                src="assets/elipselogo.png"
+                alt="Elipse Software"
+                class="w-64 md:w-80 h-auto"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <h2
+            id="elipseModalTitle"
+            class="text-2xl md:text-3xl font-bold mb-2 font-display text-primary"
+          >
+            Elipse Software
+          </h2>
+          <p class="text-gray mb-6">
+            A Brazilian software company focused on industrial automation and
+            supervisory systems, delivering solutions for process monitoring and
+            control.
+          </p>
+
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <i
+                data-feather="map-pin"
+                class="w-5 h-5 mr-3 text-secondary flex-shrink-0 mt-0.5"
+              ></i>
+              <div>
+                <div class="font-bold text-primary">Location</div>
+                <div class="text-gray">Porto Alegre, Rio Grande do Sul, Brazil</div>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <i
+                data-feather="mail"
+                class="w-5 h-5 mr-3 text-secondary flex-shrink-0 mt-0.5"
+              ></i>
+              <div>
+                <div class="font-bold text-primary">Email</div>
+                <a
+                  href="mailto:elipse@elipse.com.br"
+                  class="text-secondary hover:text-accent underline break-all"
+                >
+                  elipse@elipse.com.br
+                </a>
+              </div>
             </div>
           </div>
         </div>

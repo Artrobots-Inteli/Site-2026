@@ -43,7 +43,7 @@
     <!-- Splash Screen -->
     <div
       id="splash"
-      class="fixed inset-0 z-50 flex items-center justify-center bg-dark transition-opacity duration-1000"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-dark transition-opacity duration-500"
     >
       <div class="text-center animate-pulse">
         <img
@@ -97,13 +97,13 @@
           Clube de Robótica do Inteli
         </p>
         <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8 text-gray-300">
-          Inovação, competição e excelência em robótica
+          PROCESSO SELETIVO ABERTO! INCREVA-SE
         </p>
         <a
-          href="#about"
+          href="https://forms.gle/swRL4KXsU4TNNZgZA"
           class="bg-accent hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 inline-flex items-center"
         >
-          Conheça-nos <i data-feather="arrow-down" class="ml-2"></i>
+          FORMULÁRIO DO PROCESSO SELETIVO
         </a>
       </div>
     </section>
@@ -267,9 +267,10 @@
             >
               <i data-feather="cpu"></i>
             </div>
-            <h3 class="text-xl font-bold mb-2">Software</h3>
+            <h3 class="text-xl font-bold mb-2">Computação</h3>
             <p class="text-gray-300">
-              Desenvolvimento de sistemas de controle, visão computacional e
+              Liderado pelo nosso diretor: Felipe Caiafa. <br />
+              A Área de computação é responśavel pelo desenvolvimento das lógica dos robôs, visão computacional e
               inteligência artificial.
             </p>
           </div>
@@ -283,7 +284,8 @@
             </div>
             <h3 class="text-xl font-bold mb-2">Elétrica</h3>
             <p class="text-gray-300">
-              Projeto e implementação de circuitos eletrônicos e sistemas de
+              Liderado pela nossa diretora: Nicolli Venino. <br />
+              A Área de elétrica é responsável pelo projeto e implementação de circuitos eletrônicos e sistemas de
               potência.
             </p>
           </div>
@@ -297,7 +299,8 @@
             </div>
             <h3 class="text-xl font-bold mb-2">Mecânica</h3>
             <p class="text-gray-300">
-              Projeto e fabricação de estruturas mecânicas e sistemas de
+              Liderado por nosso diretor: Carlos Ícaro. <br />
+              A área de mecânica é responsável pelo projeto e fabricação de estruturas mecânicas e sistemas de
               movimento.
             </p>
           </div>
@@ -455,7 +458,7 @@
     <section id="sponsors" class="py-20 bg-primary relative overflow-hidden">
       <div class="absolute top-0 left-0 w-full h-full opacity-10">
         <div
-          class="absolute inset-0 bg-[url('https://static.photos/abstract/1200x630/6')] bg-cover bg-center animate-pulse"
+          class="absolute inset-0 bg-[url('assets/inteliescada.webp')] bg-cover bg-center animate-pulse"
         ></div>
       </div>
       <div class="container mx-auto safe-container relative">
@@ -465,60 +468,72 @@
           NOSSOS PARCEIROS
         </h2>
 
-        <div class="sponsors-container w-full overflow-x-auto pb-4">
+          <div class="sponsors-container w-full overflow-x-auto pb-4">
           <div class="sponsors-grid inline-flex gap-12 px-4">
-            <div
-              class="sponsor-item min-w-[200px] h-24 bg-gray-700 rounded-lg flex items-center justify-center p-4 glow-on-hover transform transition-all duration-300 hover:scale-105"
+            <button
+              id="openSolidworksModal"
+              type="button"
+              class="sponsor-item min-w-[300px] h-36 bg-gray-700 rounded-lg flex items-center justify-center p-3 glow-on-hover transform transition-all duration-300 hover:scale-105 text-left"
+              aria-haspopup="dialog"
+              aria-controls="solidworksModal"
+            >
+              <span class="sr-only"
+                >SolidWorks</span
+              >
+              <img
+                src="assets/solidoworks.svg"
+                alt="SolidWorks"
+                class="h-[120px] w-auto max-w-full rounded-md"
+                loading="lazy"
+              />
+            </button>
+            <button
+              id="openElipseModal"
+              type="button"
+              class="sponsor-item min-w-[300px] h-36 bg-gray-700 rounded-lg flex items-center justify-center p-3 glow-on-hover transform transition-all duration-300 hover:scale-105"
+              aria-haspopup="dialog"
+              aria-controls="elipseModal"
             >
               <img
-                src="https://via.placeholder.com/200x80?text=Patrocinador+1"
-                alt="Patrocinador 1"
-                class="max-h-full max-w-full"
+                src="assets/elipselogo.png"
+                alt="Elipse Software"
+                class="h-[120px] w-auto"
               />
-            </div>
+            </button>
             <div
-              class="sponsor-item min-w-[200px] h-24 bg-gray-700 rounded-lg flex items-center justify-center p-4 glow-on-hover transform transition-all duration-300 hover:scale-105"
-            >
-              <img
-                src="https://via.placeholder.com/200x80?text=Patrocinador+2"
-                alt="Patrocinador 2"
-                class="max-h-full max-w-full"
-              />
-            </div>
-            <div
-              class="sponsor-item min-w-[200px] h-24 bg-gray-700 rounded-lg flex items-center justify-center p-4 glow-on-hover transform transition-all duration-300 hover:scale-105"
+              class="sponsor-item min-w-[300px] h-36 bg-gray-700 rounded-lg flex items-center justify-center p-3 glow-on-hover transform transition-all duration-300 hover:scale-105"
             >
               <img
                 src="https://via.placeholder.com/200x80?text=Patrocinador+3"
                 alt="Patrocinador 3"
-                class="max-h-full max-w-full"
+                class="h-[120px] w-auto"
               />
             </div>
             <div
-              class="sponsor-item min-w-[200px] h-24 bg-gray-700 rounded-lg flex items-center justify-center p-4 glow-on-hover transform transition-all duration-300 hover:scale-105"
+              class="sponsor-item min-w-[300px] h-36 bg-gray-700 rounded-lg flex items-center justify-center p-3 glow-on-hover transform transition-all duration-300 hover:scale-105"
             >
               <img
                 src="https://via.placeholder.com/200x80?text=Patrocinador+4"
                 alt="Patrocinador 4"
-                class="max-h-full max-w-full"
+                class="h-[120px] w-auto"
               />
             </div>
             <div
-              class="sponsor-item min-w-[200px] h-24 bg-gray-700 rounded-lg flex items-center justify-center p-4 glow-on-hover transform transition-all duration-300 hover:scale-105"
+              class="sponsor-item min-w-[300px] h-36 bg-gray-700 rounded-lg flex items-center justify-center p-3 glow-on-hover transform transition-all duration-300 hover:scale-105"
             >
               <img
                 src="https://via.placeholder.com/200x80?text=Patrocinador+5"
                 alt="Patrocinador 5"
-                class="max-h-full max-w-full"
+                class="h-[120px] w-auto"
               />
             </div>
             <div
-              class="sponsor-item min-w-[200px] h-24 bg-gray-700 rounded-lg flex items-center justify-center p-4 glow-on-hover transform transition-all duration-300 hover:scale-105"
+              class="sponsor-item min-w-[300px] h-36 bg-gray-700 rounded-lg flex items-center justify-center p-3 glow-on-hover transform transition-all duration-300 hover:scale-105"
             >
               <img
                 src="https://via.placeholder.com/200x80?text=Patrocinador+6"
                 alt="Patrocinador 6"
-                class="max-h-full max-w-full"
+                class="h-[120px] w-auto"
               />
             </div>
           </div>
@@ -643,7 +658,7 @@
             class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-700"
           >
             <img
-              src="assets/diretorProjetos.jpg"
+              src="assets/diretorProjetos.jpeg"
               alt="Gabriel Scatolin"
               class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-teal"
             />
@@ -659,30 +674,30 @@
           <div
             class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-700"
           >
-            <div
-              class="w-32 h-32 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full mx-auto mb-4 flex items-center justify-center border-4 border-purple-600"
-            >
-              <i data-feather="share-2" class="w-12 h-12"></i>
-            </div>
+            <img
+              src="assets/diretoraMarketing.jpeg"
+              alt="Emanuelly Dias"
+              class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-purple-600"
+            />
             <h3 class="text-xl font-bold text-center mb-1">
               Diretora de Marketing
             </h3>
-            <p class="text-gray-300 text-center font-medium">A definir</p>
+            <p class="text-gray-300 text-center font-medium">Emanuelly Dias</p>
           </div>
 
           <!-- Diretor de Mecânica -->
           <div
             class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-700"
           >
-            <div
-              class="w-32 h-32 bg-gradient-to-br from-gray-600 to-gray-800 rounded-full mx-auto mb-4 flex items-center justify-center border-4 border-gray-600"
-            >
-              <i data-feather="tool" class="w-12 h-12"></i>
-            </div>
+            <img
+              src="assets/diretorMecanica.jpeg"
+              alt="Carlos Paiva"
+              class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-purple-600"
+            />
             <h3 class="text-xl font-bold text-center mb-1">
               Diretor de Mecânica
             </h3>
-            <p class="text-gray-300 text-center font-medium">A definir</p>
+            <p class="text-gray-300 text-center font-medium">Carlos Ícaro</p>
           </div>
         </div>
 
@@ -742,26 +757,26 @@
                     <div
                       class="bg-accent rounded-lg p-3 text-center min-w-[60px]"
                     >
-                      <div class="text-2xl font-bold">30</div>
-                      <div class="text-xs">JAN</div>
+                      <div class="text-2xl font-bold">04</div>
+                      <div class="text-xs">MAR</div>
                     </div>
                     <div>
                       <h4 class="text-lg font-bold mb-1">
-                        Onboarding para Calouros
+                        Abertura do processo seletivo
                       </h4>
                       <p class="text-gray-300 text-sm mb-2">
-                        Apresentação do clube para os novos alunos do Inteli.
+                        O clube vai abrir seu processo seletivo para os alunos do Inteli
                       </p>
                       <div
                         class="flex items-center text-gray-400 text-sm space-x-4"
                       >
                         <span class="flex items-center"
                           ><i data-feather="clock" class="w-4 h-4 mr-1"></i>
-                          14:00</span
+                          10:00</span
                         >
                         <span class="flex items-center"
                           ><i data-feather="map-pin" class="w-4 h-4 mr-1"></i>
-                          Auditório Principal</span
+                          Formulário</span
                         >
                       </div>
                     </div>
@@ -769,7 +784,7 @@
                 </div>
               </div>
 
-              <!-- Event 2: February -->
+              <!-- Event 2: Março -->
               <div
                 class="bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition-all duration-300 border-l-4 border-accent"
               >
@@ -778,26 +793,26 @@
                     <div
                       class="bg-accent rounded-lg p-3 text-center min-w-[60px]"
                     >
-                      <div class="text-2xl font-bold">15</div>
-                      <div class="text-xs">FEV</div>
+                      <div class="text-2xl font-bold">18</div>
+                      <div class="text-xs">MAR</div>
                     </div>
                     <div>
                       <h4 class="text-lg font-bold mb-1">
-                        Reunião com Membros
+                        Aula aberta - Modelagem 3D
                       </h4>
                       <p class="text-gray-300 text-sm mb-2">
-                        Preparação para o processo seletivo.
+                        Aula com o Diretor Carlos Ícaro
                       </p>
                       <div
                         class="flex items-center text-gray-400 text-sm space-x-4"
                       >
                         <span class="flex items-center"
                           ><i data-feather="clock" class="w-4 h-4 mr-1"></i>
-                          16:00</span
+                          13:00</span
                         >
                         <span class="flex items-center"
                           ><i data-feather="map-pin" class="w-4 h-4 mr-1"></i>
-                          Sala B203</span
+                          Atelie 10</span
                         >
                       </div>
                     </div>
@@ -814,26 +829,26 @@
                     <div
                       class="bg-accent rounded-lg p-3 text-center min-w-[60px]"
                     >
-                      <div class="text-2xl font-bold">01</div>
+                      <div class="text-2xl font-bold">19</div>
                       <div class="text-xs">MAR</div>
                     </div>
                     <div>
                       <h4 class="text-lg font-bold mb-1">
-                        Abertura do Processo Seletivo
+                        Aula aberta - Introdução a elétrica e solda
                       </h4>
                       <p class="text-gray-300 text-sm mb-2">
-                        Início das inscrições para novos membros.
+                        Aula com o Diretora Nicolli Venino
                       </p>
                       <div
                         class="flex items-center text-gray-400 text-sm space-x-4"
                       >
                         <span class="flex items-center"
                           ><i data-feather="clock" class="w-4 h-4 mr-1"></i>
-                          09:00</span
+                          13:00</span
                         >
                         <span class="flex items-center"
                           ><i data-feather="map-pin" class="w-4 h-4 mr-1"></i>
-                          Online</span
+                          M01</span
                         >
                       </div>
                     </div>
@@ -841,7 +856,7 @@
                 </div>
               </div>
 
-              <!-- Event 4: April -->
+              <!-- Event 4: Março -->
               <div
                 class="bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition-all duration-300 border-l-4 border-accent"
               >
@@ -850,26 +865,60 @@
                     <div
                       class="bg-accent rounded-lg p-3 text-center min-w-[60px]"
                     >
-                      <div class="text-2xl font-bold">10</div>
-                      <div class="text-xs">ABR</div>
+                      <div class="text-2xl font-bold">25</div>
+                      <div class="text-xs">MAR</div>
                     </div>
                     <div>
                       <h4 class="text-lg font-bold mb-1">
-                        Onboarding com Novos Membros
+                        Aula aberta - Introdução ao C++
                       </h4>
                       <p class="text-gray-300 text-sm mb-2">
-                        Integração e apresentação das atividades do clube.
+                        Aula com o Diretor Felipe Caiafa
                       </p>
                       <div
                         class="flex items-center text-gray-400 text-sm space-x-4"
                       >
                         <span class="flex items-center"
                           ><i data-feather="clock" class="w-4 h-4 mr-1"></i>
-                          10:00</span
+                          13:00</span
                         >
                         <span class="flex items-center"
                           ><i data-feather="map-pin" class="w-4 h-4 mr-1"></i>
-                          Sala C101</span
+                          Ateliê 10</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition-all duration-300 border-l-4 border-accent"
+              >
+                <div class="flex items-start justify-between">
+                  <div class="flex items-start space-x-4">
+                    <div
+                      class="bg-accent rounded-lg p-3 text-center min-w-[60px]"
+                    >
+                      <div class="text-2xl font-bold">26</div>
+                      <div class="text-xs">MAR</div>
+                    </div>
+                    <div>
+                      <h4 class="text-lg font-bold mb-1">
+                        Encerramento do processo seletivo
+                      </h4>
+                      <p class="text-gray-300 text-sm mb-2">
+                        Último dia para se inscrever
+                      </p>
+                      <div
+                        class="flex items-center text-gray-400 text-sm space-x-4"
+                      >
+                        <span class="flex items-center"
+                          ><i data-feather="clock" class="w-4 h-4 mr-1"></i>
+                          23:59</span
+                        >
+                        <span class="flex items-center"
+                          ><i data-feather="map-pin" class="w-4 h-4 mr-1"></i>
+                          Online</span
                         >
                       </div>
                     </div>
@@ -1144,6 +1193,149 @@
               >
                 Entre em Contato <i data-feather="mail" class="ml-2"></i>
               </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SolidWorks Modal -->
+    <div
+      id="solidworksModal"
+      class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="solidworksModalTitle"
+    >
+      <div class="bg-white text-dark rounded-xl max-w-2xl w-full relative">
+        <button
+          id="closeSolidworksModal"
+          class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition"
+          aria-label="Fechar"
+        >
+          <i data-feather="x" class="w-8 h-8"></i>
+        </button>
+
+        <div class="p-8">
+          <div class="flex justify-center mb-6">
+            <div class="bg-white rounded-md px-4 py-3">
+              <img
+                src="assets/solidoworks.svg"
+                alt="SolidWorks"
+                class="w-64 md:w-80 h-auto"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <h2
+            id="solidworksModalTitle"
+            class="text-2xl md:text-3xl font-bold mb-2 font-display text-primary"
+          >
+            SolidWorks
+          </h2>
+          <p class="text-gray mb-6">
+            Plataforma de modelagem CAD 3D e simulação amplamente usada em
+            engenharia, manufatura e educação para desenvolvimento de produtos.
+          </p>
+
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <i
+                data-feather="map-pin"
+                class="w-5 h-5 mr-3 text-secondary flex-shrink-0 mt-0.5"
+              ></i>
+              <div>
+                <div class="font-bold text-primary">Localização</div>
+                <div class="text-gray">Vélizy-Villacoublay, França</div>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <i
+                data-feather="mail"
+                class="w-5 h-5 mr-3 text-secondary flex-shrink-0 mt-0.5"
+              ></i>
+              <div>
+                <div class="font-bold text-primary">Email</div>
+                <a
+                  href="mailto:info@3ds.com"
+                  class="text-secondary hover:text-accent underline break-all"
+                >
+                  info@3ds.com
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Elipse Modal -->
+    <div
+      id="elipseModal"
+      class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="elipseModalTitle"
+    >
+      <div class="bg-white text-dark rounded-xl max-w-2xl w-full relative">
+        <button
+          id="closeElipseModal"
+          class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition"
+          aria-label="Fechar"
+        >
+          <i data-feather="x" class="w-8 h-8"></i>
+        </button>
+
+        <div class="p-8">
+          <div class="flex justify-center mb-6">
+            <div class="bg-white rounded-md px-4 py-3">
+              <img
+                src="assets/elipselogo.png"
+                alt="Elipse Software"
+                class="w-64 md:w-80 h-auto"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <h2
+            id="elipseModalTitle"
+            class="text-2xl md:text-3xl font-bold mb-2 font-display text-primary"
+          >
+            Elipse Software
+          </h2>
+          <p class="text-gray mb-6">
+            Empresa brasileira de software para automacao industrial e sistemas
+            de supervisao, com solucoes para monitoramento e controle de
+            processos.
+          </p>
+
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <i
+                data-feather="map-pin"
+                class="w-5 h-5 mr-3 text-secondary flex-shrink-0 mt-0.5"
+              ></i>
+              <div>
+                <div class="font-bold text-primary">Localização</div>
+                <div class="text-gray">Porto Alegre, Rio Grande do Sul, Brasil</div>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <i
+                data-feather="mail"
+                class="w-5 h-5 mr-3 text-secondary flex-shrink-0 mt-0.5"
+              ></i>
+              <div>
+                <div class="font-bold text-primary">Email</div>
+                <a
+                  href="mailto:elipse@elipse.com.br"
+                  class="text-secondary hover:text-accent underline break-all"
+                >
+                  elipse@elipse.com.br
+                </a>
+              </div>
             </div>
           </div>
         </div>

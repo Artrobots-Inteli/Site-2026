@@ -21,6 +21,7 @@ class CustomNavbar extends HTMLElement {
           leadership: "Leadership",
           calendar: "Calendar",
           contact: "Contact",
+          members: "Members",
         }
       : {
           about: "Sobre",
@@ -30,6 +31,7 @@ class CustomNavbar extends HTMLElement {
           leadership: "Liderança",
           calendar: "Calendário",
           contact: "Contato",
+          members: "Membros",
         };
 
     const isHomePage =
@@ -74,6 +76,14 @@ class CustomNavbar extends HTMLElement {
               <a href="${baseHref}#contact" class="hover:text-accent transition">${
       labels.contact
     }</a>
+
+              <a
+                href="${isEnglish ? 'membros-en.html' : 'membros.html'}"
+                class="bg-secondary hover:bg-purple text-white font-bold py-1.5 px-5 rounded-full transition duration-300 inline-flex items-center text-sm"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                ${labels.members}
+              </a>
 
               <div class="inline-flex border border-secondary rounded-full overflow-hidden">
                 <a
@@ -124,6 +134,14 @@ class CustomNavbar extends HTMLElement {
             <a href="${baseHref}#contact" class="block py-2 hover:text-accent">${
       labels.contact
     }</a>
+
+            <a
+              href="${isEnglish ? 'membros-en.html' : 'membros.html'}"
+              class="mt-2 inline-flex items-center bg-secondary hover:bg-purple text-white font-bold py-2 px-5 rounded-full transition duration-300 text-sm"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              ${labels.members}
+            </a>
 
             <div class="mt-4 inline-flex border border-secondary rounded-full overflow-hidden">
               <a

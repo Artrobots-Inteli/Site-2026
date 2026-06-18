@@ -200,6 +200,13 @@ setupModal({
   closeBtnId: "closeElipseModal",
 });
 
+// Altium Modal
+setupModal({
+  modalId: "altiumModal",
+  openBtnId: "openAltiumModal",
+  closeBtnId: "closeAltiumModal",
+});
+
 // About carousel functionality
 (function initAboutCarousel() {
   const carousel = document.getElementById("aboutCarousel");

@@ -82,12 +82,12 @@ class TeamSection extends HTMLElement {
                         <!-- Member 6 -->
                         <div class="team-member bg-dark rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-secondary">
                             <div class="aspect-square bg-gradient-to-br from-purple to-secondary overflow-hidden">
-                                <img src="https://ca.slack-edge.com/E08BEMH5QVA-U08C39L3CRG-4b73e9f23d4c-192" alt="Emanuelly Dias" class="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity">
+                                <img src="assets/fotos%20membros/Maria%20Fernanda%20Ramos(MaFe)%20Diretora%20de%20marketing.jpg" alt="Maria Fernanda Ramos" class="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity">
                             </div>
                             <div class="p-4 text-center">
-                                <h3 class="text-lg font-bold mb-1 text-white">Emanuelly Dias</h3>
+                                <h3 class="text-lg font-bold mb-1 text-white">MaFe Ramos</h3>
                                 <p class="text-secondary text-sm font-semibold mb-2">Diretora de Marketing</p>
-                                <p class="text-gray-400 text-xs">Administração</p>
+                                <p class="text-gray-400 text-xs">Marketing</p>
                             </div>
                         </div>
 

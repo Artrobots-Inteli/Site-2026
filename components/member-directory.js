@@ -1,70 +1,100 @@
-// Public snapshots only. This component never accesses an authenticated endpoint.
+// Public snapshots replace legacy cards only through an explicit board-approved siteKey.
 class ArtrobotsMemberDirectory extends HTMLElement {
   connectedCallback() {
+    if (this.initialized) return;
+    this.initialized = true;
     this.english = document.documentElement.lang.startsWith('en');
     this.render();
     this.load();
   }
-
   element(tag, text, className) {
     const element = document.createElement(tag);
     if (text !== undefined) element.textContent = text;
     if (className) element.className = className;
     return element;
   }
-
   render() {
-    this.replaceChildren();
-    const heading = this.element('h2', this.english ? 'MEMBERS OF OUR COMMUNITY' : 'MEMBROS DA NOSSA COMUNIDADE', 'text-3xl font-bold font-display mb-3');
-    const subtitle = this.element('p', this.english ? 'Profiles reviewed by the club board, connected to ArtroLove.' : 'Perfis revisados pela diretoria do clube, conectados à ArtroLove.', 'text-gray-300 mb-6');
     this.status = this.element('p', '', 'text-sm text-gray-400 mb-4');
     this.status.setAttribute('role', 'status');
-    this.grid = this.element('div', undefined, 'grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5');
-    this.retry = this.element('button', this.english ? 'Try again' : 'Tentar novamente', 'mt-4 rounded-lg border border-secondary px-4 py-2 text-sm');
+    this.retry = this.element('button', this.english ? 'Try again' : 'Tentar novamente', 'mb-8 rounded-lg border border-secondary px-4 py-2 text-sm');
     this.retry.type = 'button';
     this.retry.hidden = true;
     this.retry.addEventListener('click', () => this.load());
-    this.append(heading, subtitle, this.status, this.grid, this.retry);
+    this.append(this.status, this.retry);
+    this.sections = {};
+    const labels = this.english ? {
+      leadership: ['CLUB LEADERSHIP', 'Members leading the club today.', '#F59E0B'],
+      projects: ['PROJECT MEMBERS', 'Members contributing to an active project.', '#855EDE'],
+      community: ['COMMUNITY', 'Members without an active project allocation, with a place in our community.', '#AED6F1'],
+    } : {
+      leadership: ['DIRETORIA', 'Membros que conduzem o clube hoje.', '#F59E0B'],
+      projects: ['MEMBROS EM PROJETOS', 'Membros que contribuem com um projeto em andamento.', '#855EDE'],
+      community: ['COMUNIDADE', 'Membros sem alocação em projeto ativo, com espaço na nossa comunidade.', '#AED6F1'],
+    };
+    for (const group of ArtrobotsPublicMembers.groups) {
+      const [title, description, color] = labels[group];
+      const section = this.element('section', undefined, 'team-section connected-member-section');
+      section.dataset.directoryGroup = group;
+      section.style.setProperty('--team-color', color);
+      section.hidden = true;
+      const header = this.element('div', undefined, 'team-header');
+      const icon = this.element('div', undefined, 'member-section-icon');
+      icon.setAttribute('aria-hidden', 'true');
+      icon.textContent = group === 'leadership' ? '✦' : group === 'projects' ? '⌘' : '○';
+      const text = this.element('div');
+      text.append(this.element('h2', title, 'text-3xl font-bold font-display'), this.element('p', description, 'text-gray-400 text-sm mt-1'));
+      header.append(icon, text);
+      const grid = this.element('div', undefined, 'grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5');
+      section.append(header, grid);
+      this.sections[group] = { section, grid };
+      if (group === 'leadership') document.querySelector('[data-legacy-directory]')?.prepend(section);
+      else if (group === 'projects') {
+        const firstProject = document.querySelector('[data-legacy-directory] [data-legacy-project]');
+        if (firstProject) firstProject.before(section);
+        else this.before(section);
+      } else this.append(section);
+    }
   }
-
+  card(member, origin) {
+    const card = this.element('a', undefined, 'member-card connected-member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5');
+    card.dataset.publicProfileId = member.id;
+    card.href = `${origin}${member.profilePath}${this.english ? '?lang=en' : ''}`;
+    card.setAttribute('aria-label', this.english ? `View ${member.name}'s profile` : `Ver perfil de ${member.name}`);
+    const frame = this.element('div', undefined, 'w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4');
+    const photo = this.element('img');
+    photo.src = `${origin}${member.photoPath}`;
+    photo.alt = member.name;
+    photo.width = 96; photo.height = 96;
+    photo.loading = 'lazy'; photo.referrerPolicy = 'no-referrer';
+    photo.className = 'member-photo w-full h-full object-cover';
+    photo.addEventListener('error', () => { photo.hidden = true; });
+    frame.append(photo);
+    card.append(frame, this.element('h3', member.name, 'font-bold text-base leading-tight mb-0.5'), this.element('p', member.position, 'connected-member-position text-xs font-semibold'), this.element('p', member.description, 'mt-3 text-sm text-gray-300 whitespace-pre-wrap break-words'), this.element('span', this.english ? 'View profile →' : 'Ver perfil →', 'member-profile-label'));
+    return card;
+  }
   async load() {
     this.retry.hidden = true;
-    this.grid.replaceChildren();
-    const configured = document.querySelector('meta[name="artrolove-public-origin"]')?.content?.trim();
-    const local = ['localhost', '127.0.0.1'].includes(location.hostname);
-    const origin = configured || (local ? 'http://127.0.0.1:3107' : '');
-    if (!origin) {
-      this.hidden = true; // Deployment has not connected the authoritative source yet.
-      return;
-    }
-    this.hidden = false;
-    this.status.textContent = this.english ? 'Loading member profiles…' : 'Carregando perfis de membros…';
+    this.status.textContent = this.english ? 'Loading members…' : 'Carregando membros…';
     try {
-      const base = new URL(origin);
-      if (base.origin !== origin || base.username || base.password || !(base.protocol === 'https:' || local && base.origin === 'http://127.0.0.1:3107')) throw new Error('Invalid configured origin');
-      const response = await fetch(`${base.origin}/api/public/members`, { credentials: 'omit', cache: 'no-store', signal: AbortSignal.timeout(10000) });
-      if (!response.ok) throw new Error('Unavailable');
-      const data = await response.json();
-      if (!Array.isArray(data.members)) throw new Error('Invalid feed');
-      const fragment = document.createDocumentFragment();
-      for (const member of data.members) {
-        if (typeof member.id !== 'string' || !/^[a-zA-Z0-9-]{1,100}$/.test(member.id) || typeof member.name !== 'string' || typeof member.position !== 'string' || typeof member.description !== 'string' || member.photoPath !== `/api/public/members/${member.id}/photo`) throw new Error('Invalid profile');
-        const card = this.element('article', undefined, 'member-card rounded-2xl border border-secondary/40 bg-primary p-5 text-center');
-        card.dataset.publicProfileId = member.id;
-        const photo = this.element('img');
-        photo.src = `${base.origin}${member.photoPath}`;
-        photo.alt = member.name;
-        photo.width = 128; photo.height = 128;
-        photo.loading = 'lazy'; photo.referrerPolicy = 'no-referrer';
-        photo.className = 'mx-auto mb-4 h-32 w-32 rounded-full object-cover border-4 border-secondary';
-        photo.addEventListener('error', () => { photo.hidden = true; });
-        card.append(photo, this.element('h3', member.name, 'text-lg font-bold'), this.element('p', member.position, 'mt-1 text-light font-semibold text-sm'), this.element('p', member.description, 'mt-3 text-sm text-gray-300 whitespace-pre-wrap break-words'));
-        fragment.append(card);
+      const origin = ArtrobotsPublicMembers.configuredOrigin(document, location);
+      if (!origin) { this.status.textContent = ''; return; }
+      const data = await ArtrobotsPublicMembers.loadFeed(origin);
+      const fragments = Object.fromEntries(ArtrobotsPublicMembers.groups.map((group) => [group, document.createDocumentFragment()]));
+      for (const member of data.members) fragments[member.directoryGroup].append(this.card(member, origin));
+      // Validate/build everything before changing the existing directory.
+      const linked = new Set(data.linkedSiteKeys);
+      for (const card of document.querySelectorAll('[data-legacy-directory] [data-site-key]')) card.hidden = linked.has(card.dataset.siteKey);
+      for (const section of document.querySelectorAll('[data-legacy-directory] [data-legacy-team]')) {
+        section.hidden = [...section.querySelectorAll('[data-site-key]')].every((card) => card.hidden);
       }
-      this.grid.append(fragment);
-      this.status.textContent = data.members.length ? '' : this.english ? 'New profiles will appear here after board review.' : 'Novos perfis aparecerão aqui após a revisão da diretoria.';
+      for (const group of ArtrobotsPublicMembers.groups) {
+        const { section, grid } = this.sections[group];
+        grid.replaceChildren(fragments[group]);
+        section.hidden = !grid.children.length;
+      }
+      this.status.textContent = '';
     } catch {
-      this.status.textContent = this.english ? 'Connected profiles are temporarily unavailable. The existing directory remains below.' : 'Os perfis conectados estão temporariamente indisponíveis. O diretório existente continua abaixo.';
+      this.status.textContent = this.english ? 'Some member profiles could not be loaded. Please try again.' : 'Não foi possível carregar alguns perfis. Tente novamente.';
       this.retry.hidden = false;
     }
   }

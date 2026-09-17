@@ -8,9 +8,12 @@ class CustomNavbar extends HTMLElement {
     const isEnglish = htmlLang.startsWith("en");
 
     const currentFile = (currentPath.split("/").pop() || "").toLowerCase();
+    const profilePage = currentFile === "membro.html" || currentFile === "membro-en.html";
     const pageKey = currentFile.startsWith("membros") ? "membros" : "index";
-    const ptUrl = pageKey === "membros" ? "membros.html" : "index.html";
-    const enUrl = pageKey === "membros" ? "membros-en.html" : "index-en.html";
+    const profileKey = new URLSearchParams(window.location.search).get('perfil');
+    const profileQuery = profilePage && profileKey ? `?perfil=${encodeURIComponent(profileKey)}` : '';
+    const ptUrl = profilePage ? `membro.html${profileQuery}` : pageKey === "membros" ? "membros.html" : "index.html";
+    const enUrl = profilePage ? `membro-en.html${profileQuery}` : pageKey === "membros" ? "membros-en.html" : "index-en.html";
 
     const labels = isEnglish
       ? {

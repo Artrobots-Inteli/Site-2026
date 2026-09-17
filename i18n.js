@@ -36,6 +36,7 @@
     // Treat directory root as index.
     if (!file || file === "/") return "index";
 
+    if (file === "membro.html" || file === "membro-en.html") return "membro";
     if (file.startsWith("membros")) return "membros";
     return "index";
   }
@@ -49,6 +50,10 @@
 
   function buildTargetUrl(pageKey, targetLang) {
     const hash = window.location.hash || "";
+    if (pageKey === "membro") {
+      const search = window.location.search || "";
+      return `${targetLang === "en" ? "membro-en.html" : "membro.html"}${search}${hash}`;
+    }
     if (pageKey === "membros") {
       return targetLang === "en"
         ? `membros-en.html${hash}`

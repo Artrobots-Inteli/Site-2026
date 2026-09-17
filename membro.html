@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="artrolove-public-origin" content="" />
+    <script src="components/public-members.js" defer></script>
+    <script src="components/member-profile.js" defer></script>
+    <link rel="stylesheet" href="components/member-directory.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfil de membro - Artrobots</title>
+    <meta name="description" content="Perfil público de membro da comunidade Artrobots." />
+    <link rel="stylesheet" href="style.css" />
+    <script src="i18n.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archive:wght@400;700&family=Noto+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#2E2640",
+              secondary: "#855EDE",
+              accent: "#FF5733",
+              light: "#AED6F1",
+              dark: "#000402",
+              purple: "#4A17AB",
+              gray: "#878A96",
+              teal: "#508596",
+            },
+            fontFamily: {
+              sans: ["Noto Sans", "sans-serif"],
+              display: ["Archive", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-dark text-white font-sans">
+    <custom-navbar></custom-navbar>
+    <main class="member-profile-shell">
+      <a href="membros.html" class="member-profile-back">← Voltar para membros</a>
+      <artrobots-member-profile></artrobots-member-profile>
+      <noscript><p>Ative o JavaScript para consultar este perfil.</p></noscript>
+    </main>
+    <custom-footer></custom-footer>
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script>feather.replace();</script>
+  </body>
+</html>

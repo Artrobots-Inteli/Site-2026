@@ -2,6 +2,10 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
+    <meta name="artrolove-public-origin" content="" />
+    <script src="components/public-members.js" defer></script>
+    <script src="components/member-directory.js" defer></script>
+    <link rel="stylesheet" href="components/member-directory.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Membros - Artrobots</title>
     <meta name="description" content="Conheça todos os membros do Artrobots, organizados por equipes e projetos." />
@@ -37,58 +41,6 @@
         },
       };
     </script>
-    <style>
-      .member-card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-      .member-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-      }
-      .member-photo {
-        transition: transform 0.3s ease;
-      }
-      .member-card:hover .member-photo {
-        transform: scale(1.06);
-      }
-      .team-section {
-        margin-bottom: 5rem;
-      }
-      .team-header {
-        display: flex;
-        align-items: flex-start;
-        gap: 1.25rem;
-        margin-bottom: 2rem;
-        padding: 1.25rem 1.75rem;
-        border-radius: 1rem;
-        border-left: 5px solid;
-      }
-      .team-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.25rem;
-        padding: 0.2rem 0.65rem;
-        border-radius: 9999px;
-        font-size: 0.7rem;
-        font-weight: 700;
-        margin-top: 0.4rem;
-        letter-spacing: 0.02em;
-      }
-      .captain-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.25rem;
-        padding: 0.15rem 0.55rem;
-        border-radius: 9999px;
-        font-size: 0.65rem;
-        font-weight: 700;
-        background: rgba(255, 215, 0, 0.15);
-        color: #FFD700;
-        border: 1px solid rgba(255, 215, 0, 0.4);
-        margin-bottom: 0.35rem;
-        letter-spacing: 0.03em;
-      }
-    </style>
   </head>
   <body class="bg-dark text-white font-sans">
     <custom-navbar></custom-navbar>
@@ -107,10 +59,10 @@
     </section>
 
     <section class="py-20 bg-dark">
-      <div class="container mx-auto px-6">
+      <div class="container mx-auto px-6" data-legacy-directory>
 
         <!-- ===== DIRETORIA & GESTÃO ===== -->
-        <div class="team-section" id="diretoria">
+        <div class="team-section" data-legacy-team id="diretoria">
           <div class="team-header" style="border-color:#F59E0B; background:rgba(245,158,11,0.06);">
             <div class="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:rgba(245,158,11,0.18);">
               <i data-feather="shield" class="w-7 h-7" style="color:#F59E0B;"></i>
@@ -123,7 +75,7 @@
           <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
 
             <!-- Kaian Moura -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(245,158,11,0.3);">
+            <a href="membro.html?perfil=kaian-moura" data-site-key="kaian-moura" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(245,158,11,0.3);">
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#F59E0B;">
                 <img src="assets/presidente.jpeg" alt="Kaian Moura" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
               </div>
@@ -132,34 +84,37 @@
               <div class="team-badge" style="background:rgba(245,158,11,0.12); color:#F59E0B;">
                 <i data-feather="award" class="w-3 h-3"></i><span>Presidência</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
-            <!-- Mell Carneiro -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(245,158,11,0.3);">
+            <!-- Mell Aguiar -->
+            <a href="membro.html?perfil=mell-aguiar" data-site-key="mell-aguiar" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(245,158,11,0.3);">
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#F59E0B;">
-                <img src="assets/vice.jpeg" alt="Mell Carneiro" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
+                <img src="assets/vice.jpeg" alt="Mell Aguiar" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
               </div>
-              <h3 class="font-bold text-base leading-tight mb-0.5">Mell Carneiro</h3>
+              <h3 class="font-bold text-base leading-tight mb-0.5">Mell Aguiar</h3>
               <p class="text-xs font-semibold" style="color:#F59E0B;">Vice-Presidente</p>
               <div class="team-badge" style="background:rgba(245,158,11,0.12); color:#F59E0B;">
                 <i data-feather="award" class="w-3 h-3"></i><span>Presidência</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
-            <!-- Carlos Ícaro -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(245,158,11,0.3);">
+            <!-- Carlos Icaro -->
+            <a href="membro.html?perfil=carlos-icaro" data-site-key="carlos-icaro" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(245,158,11,0.3);">
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#F59E0B;">
-                <img src="assets/diretorMecanica.jpeg" alt="Carlos Ícaro" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
+                <img src="assets/diretorMecanica.jpeg" alt="Carlos Icaro" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
               </div>
-              <h3 class="font-bold text-base leading-tight mb-0.5">Carlos Ícaro</h3>
+              <h3 class="font-bold text-base leading-tight mb-0.5">Carlos Icaro</h3>
               <p class="text-xs font-semibold" style="color:#F59E0B;">VP &amp; Dir. Mecânica</p>
               <div class="team-badge" style="background:rgba(245,158,11,0.12); color:#F59E0B;">
                 <i data-feather="tool" class="w-3 h-3"></i><span>Mecânica</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
             <!-- Luiz Gustavo -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(245,158,11,0.3);">
+            <a href="membro.html?perfil=luiz-gustavo" data-site-key="luiz-gustavo" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(245,158,11,0.3);">
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#F59E0B;">
                 <img src="assets/diretorFinanceiro.jpeg" alt="Luiz Gustavo" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
               </div>
@@ -168,10 +123,11 @@
               <div class="team-badge" style="background:rgba(245,158,11,0.12); color:#F59E0B;">
                 <i data-feather="dollar-sign" class="w-3 h-3"></i><span>Financeiro</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
             <!-- Nicolli Venino -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(245,158,11,0.3);">
+            <a href="membro.html?perfil=nicolli-venino" data-site-key="nicolli-venino" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(245,158,11,0.3);">
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#F59E0B;">
                 <img src="assets/diretoraELetrica.jpeg" alt="Nicolli Venino" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
               </div>
@@ -180,10 +136,11 @@
               <div class="team-badge" style="background:rgba(245,158,11,0.12); color:#F59E0B;">
                 <i data-feather="zap" class="w-3 h-3"></i><span>Elétrica</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
             <!-- Felipe Caiafa -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(245,158,11,0.3);">
+            <a href="membro.html?perfil=felipe-caiafa" data-site-key="felipe-caiafa" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(245,158,11,0.3);">
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#F59E0B;">
                 <img src="assets/diretorComputacao.jpeg" alt="Felipe Caiafa" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
               </div>
@@ -192,10 +149,11 @@
               <div class="team-badge" style="background:rgba(245,158,11,0.12); color:#F59E0B;">
                 <i data-feather="cpu" class="w-3 h-3"></i><span>Computação</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
             <!-- José Isaias -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(245,158,11,0.3);">
+            <a href="membro.html?perfil=jose-isaias" data-site-key="jose-isaias" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(245,158,11,0.3);">
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#F59E0B;">
                 <img src="assets/fotos%20membros/Jos%C3%A9%20Isaias%20-%20apoio%20de%20projetos.jpg" alt="José Isaias" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
               </div>
@@ -204,13 +162,14 @@
               <div class="team-badge" style="background:rgba(245,158,11,0.12); color:#F59E0B;">
                 <i data-feather="users" class="w-3 h-3"></i><span>Projetos</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
           </div>
         </div>
 
         <!-- ===== MARKETING ===== -->
-        <div class="team-section" id="marketing">
+        <div class="team-section" data-legacy-team id="marketing">
           <div class="team-header" style="border-color:#D946EF; background:rgba(217,70,239,0.06);">
             <div class="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:rgba(217,70,239,0.18);">
               <i data-feather="trending-up" class="w-7 h-7" style="color:#D946EF;"></i>
@@ -224,7 +183,7 @@
 
 
             <!-- MaFe Ramos -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(217,70,239,0.3);">
+            <a href="membro.html?perfil=mafe-ramos" data-site-key="mafe-ramos" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(217,70,239,0.3);">
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#D946EF;">
                 <img src="assets/fotos%20membros/Maria%20Fernanda%20Ramos(MaFe)%20Diretora%20de%20marketing.jpg" alt="MaFe Ramos" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
               </div>
@@ -233,10 +192,11 @@
               <div class="team-badge" style="background:rgba(217,70,239,0.12); color:#D946EF;">
                 <i data-feather="trending-up" class="w-3 h-3"></i><span>Marketing</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
             <!-- Christian Lawrence -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(217,70,239,0.3);">
+            <a href="membro.html?perfil=christian-lawrence" data-site-key="christian-lawrence" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(217,70,239,0.3);">
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#D946EF;">
                 <img src="assets/fotos%20membros/Christian%20de%20Carvalho%20Lawrence%20-%20Membro%20de%20marketing.jpeg" alt="Christian Lawrence" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
               </div>
@@ -245,10 +205,11 @@
               <div class="team-badge" style="background:rgba(217,70,239,0.12); color:#D946EF;">
                 <i data-feather="trending-up" class="w-3 h-3"></i><span>Marketing</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
             <!-- Felipe Viana -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(217,70,239,0.3);">
+            <a href="membro.html?perfil=felipe-viana" data-site-key="felipe-viana" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(217,70,239,0.3);">
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#D946EF;">
                 <img src="assets/fotos%20membros/Felipe%20Viana%20-%20Membro%20marketing.jpg" alt="Felipe Viana" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
               </div>
@@ -257,10 +218,11 @@
               <div class="team-badge" style="background:rgba(217,70,239,0.12); color:#D946EF;">
                 <i data-feather="trending-up" class="w-3 h-3"></i><span>Marketing</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
             <!-- João Cherry -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(217,70,239,0.3);">
+            <a href="membro.html?perfil=joao-cherry" data-site-key="joao-cherry" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(217,70,239,0.3);">
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#D946EF;">
                 <img src="assets/fotos%20membros/Jo%C3%A3o%20Cherry%20-%20membro%20marketing.jpeg" alt="João Cherry" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
               </div>
@@ -269,13 +231,14 @@
               <div class="team-badge" style="background:rgba(217,70,239,0.12); color:#D946EF;">
                 <i data-feather="trending-up" class="w-3 h-3"></i><span>Marketing</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
           </div>
         </div>
 
         <!-- ===== LUGO BOTS ===== -->
-        <div class="team-section" id="lugo-bots">
+        <div class="team-section" data-legacy-team data-legacy-project id="lugo-bots">
           <div class="team-header" style="border-color:#855EDE; background:rgba(133,94,222,0.06);">
             <div class="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:rgba(133,94,222,0.18);">
               <i data-feather="cpu" class="w-7 h-7" style="color:#855EDE;"></i>
@@ -288,7 +251,7 @@
           <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-5">
 
             <!-- Ali Abdallah - CAPITÃO -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(133,94,222,0.35);">
+            <a href="membro.html?perfil=ali-abdallah" data-site-key="ali-abdallah" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(133,94,222,0.35);">
               <div class="captain-badge mx-auto w-fit"><i data-feather="star" class="w-3 h-3 inline mr-0.5"></i>CAPITÃO</div>
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#855EDE;">
                 <img src="assets/fotos%20membros/Ali%20Abdallah%20-%20P.O%20Projetos(Lugo%20bots).jpg" alt="Ali Abdallah" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
@@ -298,10 +261,11 @@
               <div class="team-badge" style="background:rgba(133,94,222,0.12); color:#855EDE;">
                 <i data-feather="briefcase" class="w-3 h-3"></i><span>Projetos</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
             <!-- André Fischer -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(133,94,222,0.25);">
+            <a href="membro.html?perfil=andre-fischer" data-site-key="andre-fischer" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(133,94,222,0.25);">
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#855EDE;">
                 <img src="assets/fotos%20membros/Andr%C3%A9%20Fischer%20de%20Carvalho%20-%20Membro%20computacao%20-%20Lugo%20bots.jpg" alt="André Fischer" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
               </div>
@@ -310,10 +274,11 @@
               <div class="team-badge" style="background:rgba(133,94,222,0.12); color:#855EDE;">
                 <i data-feather="cpu" class="w-3 h-3"></i><span>Computação</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
             <!-- Leonardo Carioca -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(133,94,222,0.25);">
+            <a href="membro.html?perfil=leonardo-carioca" data-site-key="leonardo-carioca" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(133,94,222,0.25);">
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#855EDE;">
                 <img src="assets/fotos%20membros/Leonardo%20carioca%20-%20Membro%20Computa%C3%A7%C3%A3o%20(Lugo%20bot).jpg" alt="Leonardo Carioca" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
               </div>
@@ -322,10 +287,11 @@
               <div class="team-badge" style="background:rgba(133,94,222,0.12); color:#855EDE;">
                 <i data-feather="cpu" class="w-3 h-3"></i><span>Computação</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
             <!-- Pedro Melo -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(133,94,222,0.25);">
+            <a href="membro.html?perfil=pedro-melo" data-site-key="pedro-melo" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(133,94,222,0.25);">
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#855EDE;">
                 <img src="assets/fotos%20membros/Pedro%20Melo%20-%20Membro%20computa%C3%A7%C3%A3o%20-%20Lugo%20bots.jpeg" alt="Pedro Melo" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
               </div>
@@ -334,10 +300,11 @@
               <div class="team-badge" style="background:rgba(133,94,222,0.12); color:#855EDE;">
                 <i data-feather="cpu" class="w-3 h-3"></i><span>Computação</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
             <!-- Rafael Seiji -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(133,94,222,0.25);">
+            <a href="membro.html?perfil=rafael-seiji" data-site-key="rafael-seiji" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(133,94,222,0.25);">
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#855EDE;">
                 <img src="assets/fotos%20membros/Rafael%20Seiji%20Yto%20-%20Membro%20computacao%20lugo%20bots.jpeg" alt="Rafael Seiji" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
               </div>
@@ -346,10 +313,11 @@
               <div class="team-badge" style="background:rgba(133,94,222,0.12); color:#855EDE;">
                 <i data-feather="cpu" class="w-3 h-3"></i><span>Computação</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
             <!-- Samuel Chen -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(133,94,222,0.25);">
+            <a href="membro.html?perfil=samuel-chen" data-site-key="samuel-chen" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(133,94,222,0.25);">
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#855EDE;">
                 <img src="assets/fotos%20membros/Samuel%20Yenyu%20Chen%20-%20Membro%20computacao%20-%20Lugo%20bots.jpg" alt="Samuel Chen" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
               </div>
@@ -358,13 +326,14 @@
               <div class="team-badge" style="background:rgba(133,94,222,0.12); color:#855EDE;">
                 <i data-feather="cpu" class="w-3 h-3"></i><span>Computação</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
           </div>
         </div>
 
         <!-- ===== HOCKEY ===== -->
-        <div class="team-section" id="hockey">
+        <div class="team-section" data-legacy-team data-legacy-project id="hockey">
           <div class="team-header" style="border-color:#3B82F6; background:rgba(59,130,246,0.06);">
             <div class="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:rgba(59,130,246,0.18);">
               <i data-feather="target" class="w-7 h-7" style="color:#3B82F6;"></i>
@@ -377,7 +346,7 @@
           <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
 
             <!-- Mariana Azevedo - CAPITÃ -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(59,130,246,0.35);">
+            <a href="membro.html?perfil=mariana-azevedo" data-site-key="mariana-azevedo" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(59,130,246,0.35);">
               <div class="captain-badge mx-auto w-fit"><i data-feather="star" class="w-3 h-3 inline mr-0.5"></i>CAPITÃ</div>
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#3B82F6;">
                 <img src="assets/fotos%20membros/Mariana%20Azevedo%20-%20P.O%20De%20projetos(hockey).jpeg" alt="Mariana Azevedo" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
@@ -387,10 +356,11 @@
               <div class="team-badge" style="background:rgba(59,130,246,0.12); color:#3B82F6;">
                 <i data-feather="briefcase" class="w-3 h-3"></i><span>Projetos</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
             <!-- Ana Camily -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(59,130,246,0.25);">
+            <a href="membro.html?perfil=ana-camily" data-site-key="ana-camily" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(59,130,246,0.25);">
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#3B82F6;">
                 <img src="assets/fotos%20membros/Ana%20Camily%20Figueiredo%20dos%20Santos%20-%20membro%20eletrica%20hockey.jpeg" alt="Ana Camily" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
               </div>
@@ -399,10 +369,11 @@
               <div class="team-badge" style="background:rgba(59,130,246,0.12); color:#3B82F6;">
                 <i data-feather="zap" class="w-3 h-3"></i><span>Elétrica</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
             <!-- Arthur Davi -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(59,130,246,0.25);">
+            <a href="membro.html?perfil=arthur-davi" data-site-key="arthur-davi" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(59,130,246,0.25);">
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#3B82F6;">
                 <img src="assets/fotos%20membros/Arthur%20Davi%20da%20Silva%20Rodrigues%20-%20Membro%20mecanica%20-%20Hockey.jpeg" alt="Arthur Davi" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
               </div>
@@ -411,10 +382,11 @@
               <div class="team-badge" style="background:rgba(59,130,246,0.12); color:#3B82F6;">
                 <i data-feather="tool" class="w-3 h-3"></i><span>Mecânica</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
             <!-- William Maia -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(59,130,246,0.25);">
+            <a href="membro.html?perfil=william-maia" data-site-key="william-maia" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(59,130,246,0.25);">
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#3B82F6;">
                 <img src="assets/fotos%20membros/William%20Maia%20-%20Membro%20computacao%20-%20hockey.jpg" alt="William Maia" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
               </div>
@@ -423,13 +395,14 @@
               <div class="team-badge" style="background:rgba(59,130,246,0.12); color:#3B82F6;">
                 <i data-feather="cpu" class="w-3 h-3"></i><span>Computação</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
           </div>
         </div>
 
         <!-- ===== SEGUIDOR DE LINHA ===== -->
-        <div class="team-section" id="seguidor-de-linha">
+        <div class="team-section" data-legacy-team data-legacy-project id="seguidor-de-linha">
           <div class="team-header" style="border-color:#10B981; background:rgba(16,185,129,0.06);">
             <div class="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:rgba(16,185,129,0.18);">
               <i data-feather="navigation" class="w-7 h-7" style="color:#10B981;"></i>
@@ -442,7 +415,7 @@
           <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
 
             <!-- Vitor Tadashi - CAPITÃO -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(16,185,129,0.35);">
+            <a href="membro.html?perfil=vitor-tadashi" data-site-key="vitor-tadashi" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(16,185,129,0.35);">
               <div class="captain-badge mx-auto w-fit"><i data-feather="star" class="w-3 h-3 inline mr-0.5"></i>CAPITÃO</div>
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#10B981;">
                 <img src="assets/fotos%20membros/Vitor%20Tadashi%20Martins%20Goia%20-%20Capit%C3%A3o%20De%20Projetos(Seguidor%20de%20linha).jpg" alt="Vitor Tadashi" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
@@ -452,10 +425,11 @@
               <div class="team-badge" style="background:rgba(16,185,129,0.12); color:#10B981;">
                 <i data-feather="star" class="w-3 h-3"></i><span>Capitão</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
             <!-- João Pedro -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(16,185,129,0.25);">
+            <a href="membro.html?perfil=joao-pedro" data-site-key="joao-pedro" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(16,185,129,0.25);">
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#10B981;">
                 <img src="assets/fotos%20membros/Jo%C3%A3o%20Pedro%20-%20membro%20mecanica%20-%20seguidor%20de%20linha.jpg" alt="João Pedro" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
               </div>
@@ -464,10 +438,11 @@
               <div class="team-badge" style="background:rgba(16,185,129,0.12); color:#10B981;">
                 <i data-feather="tool" class="w-3 h-3"></i><span>Mecânica</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
             <!-- Pablo Oliveira -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(16,185,129,0.25);">
+            <a href="membro.html?perfil=pablo-garcia" data-site-key="pablo-garcia" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(16,185,129,0.25);">
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#10B981;">
                 <img src="assets/fotos%20membros/Pablo%20Oliveira%20Garcia%20-%20%20Membro%20eletrica%20-%20Seguidor%20de%20linha.jpeg" alt="Pablo Garcia" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
               </div>
@@ -476,10 +451,11 @@
               <div class="team-badge" style="background:rgba(16,185,129,0.12); color:#10B981;">
                 <i data-feather="zap" class="w-3 h-3"></i><span>Elétrica</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
             <!-- Ricardo Victor -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(16,185,129,0.25);">
+            <a href="membro.html?perfil=ricardo-victor" data-site-key="ricardo-victor" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(16,185,129,0.25);">
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#10B981;">
                 <img src="assets/fotos%20membros/Ricardo%20Victor%20Nelken%20-%20Membro%20computa%C3%A7%C3%A3o%20seguidor%20de%20linha.jpg" alt="Ricardo Victor" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
               </div>
@@ -488,13 +464,14 @@
               <div class="team-badge" style="background:rgba(16,185,129,0.12); color:#10B981;">
                 <i data-feather="cpu" class="w-3 h-3"></i><span>Computação</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
           </div>
         </div>
 
         <!-- ===== ESTOURA BALÃO ===== -->
-        <div class="team-section" id="estoura-balao">
+        <div class="team-section" data-legacy-team data-legacy-project id="estoura-balao">
           <div class="team-header" style="border-color:#FF5733; background:rgba(255,87,51,0.06);">
             <div class="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background:rgba(255,87,51,0.18);">
               <i data-feather="zap" class="w-7 h-7" style="color:#FF5733;"></i>
@@ -507,7 +484,7 @@
           <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
 
             <!-- Gabriel Scatolin - CAPITÃO -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(255,87,51,0.35);">
+            <a href="membro.html?perfil=gabriel-scatolin" data-site-key="gabriel-scatolin" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(255,87,51,0.35);">
               <div class="captain-badge mx-auto w-fit"><i data-feather="star" class="w-3 h-3 inline mr-0.5"></i>CAPITÃO</div>
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#FF5733;">
                 <img src="assets/fotos%20membros/Gabriel%20Scatolin%20-%20Diretor%20de%20projetos.jpg" alt="Gabriel Scatolin" class="member-photo w-full h-full object-cover" onerror="this.src='assets/diretorProjetos.jpeg'" />
@@ -517,10 +494,11 @@
               <div class="team-badge" style="background:rgba(255,87,51,0.12); color:#FF5733;">
                 <i data-feather="briefcase" class="w-3 h-3"></i><span>Projetos</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
             <!-- Filipe Nunes -->
-            <div class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(255,87,51,0.25);">
+            <a href="membro.html?perfil=filipe-nunes" data-site-key="filipe-nunes" class="member-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5" style="border-color:rgba(255,87,51,0.25);">
               <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style="border-color:#FF5733;">
                 <img src="assets/fotos%20membros/Filipe%20Nunes%20-%20eletrica%20estoura%20bal%C3%A3o.jpg" alt="Filipe Nunes" class="member-photo w-full h-full object-cover" onerror="this.src='assets/logo_circulo.png'" />
               </div>
@@ -529,11 +507,13 @@
               <div class="team-badge" style="background:rgba(255,87,51,0.12); color:#FF5733;">
                 <i data-feather="zap" class="w-3 h-3"></i><span>Elétrica</span>
               </div>
-            </div>
+            <span class="member-profile-label">Ver perfil →</span>
+            </a>
 
           </div>
         </div>
 
+        <artrobots-member-directory></artrobots-member-directory>
       </div>
     </section>
 

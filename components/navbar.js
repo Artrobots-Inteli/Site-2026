@@ -88,7 +88,7 @@ class CustomNavbar extends HTMLElement {
                 ${labels.members}
               </a>
 
-              <a href="https://artrolove.onrender.com" class="hover:text-accent transition">ArtroLove</a>
+              <a href="https://artrolove.artrobots.tech" class="hover:text-accent transition">ArtroLove</a>
               <div class="inline-flex border border-secondary rounded-full overflow-hidden">
                 <a
                   href="${ptUrl}"
@@ -117,7 +117,7 @@ class CustomNavbar extends HTMLElement {
                         </button>
                     </div>
                     <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 overflow-hidden opacity-0 -translate-y-1 max-h-0 transition-all duration-200 ease-out">
-            <a href="https://artrolove.onrender.com" class="block py-2 hover:text-accent">ArtroLove</a>
+            <a href="https://artrolove.artrobots.tech" class="block py-2 hover:text-accent">ArtroLove</a>
             <a href="${baseHref}#about" class="block py-2 hover:text-accent">${
       labels.about
     }</a>

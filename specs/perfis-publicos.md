@@ -33,3 +33,7 @@ Rastreabilidade: pedido → PUB-06 → `components/public-members.js`, `componen
 Aceite PUB-05: nome com HTML é texto literal; URL de foto só pode ser o caminho público previsto no mesmo host da ArtroLove; feed inválido não substitui conteúdo legado; pt/en funcionam; configuração vazia não inventa domínio. Em localhost, a prévia usa explicitamente ArtroLove local na porta 3107. Produção exige configurar origem real antes de ativar.
 
 Contrato detalhado e testes de aprovação/permissões vivem no repositório Artrobots-Inteli/artrolove, specs/001-conhecimento/public-profiles.md. Dados reais exigem decisão da diretoria, não aprovação do agente.
+
+## Publicação institucional
+
+PUB-07: exportar somente HTML, CSS, scripts, componentes, imagens e verificação de domínio para dist. Não publicar specs, testes, Git ou arquivos operacionais. Integrar feed público à origem HTTPS validada da ArtroLove e disponibilizar acesso na navegação desktop e móvel. Domínios finais: artrobots.tech para site e artrolove.artrobots.tech para comunidade, após DNS e TLS comprovados. Origem onrender é temporária até essa validação.

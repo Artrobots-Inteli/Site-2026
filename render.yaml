@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: artrobots-site
+    runtime: static
+    buildCommand: node deploy/build.cjs
+    staticPublishPath: dist
+    autoDeployTrigger: 'off'

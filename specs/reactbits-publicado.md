@@ -20,4 +20,15 @@ Hipótese: aplicar os efeitos nos elementos existentes melhora a expressividade 
 
 Validação local: nove testes do diretório, sintaxe JavaScript e build estático aprovados. Navegador Edge: seis canvases na abertura, sem erro JavaScript; quatro flip cards; Escape fecha e devolve foco ao botão. Layout em 1440 e 390 px sem overflow horizontal. O aviso de Tailwind CDN já existia na base e não faz parte desta alteração.
 
-O controle "Pausar efeitos" respeita a preferência nesta aba; a preferência de movimento reduzido do sistema também mantém conteúdo e controles acessíveis. As capturas comparativas e os identificadores de publicação serão registrados após a validação do ambiente publicado.
+O controle "Pausar efeitos" respeita a preferência nesta aba; a preferência de movimento reduzido do sistema também mantém conteúdo e controles acessíveis.
+
+## Publicação confirmada em 27/09/2026
+
+- Versão publicada: `12b5ac60b15fdd3a56d5f5467aa40e0e24338433`, [PR 2](https://github.com/Artrobots-Inteli/Site-2026/pull/2).
+- [CI no commit final](https://github.com/Artrobots-Inteli/Site-2026/actions/runs/36308233695): 36 testes e build estático aprovados.
+- [Deploy Render](https://dashboard.render.com/static/srv-das2cnojo6nc739uabeg/deploys/dep-dasdqb17lnhs738ou020): sucesso em 17,1 segundos.
+- Produção PT/EN: quatro seções conectadas ao CMS público, com 4 projetos, 2 competições, 3 parceiros e 2 eventos. Oito imagens conferidas. Atualização a cada 60 segundos, ao retornar à aba e com preservação de foco/card aberto; sucesso vazio e retirada não recuperam conteúdo antigo.
+- Edge em desktop/celular: nenhum overflow horizontal, nenhum erro novo de console, FlipCard abre por clique/toque e Escape devolve o foco. O botão de pausa foi validado.
+- [Capturas públicas de antes e depois](evidence/reactbits-2026-09-27/README.md). A página completa foi capturada com os efeitos pausados para manter os textos fora da viewport legíveis; capturas de abertura e cards mostram efeitos ativos.
+
+Os números da validação local acima representam o primeiro checkpoint; os 36 testes incluem a integração final do CMS. Os PRs permanecem abertos para revisão. Commits posteriores a esta versão apenas registram evidências, sem alterar o pacote publicado.

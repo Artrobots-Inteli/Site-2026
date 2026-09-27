@@ -6,7 +6,15 @@
     <title>Artrobots - Equipe Universitária de Robótica</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="identity.css" />
+    <link rel="stylesheet" href="effects/site-effects.css" />
+    <script src="effects/tech-text.js" defer></script>
+    <script src="effects/shaders.js" defer></script>
+    <script src="effects/specular-shaders.js" defer></script>
+    <script src="effects/site-effects.js" defer></script>
+    <script src="components/member-profile-card.js" defer></script>
     <script src="i18n.js" defer></script>
+    <script src="components/site-content.js" defer></script>
+    <link rel="stylesheet" href="components/site-content.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -39,6 +47,7 @@
         },
       };
     </script>
+  <noscript><style>#splash { display: none; }</style></noscript>
   </head>
   <body class="artrobots-site font-sans">
     <!-- Splash Screen -->
@@ -326,70 +335,9 @@
         <p class="text-center text-gray-300 mb-16 max-w-2xl mx-auto">
           Conheça os projetos que estão sendo desenvolvidos pela equipe Artrobots este semestre
         </p>
-        <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-
-          <!-- Lugo Bots -->
-          <div class="bg-dark p-8 rounded-xl shadow-2xl border hover:scale-105 transition-all duration-300" style="border-color:#855EDE;">
-            <div class="p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6 mx-auto" style="background:rgba(133,94,222,0.2);">
-              <i data-feather="cpu" class="w-8 h-8" style="color:#855EDE;"></i>
-            </div>
-            <h3 class="text-2xl font-bold text-center mb-3" style="color:#855EDE;">LUGO BOTS</h3>
-            <p class="text-gray-300 text-center mb-4">
-              Projeto de simulação de futebol 2D com foco em desenvolver a melhor estratégia para um time virtual.
-            </p>
-            <div class="flex justify-center flex-wrap gap-2">
-              <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background:rgba(133,94,222,0.18); color:#855EDE;">Computação</span>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background:rgba(133,94,222,0.18); color:#855EDE;">IA</span>
-            </div>
-          </div>
-
-          <!-- Hockey -->
-          <div class="bg-dark p-8 rounded-xl shadow-2xl border hover:scale-105 transition-all duration-300" style="border-color:#3B82F6;">
-            <div class="p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6 mx-auto" style="background:rgba(59,130,246,0.2);">
-              <i data-feather="target" class="w-8 h-8" style="color:#3B82F6;"></i>
-            </div>
-            <h3 class="text-2xl font-bold text-center mb-3" style="color:#3B82F6;">HOCKEY</h3>
-            <p class="text-gray-300 text-center mb-4">
-              Dinâmica com três robôs em formato semelhante ao hóquei: o objetivo é levar o disco até o gol adversário.
-            </p>
-            <div class="flex justify-center flex-wrap gap-2">
-              <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background:rgba(59,130,246,0.18); color:#3B82F6;">Mecânica</span>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background:rgba(59,130,246,0.18); color:#3B82F6;">Elétrica</span>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background:rgba(59,130,246,0.18); color:#3B82F6;">Computação</span>
-            </div>
-          </div>
-
-          <!-- Seguidor de Linha -->
-          <div class="bg-dark p-8 rounded-xl shadow-2xl border hover:scale-105 transition-all duration-300" style="border-color:#10B981;">
-            <div class="p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6 mx-auto" style="background:rgba(16,185,129,0.2);">
-              <i data-feather="navigation" class="w-8 h-8" style="color:#10B981;"></i>
-            </div>
-            <h3 class="text-2xl font-bold text-center mb-3" style="color:#10B981;">SEGUIDOR DE LINHA</h3>
-            <p class="text-gray-300 text-center mb-4">
-              Projeto de robô autônomo que segue uma linha no chão, com foco em completar o circuito no menor tempo possível.
-            </p>
-            <div class="flex justify-center flex-wrap gap-2">
-              <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background:rgba(16,185,129,0.18); color:#10B981;">Mecânica</span>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background:rgba(16,185,129,0.18); color:#10B981;">Elétrica</span>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background:rgba(16,185,129,0.18); color:#10B981;">Computação</span>
-            </div>
-          </div>
-
-          <!-- Estoura Balão -->
-          <div class="bg-dark p-8 rounded-xl shadow-2xl border hover:scale-105 transition-all duration-300" style="border-color:#FF5733;">
-            <div class="p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6 mx-auto" style="background:rgba(255,87,51,0.2);">
-              <i data-feather="zap" class="w-8 h-8" style="color:#FF5733;"></i>
-            </div>
-            <h3 class="text-2xl font-bold text-center mb-3" style="color:#FF5733;">ESTOURA BALÃO</h3>
-            <p class="text-gray-300 text-center mb-4">
-              Competição entre dois robôs, cada um com um balão e um espeto. O objetivo é estourar o balão do adversário.
-            </p>
-            <div class="flex justify-center flex-wrap gap-2">
-              <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background:rgba(255,87,51,0.18); color:#FF5733;">Mecânica</span>
-              <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background:rgba(255,87,51,0.18); color:#FF5733;">Elétrica</span>
-            </div>
-          </div>
-
+        <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto" data-public-content="PROJECT" aria-busy="true">
+          <p class="site-content-state" role="status">Carregando conteúdo publicado…</p>
+          <noscript><a href="https://artrolove.artrobots.tech">Consulte o conteúdo publicado na comunidade.</a></noscript>
         </div>
 
         <div class="text-center mt-12">
@@ -409,52 +357,9 @@
         >
           COMPETIÇÕES
         </h2>
-        <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          <!-- Robo Challenge -->
-          <div
-            class="bg-gradient-to-br from-gray-800 to-gray-900 p-8 rounded-xl shadow-2xl border border-secondary hover:border-accent transition-all duration-300 transform hover:scale-105"
-          >
-            <div
-              class="bg-secondary p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6 mx-auto"
-            >
-              <i data-feather="zap" class="w-8 h-8"></i>
-            </div>
-            <h3 class="text-2xl font-bold text-center mb-4">ROBO CHALLENGE</h3>
-            <p class="text-gray-300 text-center mb-4">
-              Competição com provas como seguidor de linha e hockey robótico.
-            </p>
-            <div class="flex justify-center flex-wrap gap-2">
-              <span class="bg-primary text-xs px-3 py-1 rounded-full"
-                >Seguidor de Linha</span
-              >
-              <span class="bg-primary text-xs px-3 py-1 rounded-full"
-                >Hockey</span
-              >
-            </div>
-          </div>
-
-          <!-- RSM -->
-          <div
-            class="bg-gradient-to-br from-gray-800 to-gray-900 p-8 rounded-xl shadow-2xl border border-secondary hover:border-accent transition-all duration-300 transform hover:scale-105"
-          >
-            <div
-              class="bg-secondary p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6 mx-auto"
-            >
-              <i data-feather="target" class="w-8 h-8"></i>
-            </div>
-            <h3 class="text-2xl font-bold text-center mb-4">RSM</h3>
-            <p class="text-gray-300 text-center mb-4">
-              Competição com provas como seguidor de linha e hockey robótico.
-            </p>
-            <div class="flex justify-center flex-wrap gap-2">
-              <span class="bg-primary text-xs px-3 py-1 rounded-full"
-                >Seguidor de Linha</span
-              >
-              <span class="bg-primary text-xs px-3 py-1 rounded-full"
-                >Hockey</span
-              >
-            </div>
-          </div>
+        <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto" data-public-content="COMPETITION" aria-busy="true">
+          <p class="site-content-state" role="status">Carregando conteúdo publicado…</p>
+          <noscript><a href="https://artrolove.artrobots.tech">Consulte o conteúdo publicado na comunidade.</a></noscript>
         </div>
       </div>
     </section>
@@ -473,64 +378,20 @@
         </h2>
 
           <div class="sponsors-container w-full overflow-x-auto pb-4">
-          <div class="sponsors-grid inline-flex gap-12 px-4">
-            <button
-              id="openSolidworksModal"
-              type="button"
-              class="sponsor-item min-w-[300px] h-36 bg-gray-700 rounded-lg flex items-center justify-center p-3 glow-on-hover transform transition-all duration-300 hover:scale-105 text-left"
-              aria-haspopup="dialog"
-              aria-controls="solidworksModal"
-            >
-              <span class="sr-only"
-                >SolidWorks</span
-              >
-              <img
-                src="assets/solidoworks.svg"
-                alt="SolidWorks"
-                class="h-[120px] w-auto max-w-full rounded-md"
-                loading="lazy"
-              />
-            </button>
-            <button
-              id="openElipseModal"
-              type="button"
-              class="sponsor-item min-w-[300px] h-36 bg-gray-700 rounded-lg flex items-center justify-center p-3 glow-on-hover transform transition-all duration-300 hover:scale-105"
-              aria-haspopup="dialog"
-              aria-controls="elipseModal"
-            >
-              <img
-                src="assets/elipselogo.png"
-                alt="Elipse Software"
-                class="h-[120px] w-auto"
-              />
-            </button>
-            <button
-              id="openAltiumModal"
-              type="button"
-              class="sponsor-item min-w-[300px] h-36 bg-gray-700 rounded-lg flex items-center justify-center p-3 glow-on-hover transform transition-all duration-300 hover:scale-105"
-              aria-haspopup="dialog"
-              aria-controls="altiumModal"
-            >
-              <img
-                src="assets/Altium_Logo.png"
-                alt="Altium"
-                class="h-[90px] w-auto"
-                loading="lazy"
-              />
-            </button>
-          </div>
+          <div class="sponsors-grid inline-flex gap-12 px-4" data-public-content="PARTNERSHIP" aria-busy="true">
+          <p class="site-content-state" role="status">Carregando conteúdo publicado…</p>
+          <noscript><a href="https://artrolove.artrobots.tech">Consulte o conteúdo publicado na comunidade.</a></noscript>
+        </div>
         </div>
 
         <div class="flex justify-center mt-8">
-          <button
-            class="sponsors-scroll-left bg-secondary bg-opacity-50 hover:bg-opacity-100 text-white p-3 rounded-full mr-4 transition-all duration-300 transform hover:scale-110"
+          <button type="button" aria-label="Parceiros anteriores" class="sponsors-scroll-left bg-secondary bg-opacity-50 hover:bg-opacity-100 text-white p-3 rounded-full mr-4 transition-all duration-300 transform hover:scale-110"
           >
-            <i data-feather="chevron-left"></i>
+            <span aria-hidden="true">←</span>
           </button>
-          <button
-            class="sponsors-scroll-right bg-secondary bg-opacity-50 hover:bg-opacity-100 text-white p-3 rounded-full transition-all duration-300 transform hover:scale-110"
+          <button type="button" aria-label="Próximos parceiros" class="sponsors-scroll-right bg-secondary bg-opacity-50 hover:bg-opacity-100 text-white p-3 rounded-full transition-all duration-300 transform hover:scale-110"
           >
-            <i data-feather="chevron-right"></i>
+            <span aria-hidden="true">→</span>
           </button>
         </div>
         <div
@@ -751,72 +612,14 @@
             <div
               class="bg-gradient-to-r from-secondary to-accent p-6 flex justify-between items-center"
             >
-              <button
-                class="hover:bg-white hover:bg-opacity-20 p-2 rounded-lg transition"
-              >
-                <i data-feather="chevron-left" class="w-6 h-6"></i>
-              </button>
-              <h3 class="text-2xl font-bold">CALENDÁRIO 2026</h3>
-              <button
-                class="hover:bg-white hover:bg-opacity-20 p-2 rounded-lg transition"
-              >
-                <i data-feather="chevron-right" class="w-6 h-6"></i>
-              </button>
+              <h3 class="text-2xl font-bold">AGENDA DO CLUBE</h3>
             </div>
 
             <!-- Events List -->
-            <div class="p-6 space-y-4">
-
-              <!-- Event 1: 18/JUN -->
-              <div class="bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition-all duration-300 border-l-4 border-secondary">
-                <div class="flex items-start space-x-4">
-                  <div class="bg-secondary rounded-lg p-3 text-center min-w-[60px]">
-                    <div class="text-2xl font-bold">18</div>
-                    <div class="text-xs">JUN</div>
-                  </div>
-                  <div>
-                    <h4 class="text-lg font-bold mb-1">Desenvolvimento de Projetos</h4>
-                    <p class="text-gray-300 text-sm mb-2">
-                      Reunião de desenvolvimento dos projetos em andamento
-                    </p>
-                    <div class="flex items-center text-gray-400 text-sm space-x-4">
-                      <span class="flex items-center"><i data-feather="users" class="w-4 h-4 mr-1"></i>Todos os times</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Event 2: 25/JUN -->
-              <div class="bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition-all duration-300 border-l-4 border-accent">
-                <div class="flex items-start space-x-4">
-                  <div class="bg-accent rounded-lg p-3 text-center min-w-[60px]">
-                    <div class="text-2xl font-bold">25</div>
-                    <div class="text-xs">JUN</div>
-                  </div>
-                  <div>
-                    <h4 class="text-lg font-bold mb-1">Última Reunião do Semestre</h4>
-                    <p class="text-gray-300 text-sm mb-2">
-                      Encerramento das atividades do 1º semestre de 2026
-                    </p>
-                    <div class="flex items-center text-gray-400 text-sm space-x-4">
-                      <span class="flex items-center"><i data-feather="flag" class="w-4 h-4 mr-1"></i>Encerramento do semestre</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- Google Calendar Integration -->
-          <div class="mt-8 text-center">
-            <a
-              href="#"
-              class="inline-flex items-center bg-secondary hover:bg-opacity-80 text-white font-bold py-3 px-8 rounded-full transition duration-300"
-            >
-              <i data-feather="calendar" class="mr-2"></i>
-              Adicionar ao Google Calendar
-            </a>
+            <div class="p-6 space-y-4" data-public-content="EVENT" aria-busy="true">
+          <p class="site-content-state" role="status">Carregando conteúdo publicado…</p>
+          <noscript><a href="https://artrolove.artrobots.tech">Consulte o conteúdo publicado na comunidade.</a></noscript>
+        </div>
           </div>
         </div>
       </div>

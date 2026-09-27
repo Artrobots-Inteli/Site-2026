@@ -213,17 +213,22 @@
   }
 
   // Actual project copy is moved once, never cloned into two accessible faces.
+  const enhancedCards = new WeakSet();
   function flipCard(card, index) {
-    const heading = card.querySelector('h3'), description = card.querySelector('p');
+    if (enhancedCards.has(card)) return;
+    const heading = card.querySelector('h3'), description = card.querySelector('.site-entry-summary') || card.querySelector('p');
     if (!heading || !description) return;
-    const height = Math.max(290, card.getBoundingClientRect().height + 36);
+    enhancedCards.add(card);
+    const height = Math.min(540, Math.max(350, card.getBoundingClientRect().height + 36));
     const front = document.createElement('div'), back = document.createElement('div'), rotor = document.createElement('div');
     front.className = 'rb-flip-front'; back.className = 'rb-flip-back'; rotor.className = 'rb-flip-rotor';
     while (card.firstChild) front.append(card.firstChild);
     const backTitle = document.createElement('p'); backTitle.className = 'rb-flip-back-title'; backTitle.textContent = heading.textContent;
     back.append(backTitle, description);
+    const details = front.querySelector('.site-entry-details'); if (details) back.append(details);
+    back.tabIndex = 0;
     const button = document.createElement('button'); button.type = 'button'; button.className = 'rb-flip-toggle rb-specular';
-    back.id = `project-details-${index}`; button.setAttribute('aria-controls', back.id);
+    back.id = `project-details-${card.getAttribute('data-entry-id') || index}`; button.setAttribute('aria-controls', back.id);
     let flipped = false, grip = null;
     function show(value) {
       flipped = value; card.classList.toggle('is-flipped', value); back.inert = !value;
@@ -232,7 +237,7 @@
       button.setAttribute('aria-label', `${value ? (english ? 'Back to' : 'Voltar a') : (english ? 'Read about' : 'Ler sobre')} ${heading.textContent.trim()}`);
       button.textContent = value ? (english ? 'Back ↶' : 'Voltar ↶') : (english ? 'About the project ↗' : 'Sobre o projeto ↗');
     }
-    button.addEventListener('click', () => show(!flipped));
+    button.addEventListener('click', event => { show(!flipped); if (flipped && event.detail === 0) back.focus({ preventScroll: true }); });
     card.addEventListener('keydown', event => { if (event.key === 'Escape' && flipped) { show(false); button.focus(); } });
     card.addEventListener('pointerdown', event => { if (event.button === 0 && !event.target.closest('button, a')) grip = { x: event.clientX, y: event.clientY, id: event.pointerId }; });
     card.addEventListener('pointerup', event => { if (grip?.id === event.pointerId && Math.abs(event.clientX - grip.x) > 45 && Math.abs(event.clientX - grip.x) > Math.abs(event.clientY - grip.y) * 1.5) show(!flipped); grip = null; });
@@ -246,19 +251,37 @@
     });
     rotor.append(front, back); card.append(rotor, button); card.classList.add('rb-flip'); card.style.minHeight = `${height}px`; show(false);
   }
-  document.querySelectorAll('#projects > .container > .grid > div').forEach(flipCard);
 
   // Add ProfileCard materials to the real approved/legacy nodes and leadership.
   document.querySelectorAll('#leadership > .container > .grid > div').forEach(card => card.setAttribute('data-profile-card', ''));
 
-  const buttons = document.querySelectorAll('.brand-button, #about a[href="#contact"], #projects .text-center > a, #leadership .text-center > a, #sponsors .text-center > :is(a,button), #contact button[type="submit"], .rb-flip-toggle');
-  buttons.forEach(button => {
+  const enhancedButtons = new WeakSet();
+  function specularFallback(button) {
+    if (enhancedButtons.has(button)) return;
+    enhancedButtons.add(button);
     button.classList.add('rb-specular');
     button.addEventListener('pointermove', event => {
       if (!allowed() || !fine.matches || event.pointerType !== 'mouse') return;
       const box = button.getBoundingClientRect(); button.style.setProperty('--specular-x', `${clamp((event.clientX - box.left) / box.width) * 100}%`); button.style.setProperty('--specular-y', `${clamp((event.clientY - box.top) / box.height) * 100}%`);
     });
-  });
+  }
+  function mountEffects(root = document) {
+    root.querySelectorAll('#projects > .container > .grid > div:not(.site-content-state), #projects [data-kind="PROJECT"]').forEach(flipCard);
+    root.querySelectorAll('.brand-button, #about a[href="#contact"], #projects .text-center > a, #leadership .text-center > a, #sponsors .text-center > :is(a,button), #contact button[type="submit"], .rb-flip-toggle, .site-entry-link, .site-content-retry').forEach(specularFallback);
+    syncSponsorControls();
+  }
+  function syncSponsorControls() {
+    const carousel = document.querySelector('.sponsors-container'), previous = document.querySelector('.sponsors-scroll-left'), next = document.querySelector('.sponsors-scroll-right');
+    if (!carousel || !previous || !next) return;
+    const scrollable = carousel.scrollWidth > carousel.clientWidth + 2;
+    previous.parentElement.hidden = !scrollable;
+    previous.parentElement.style.display = scrollable ? '' : 'none';
+    previous.disabled = !scrollable; next.disabled = !scrollable;
+  }
+  const sponsorContainer = document.querySelector('.sponsors-container');
+  if (sponsorContainer) { const resize = new ResizeObserver(syncSponsorControls); resize.observe(sponsorContainer); const track = sponsorContainer.querySelector('.sponsors-grid'); if (track) resize.observe(track); cleanups.push(() => resize.disconnect()); }
+  window.ArtrobotsSiteEffects = Object.freeze({ mount: mountEffects });
+  mountEffects();
 
   function scrollReveal() {
     const entries = [...document.querySelectorAll('body > section[id] > .container > h2, body > section[id] > .container > p, #aboutText')].filter(element => !element.children.length);

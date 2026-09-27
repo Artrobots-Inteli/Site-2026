@@ -35,7 +35,7 @@
 .rb-flip-front::after, .rb-flip-back::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at var(--glare-x,50%) var(--glare-y,30%), #ffffff6b, transparent 65%); opacity: 0; transition: opacity .2s; }
 .rb-flip:hover .rb-flip-front::after, .rb-flip:hover .rb-flip-back::after { opacity: 1; }
 .rb-flip-front > *, .rb-flip-back > * { position: relative; z-index: 1; }
-.rb-flip-back { transform: rotateY(180deg); background: linear-gradient(145deg, #e7d9f7, #fdfcff 60%, #d9eafa); }
+.rb-flip-back { transform: rotateY(180deg); background: linear-gradient(145deg, #e7d9f7, #fdfcff 60%, #d9eafa); overflow-y: auto; justify-content: flex-start; }
 .artrobots-site .rb-flip-back-title { font-family: "Oswald", sans-serif; color: var(--brand-violet-deep); font-size: 1.55rem; font-weight: 600; text-align: center; margin-bottom: 1rem; }
 .rb-flip-back p { overflow-wrap: anywhere; }
 .artrobots-site .rb-flip-toggle { position: absolute; z-index: 2; bottom: 1.3rem; left: 50%; transform: translateX(-50%); min-height: 42px; min-width: 160px; max-width: calc(100% - 2rem); padding: .65rem 1rem; border: 1px solid #8a62b5; border-radius: 2rem; background: #ffffffb8; color: var(--brand-violet-deep); font-size: .75rem; font-weight: 600; }

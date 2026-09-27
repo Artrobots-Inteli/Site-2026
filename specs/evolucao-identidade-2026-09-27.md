@@ -22,14 +22,14 @@ O ponto de comparação é a versão `0edcea4`. Recolorir somente o fundo manter
 
 Rastreabilidade: referências da gestão → VIS-01/02/03 → `identity.css`, páginas PT/EN e componentes de navegação/rodapé; pedido de horário → VIS-04 → `index.html`/`index-en.html`; contrato público existente → VIS-05 → testes de diretório; publicação estática existente → VIS-06 → exportação.
 
-Limites: mudança visual não comprova aumento de retenção. A métrica desta entrega é consistência visual e ausência de regressões nos caminhos existentes. Validação no navegador pendente neste commit; o responsável pela publicação deve registrar desktop, móvel, menu e páginas PT/EN antes de publicar. Os identificadores de publicação são registrados após essa validação.
+Limites: mudança visual não comprova aumento de retenção. A métrica desta entrega é consistência visual e ausência de regressões nos caminhos existentes. A revisão local de desktop, móvel, menu e páginas PT/EN foi realizada em 27/09/2026. Os identificadores de publicação são registrados após o deploy.
 
 ## Validação da implementação
 
 - `node --test tests/member-directory.test.cjs`: 9 testes aprovados, incluindo 27 identidades PT/EN, fotos, retirada, associação e origem HTTPS.
 - `node --check script.js`, `components/navbar.js` e `components/footer.js`: sintaxe válida.
 - `node deploy/build.cjs`: exportação concluída. As seis páginas e `identity.css` exportados correspondem à fonte; `specs` e `tests` não entram em `dist`.
-- Verificação estática: horário PT/EN atualizado, mesma folha de identidade e fonte nas seis páginas. Menu compacto até 1279px; apresentação em uma coluna abaixo de 768px. A ausência de overflow precisa também da medição em navegador.
+- Verificação estática: horário PT/EN atualizado, mesma folha de identidade e fonte nas seis páginas. Menu compacto até 1279px; apresentação em uma coluna abaixo de 768px. No navegador, largura do documento de 1265px em viewport de 1280px e 375px em viewport de 390px, sem rolagem horizontal da página.
 - Contraste calculado dos pares principais: texto púrpura/azul 10,49:1; texto secundário/lavanda 8,30:1; branco/botão violeta 8,21:1; link violeta/branco 10,45:1. Isso cobre os tokens principais, sem substituir uma auditoria de todos os estados renderizados.
 - Os efeitos antigos de mascote móvel e ocultação de seções até rolar foram removidos. Âncoras e carrossel respeitam movimento reduzido. Nenhuma alteração na busca do feed público ou nos critérios de aprovação.
 
@@ -42,7 +42,7 @@ O primeiro QA desktop (1280px) encontrou título, subtítulo e link da apresenta
 
 Correção: remover `text-white` e `bg-dark` do `body` nas seis páginas, definir os tokens do corpo em `body.artrobots-site` e explicitar a cor nos dois tipos de apresentação. Cartões herdam o texto do corpo corrigido; botões violeta mantêm regra própria para texto branco.
 
-Os valores de contraste acima são cálculos entre tokens, não medições do estilo computado do DOM. A primeira captura demonstrou que tokens corretos não garantem aplicação correta. Validação visual/computed após esta correção ainda pendente e necessária antes da publicação.
+Os valores de contraste acima são cálculos entre tokens, não medições de todos os estados do DOM. A primeira captura demonstrou que tokens corretos não garantem aplicação correta. A revisão posterior confirmou texto púrpura computado `rgb(55, 21, 84)` nos cards, legibilidade das capturas desktop/móvel e navegação pelo menu móvel, troca PT/EN e perfil público de Kaian Moura em inglês. O horário foi observado nos dois idiomas. Isso não substitui uma auditoria completa de acessibilidade ou testes de envio do formulário de contato.
 
 ## Vidro translúcido na área de membros
 
@@ -50,4 +50,8 @@ Fonte: solicitação posterior da gestão para aplicar efeito “liquid glass”
 
 Decisão: reflexos por gradientes estáticos, camada translúcida azul/lavanda, blur moderado do fundo e sombra fina. O diretório recebe um fundo claro suave que permite perceber o vidro. Sem animação contínua, distorção de texto ou filtro nas fotos. Fallback opaco quando `backdrop-filter` não está disponível, quando a preferência `prefers-reduced-transparency` é reconhecida ou em cores forçadas.
 
-Fontes preservadas: nomes, fotos e histórico públicos continuam no HTML original; perfis novos continuam vindo exclusivamente do snapshot aprovado da ArtroLove. Este ajuste altera CSS, não informações pessoais, classificação, links nem aprovação. A inspeção visual/computed do vidro após implementação permanece pendente neste commit.
+Fontes preservadas: nomes, fotos e histórico públicos continuam no HTML original; perfis novos continuam vindo exclusivamente do snapshot aprovado da ArtroLove. Este ajuste altera CSS, não informações pessoais, classificação, links nem aprovação. O navegador confirmou `backdrop-filter: blur(12px) saturate(1.15)` e borda uniforme branca fina nos painéis e cards. As capturas abaixo registram a versão local final, não uma publicação em produção.
+
+![Cards desktop, versão local](evidencias-identidade/membros-glass-desktop-local.png)
+
+![Cards móveis, versão local em 390px](evidencias-identidade/membros-glass-mobile-local.png)

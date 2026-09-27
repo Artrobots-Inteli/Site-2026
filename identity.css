@@ -12,7 +12,7 @@
   --spider-safe-right: 0px;
 }
 
-.artrobots-site {
+body.artrobots-site {
   color: var(--brand-ink);
   background: var(--brand-paper);
   font-family: "Noto Sans", sans-serif;
@@ -82,6 +82,10 @@
 .artrobots-site .navigation-toggle { padding: .55rem; border-radius: .6rem; }
 .artrobots-site #mobile-menu { overflow-y: auto; }
 .artrobots-site #mobile-menu.max-h-96 { max-height: calc(100svh - 6rem); }
+
+/* Explicit section color protects inherited headings and text from legacy
+   utility classes, including the Tailwind CDN stylesheet inserted at runtime. */
+.artrobots-site .brand-hero, .artrobots-site .directory-hero { color: var(--brand-ink); }
 
 /* The reference palette, halftone and electronic spider define the opening. */
 .artrobots-site .brand-hero, .artrobots-site .directory-hero {

@@ -33,3 +33,12 @@ Limites: mudança visual não comprova aumento de retenção. A métrica desta e
 - Os efeitos antigos de mascote móvel e ocultação de seções até rolar foram removidos. Âncoras e carrossel respeitam movimento reduzido. Nenhuma alteração na busca do feed público ou nos critérios de aprovação.
 
 Pendência factual preexistente: a seção de contato ainda lista emails antigos em `@artrobots.tech`, enquanto o serviço Zoho foi aposentado. A identidade visual não valida esses endereços; a substituição por contatos institucionais confirmados fica em checkpoint separado.
+
+
+## Correção após QA no navegador
+
+O primeiro QA desktop (1280px) encontrou título, subtítulo e link da apresentação brancos sobre azul-claro. A causa foi a classe legada `text-white` no próprio `body`: a regra `.artrobots-site .text-white` cobre descendentes, não o elemento raiz. O CSS gerado em tempo de execução pelo CDN Tailwind prevaleceu sobre a regra simples `.artrobots-site`. O mesmo problema podia afetar outros títulos herdados e o fundo do corpo.
+
+Correção: remover `text-white` e `bg-dark` do `body` nas seis páginas, definir os tokens do corpo em `body.artrobots-site` e explicitar a cor nos dois tipos de apresentação. Cartões herdam o texto do corpo corrigido; botões violeta mantêm regra própria para texto branco.
+
+Os valores de contraste acima são cálculos entre tokens, não medições do estilo computado do DOM. A primeira captura demonstrou que tokens corretos não garantem aplicação correta. Validação visual/computed após esta correção ainda pendente e necessária antes da publicação.

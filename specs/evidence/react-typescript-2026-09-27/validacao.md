@@ -34,4 +34,17 @@ O cadastro importado da planilha permanece privado. A API pública atual só ret
 
 O formulário de contato não possuía serviço de envio na versão anterior. A refatoração informa esse estado e direciona aos contatos existentes; não simula envio bem-sucedido.
 
-Deploy e CI do SHA publicado devem ser associados ao PR; não inferir produção apenas a partir destes testes locais.
+## Publicação comprovada
+
+- Código publicado: `cdfeded8f7eadca7b44df6c7babcffacc5c01afc`, [PR 3](https://github.com/Artrobots-Inteli/Site-2026/pull/3).
+- CI aprovado no SHA exato: [push](https://github.com/Artrobots-Inteli/Site-2026/actions/runs/36354545900) e [pull request](https://github.com/Artrobots-Inteli/Site-2026/actions/runs/36354565607).
+- Render: serviço existente `srv-das2cnojo6nc739uabeg`, deploy `dep-dasparbbc2fs7389gscg`, publicado em 27/09/2026 às 19h15, UTC−3. Build executou tipos, Vite e verificação das seis páginas.
+- Smoke em https://artrobots.tech/: seis rotas HTTP 200, todas carregando `/_app/main-CYh054wa.js`, idêntico ao build validado.
+- Navegador publicado: home EN em 1528 × 686, seis canvases, oito cards de liderança, conteúdo CMS carregado, sem imagens quebradas ou transbordamento. Diretório PT: 27 cards e 27 links de perfis, sem erro de console no navegador integrado.
+- O Edge registrou três mensagens de canal assíncrono de extensão; não foram reproduzidas no navegador integrado. Não houve erro de hidratação React observado.
+
+![Home React publicada no desktop](home-publicada-desktop.png)
+
+![Diretório React publicado](membros-publicado-react.png)
+
+A revisão independente também verificou 226 referências locais e 90 âncoras sem falhas. Reversão disponível pelo deploy anterior `12b5ac60b15fdd3a56d5f5467aa40e0e24338433`. Nenhuma migração de dados foi necessária para esta refatoração do site.

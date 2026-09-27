@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Artrobots - University Robotics Team</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="identity.css" />
     <script src="i18n.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Archive:wght@400;700&family=Noto+Sans:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Noto+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="shortcut icon" href="assets/logo_circulo.png" type="image/png" />
@@ -32,14 +33,14 @@
             },
             fontFamily: {
               sans: ["Noto Sans", "sans-serif"],
-              display: ["Archive", "sans-serif"],
+              display: ["Oswald", "sans-serif"],
             },
           },
         },
       };
     </script>
   </head>
-  <body class="bg-dark text-white font-sans">
+  <body class="artrobots-site bg-dark text-white font-sans">
     <!-- Splash Screen -->
     <div
       id="splash"
@@ -59,59 +60,21 @@
 
     <custom-navbar></custom-navbar>
 
-    <!-- Mascote flutuante com teia - FORA das sections para ficar em toda página -->
-    <!-- Teia/Linha que cresce do topo -->
-    <div class="fixed w-1 bg-white shadow-lg z-30" id="spider-web"></div>
-
-    <div class="fixed z-40" id="spider-mascot">
-      <!-- Aranha -->
-      <img
-        src="assets/mascote.png"
-        alt="Mascote Artrobots"
-        class="w-32 h-32 opacity-90"
-      />
-    </div>
-
-    <!-- Hero Section -->
-    <section
-      class="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-primary to-light overflow-hidden"
-      style="padding-top: 100px"
-    >
-      <div class="absolute inset-0 opacity-10 hero-parallax">
-        <div
-          class="absolute inset-0 bg-[url('assets/seguidordelinha.jpg')] bg-cover bg-center"
-        ></div>
-      </div>
-      <div
-        class="absolute inset-0 bg-gradient-to-b from-transparent to-primary opacity-90"
-      ></div>
-      <div
-        class="container mx-auto safe-container z-20 text-center relative py-20"
-      >
-        <h1
-          class="text-5xl md:text-7xl font-bold mb-6 animate-fade-in font-display text-white"
-        >
-          ARTROBOTS
-        </h1>
-        <p class="text-xl md:text-2xl max-w-2xl mx-auto mb-4">
-          Inteli Robotics Club
-        </p>
-        <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8 text-gray-300">
-          Learn, build, and compete. Real robotics in practice.
-        </p>
-        <div class="flex flex-wrap gap-4 justify-center">
-          <a
-            href="membros-en.html"
-            class="bg-secondary hover:bg-purple text-white font-bold py-3 px-8 rounded-full transition duration-300 inline-flex items-center shadow-lg hover:shadow-xl hover:scale-105 transform"
-          >
-            <i data-feather="users" class="mr-2 w-5 h-5"></i> Meet the Team
-          </a>
-          <a
-            href="#contact"
-            class="bg-accent hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 inline-flex items-center"
-          >
-            Get in Touch <i data-feather="message-circle" class="ml-2 w-5 h-5"></i>
-          </a>
+    <!-- Institutional mark, shared with the club identity. -->
+    <section class="brand-hero" aria-labelledby="home-title">
+      <div class="container mx-auto brand-hero-layout">
+        <div class="brand-hero-copy">
+          <p class="brand-eyebrow">INTELI / ROBOTICS</p>
+          <h1 id="home-title">ARTROBOTS</h1>
+          <p class="brand-hero-subtitle">Inteli Robotics Club</p>
+          <div class="brand-hero-actions">
+            <a href="membros-en.html" class="brand-button brand-button-primary">Members <i data-feather="arrow-up-right" aria-hidden="true"></i></a>
+            <a href="#projects" class="brand-button brand-button-secondary">Projects <i data-feather="arrow-down" aria-hidden="true"></i></a>
+          </div>
+          <a href="https://artrolove.artrobots.tech" class="brand-community-link"><img src="assets/artrolove-spider.png" alt="" width="48" height="39" /> ArtroLove <i data-feather="arrow-up-right" aria-hidden="true"></i></a>
+        </div>
+        <div class="brand-hero-mark" aria-hidden="true">
+          <img src="assets/logo_circulo.png" alt="" width="752" height="754" fetchpriority="high" />
         </div>
       </div>
     </section>
@@ -949,7 +912,7 @@
                 <i data-feather="clock" class="text-secondary mr-4 mt-1"></i>
                 <div>
                   <h4 class="font-bold">Hours</h4>
-                  <p class="text-gray-300">Mon–Fri, 08:00–20:00</p>
+                  <p class="text-gray-300">Mon–Fri, 10:00–18:00</p>
                 </div>
               </div>
             </div>

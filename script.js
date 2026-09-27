@@ -24,78 +24,23 @@ window.addEventListener("DOMContentLoaded", () => {
 // Keep a fallback for slow devices/network
 window.addEventListener("load", hideSplash);
 
-// Parallax effect for hero section
-let spiderCurrentTop = 80; // Posição inicial da aranha
+// Content remains visible without scroll-triggered decorative animation.
+const prefersReducedMotion =
+  window.matchMedia &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-window.addEventListener("scroll", function () {
-  const parallax = document.querySelector(".hero-parallax");
-  if (parallax) {
-    const scrolled = window.pageYOffset;
-    parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
-  }
-
-  // Spider mascot with web animation
-  const spiderMascot = document.getElementById("spider-mascot");
-  const spiderWeb = document.getElementById("spider-web");
-
-  if (spiderWeb) {
-    const scrolled = window.pageYOffset;
-    const navbarHeight = 80;
-    const spiderTopNudge = -4;
-    const spiderWebExtra = 4;
-
-    // A aranha desce devagar: apenas 15% da velocidade do scroll
-    // E sempre adiciona à posição atual, não pula
-    const targetPosition = navbarHeight + scrolled * 0.05;
-
-    // Interpola suavemente da posição atual para a target
-    spiderCurrentTop += (targetPosition - spiderCurrentTop) * 0.1;
-
-    // Move a aranha para baixo conforme o scroll
-    if (spiderMascot) {
-      spiderMascot.style.top = `${spiderCurrentTop + spiderTopNudge}px`;
-    }
-
-    // A teia cresce até o topo da aranha, usando a mesma referência do `top`
-    // (evita tremulação no mobile por conta de `scale()` + transitions)
-    const attachY = Math.max(6, spiderCurrentTop + spiderTopNudge + 14);
-    spiderWeb.style.height = `${attachY}px`;
-  }
-}); // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", function (e) {
+    const hash = this.getAttribute("href");
+    if (!hash || hash === "#") return;
+    const target = document.getElementById(hash.slice(1));
+    if (!target) return;
     e.preventDefault();
-    const target = document.querySelector(this.getAttribute("href"));
-    if (target) {
-      target.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
+    target.scrollIntoView({
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+      block: "start",
+    });
   });
-});
-
-// Animate elements on scroll
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: "0px 0px -50px 0px",
-};
-
-const observer = new IntersectionObserver(function (entries) {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = "1";
-      entry.target.style.transform = "translateY(0)";
-    }
-  });
-}, observerOptions);
-
-// Observe all sections
-document.querySelectorAll("section").forEach((section) => {
-  section.style.opacity = "0";
-  section.style.transform = "translateY(20px)";
-  section.style.transition = "all 0.6s ease-out";
-  observer.observe(section);
 });
 
 // Sponsors scroll functionality
@@ -105,20 +50,17 @@ const scrollRight = document.querySelector(".sponsors-scroll-right");
 
 if (scrollLeft && sponsorsContainer) {
   scrollLeft.addEventListener("click", () => {
-    sponsorsContainer.scrollBy({ left: -300, behavior: "smooth" });
+    sponsorsContainer.scrollBy({ left: -300, behavior: prefersReducedMotion ? "auto" : "smooth" });
   });
 }
 
 if (scrollRight && sponsorsContainer) {
   scrollRight.addEventListener("click", () => {
-    sponsorsContainer.scrollBy({ left: 300, behavior: "smooth" });
+    sponsorsContainer.scrollBy({ left: 300, behavior: prefersReducedMotion ? "auto" : "smooth" });
   });
 }
 
 const MODAL_TRANSITION_MS = 200;
-const prefersReducedMotion =
-  window.matchMedia &&
-  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 function setupModal({ modalId, openBtnId, closeBtnId, extraCloseBtnIds = [] }) {
   const modalEl = document.getElementById(modalId);

@@ -57,7 +57,7 @@ class CustomNavbar extends HTMLElement {
                             <img src="assets/logo_circulo.png" alt="Artrobots Logo" class="w-10 h-10" />
                             <span class="text-2xl font-bold text-white font-display">ARTROBOTS</span>
                         </a>
-                        <div class="hidden md:flex items-center space-x-8">
+                        <div class="desktop-navigation hidden md:flex items-center space-x-8">
               <a href="${baseHref}#about" class="hover:text-accent transition">${
       labels.about
     }</a>
@@ -112,7 +112,7 @@ class CustomNavbar extends HTMLElement {
                 >ENG</a>
               </div>
                         </div>
-                        <button class="md:hidden text-white" onclick="toggleMenu()" aria-controls="mobile-menu" aria-expanded="false">
+                        <button class="navigation-toggle md:hidden text-white" aria-label="${isEnglish ? 'Open menu' : 'Abrir menu'}" onclick="toggleMenu()" aria-controls="mobile-menu" aria-expanded="false">
                             <i data-feather="menu"></i>
                         </button>
                     </div>

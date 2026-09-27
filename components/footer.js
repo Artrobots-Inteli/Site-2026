@@ -18,7 +18,8 @@ class CustomFooter extends HTMLElement {
                 <div class="container mx-auto px-6">
                     <div class="flex flex-col md:flex-row justify-between items-center">
                         <div class="flex items-center space-x-3 mb-4 md:mb-0">
-                            <img src="assets/logocomtexto.png" alt="Artrobots Logo" class="h-12" />
+                            <img src="assets/logo_circulo.png" alt="" class="h-12 w-12" />
+                            <span class="font-display text-2xl">ARTROBOTS</span>
                         </div>
                         <div class="text-center md:text-right">
                                                         <p class="text-gray-300">${line1}</p>

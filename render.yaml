@@ -2,6 +2,6 @@ services:
   - type: web
     name: artrobots-site
     runtime: static
-    buildCommand: npm ci && npm run build
+    buildCommand: node deploy/build.cjs
     staticPublishPath: dist
     autoDeployTrigger: 'off'

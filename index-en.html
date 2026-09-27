@@ -1,2 +1,1329 @@
-<!doctype html>
-<html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" /><meta name="description" content="Projetos, pessoas e conhecimento do clube de robótica do Inteli." /><title>Artrobots | Liga de robótica do Inteli</title><link rel="icon" href="/assets/logo_circulo.png" /><script src="/components/site-theme.js"></script><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" /><link rel="stylesheet" href="/identity.css" /></head><body class="artrobots-site league-experience"><div id="root" data-react-league></div><script type="module" src="/src/main.tsx"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Artrobots - University Robotics Team</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="identity.css" />
+    <script src="i18n.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Noto+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="assets/logo_circulo.png" type="image/png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#2E2640",
+              secondary: "#855EDE",
+              accent: "#FF5733",
+              light: "#AED6F1",
+              dark: "#000402",
+              purple: "#4A17AB",
+              gray: "#878A96",
+              teal: "#508596",
+            },
+            fontFamily: {
+              sans: ["Noto Sans", "sans-serif"],
+              display: ["Oswald", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="artrobots-site font-sans">
+    <!-- Splash Screen -->
+    <div
+      id="splash"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-dark transition-opacity duration-500"
+    >
+      <div class="text-center animate-pulse">
+        <img
+          src="assets/logo_circulo.png"
+          alt="Artrobots Logo"
+          class="w-32 h-32 mx-auto mb-4"
+        />
+        <h1 class="text-5xl font-bold mt-6 text-white font-display">
+          ARTROBOTS
+        </h1>
+      </div>
+    </div>
+
+    <custom-navbar></custom-navbar>
+
+    <!-- Institutional mark, shared with the club identity. -->
+    <section class="brand-hero" aria-labelledby="home-title">
+      <div class="container mx-auto brand-hero-layout">
+        <div class="brand-hero-copy">
+          <p class="brand-eyebrow">INTELI / ROBOTICS</p>
+          <h1 id="home-title">ARTROBOTS</h1>
+          <p class="brand-hero-subtitle">Inteli Robotics Club</p>
+          <div class="brand-hero-actions">
+            <a href="membros-en.html" class="brand-button brand-button-primary">Members <i data-feather="arrow-up-right" aria-hidden="true"></i></a>
+            <a href="#projects" class="brand-button brand-button-secondary">Projects <i data-feather="arrow-down" aria-hidden="true"></i></a>
+          </div>
+          <a href="https://artrolove.artrobots.tech" class="brand-community-link"><img src="assets/artrolove-spider.png" alt="" width="48" height="39" /> ArtroLove <i data-feather="arrow-up-right" aria-hidden="true"></i></a>
+        </div>
+        <div class="brand-hero-mark" aria-hidden="true">
+          <img src="assets/logo_circulo.png" alt="" width="752" height="754" fetchpriority="high" />
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-primary">
+      <div class="container mx-auto safe-container">
+        <h2
+          class="text-3xl md:text-4xl font-bold text-center mb-16 font-display"
+        >
+          ABOUT US
+        </h2>
+        <div id="aboutCarousel" class="grid lg:grid-cols-12 gap-8 items-start">
+          <div class="lg:col-span-7 relative">
+            <div
+              class="rounded-lg overflow-hidden border border-secondary bg-dark"
+            >
+              <img
+                id="aboutMedia"
+                src="assets/MEMBROS.jpg"
+                alt="Artrobots members"
+                class="w-full h-[420px] md:h-[520px] object-cover"
+                loading="lazy"
+              />
+            </div>
+
+            <button
+              id="aboutPrev"
+              type="button"
+              aria-label="Previous media"
+              class="absolute left-3 top-1/2 -translate-y-1/2 bg-dark border border-secondary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary hover:bg-opacity-20 transition"
+            >
+              <i data-feather="chevron-left"></i>
+            </button>
+            <button
+              id="aboutNext"
+              type="button"
+              aria-label="Next media"
+              class="absolute right-3 top-1/2 -translate-y-1/2 bg-dark border border-secondary text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-secondary hover:bg-opacity-20 transition"
+            >
+              <i data-feather="chevron-right"></i>
+            </button>
+          </div>
+
+          <div class="lg:col-span-5">
+            <h3 id="aboutTitle" class="text-2xl font-bold mb-4 text-white">
+              The club (and the people behind it)
+            </h3>
+            <p id="aboutText" class="text-gray mb-6 leading-relaxed">
+              We are Artrobots, Inteli's robotics club. We learn by doing: from
+              the first prototype to competition-ready robots — always with
+              teamwork and lots of hands-on building.
+            </p>
+
+            <div class="grid grid-cols-3 gap-3">
+              <button
+                type="button"
+                data-about-index="0"
+                class="about-thumb text-left border border-secondary rounded-lg overflow-hidden bg-dark hover:bg-secondary hover:bg-opacity-20 transition ring-2 ring-accent"
+              >
+                <img
+                  src="assets/MEMBROS.jpg"
+                  alt="Artrobots members"
+                  class="w-full h-24 object-cover"
+                  loading="lazy"
+                />
+                <span class="block text-xs px-2 py-2 text-gray">The club</span>
+              </button>
+
+              <button
+                type="button"
+                data-about-index="1"
+                class="about-thumb text-left border border-secondary rounded-lg overflow-hidden bg-dark hover:bg-secondary hover:bg-opacity-20 transition"
+              >
+                <img
+                  src="assets/artrobots-robochallenge.jpeg"
+                  alt="Artrobots at RoboChallenge"
+                  class="w-full h-24 object-cover"
+                  loading="lazy"
+                />
+                <span class="block text-xs px-2 py-2 text-gray"
+                  >RoboChallenge</span
+                >
+              </button>
+
+              <button
+                type="button"
+                data-about-index="2"
+                class="about-thumb text-left border border-secondary rounded-lg overflow-hidden bg-dark hover:bg-secondary hover:bg-opacity-20 transition"
+              >
+                <img
+                  src="assets/auladearduino.gif"
+                  alt="Arduino class"
+                  class="w-full h-24 object-cover"
+                  loading="lazy"
+                />
+                <span class="block text-xs px-2 py-2 text-gray"
+                  >Arduino class</span
+                >
+              </button>
+
+              <button
+                type="button"
+                data-about-index="3"
+                class="about-thumb text-left border border-secondary rounded-lg overflow-hidden bg-dark hover:bg-secondary hover:bg-opacity-20 transition"
+              >
+                <img
+                  src="assets/estourabalao-inteliday.gif"
+                  alt="Inteli Day"
+                  class="w-full h-24 object-cover"
+                  loading="lazy"
+                />
+                <span class="block text-xs px-2 py-2 text-gray"
+                  >Inteli Day</span
+                >
+              </button>
+
+              <button
+                type="button"
+                data-about-index="4"
+                class="about-thumb text-left border border-secondary rounded-lg overflow-hidden bg-dark hover:bg-secondary hover:bg-opacity-20 transition"
+              >
+                <img
+                  src="assets/seguidordelinha-rsm.png"
+                  alt="Artrobots at RSM"
+                  class="w-full h-24 object-cover"
+                  loading="lazy"
+                />
+                <span class="block text-xs px-2 py-2 text-gray">RSM</span>
+              </button>
+            </div>
+
+            <div class="mt-6">
+              <a
+                href="#contact"
+                class="bg-accent hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 inline-flex items-center"
+              >
+                Talk to the team
+                <i data-feather="message-circle" class="ml-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Areas Section -->
+    <section id="areas" class="py-20 bg-dark">
+      <div class="container mx-auto safe-container">
+        <h2
+          class="text-3xl md:text-4xl font-bold text-center mb-16 font-display"
+        >
+          TEAM AREAS
+        </h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div
+            class="bg-primary p-6 rounded-lg hover:bg-secondary hover:bg-opacity-20 transition duration-300 border border-secondary"
+          >
+            <div
+              class="bg-secondary p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4"
+            >
+              <i data-feather="cpu"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Computing</h3>
+              <p class="text-gray-300">
+              Led by our director:
+              <a
+                href="https://br.linkedin.com/in/felipecaiafa"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-secondary hover:text-accent transition-colors"
+                >Felipe Caiafa</a
+              >.
+              <br />
+              The Computing Area is responsible for developing the logic of the robots, computer vision, and artificial intelligence.
+            </p>
+          </div>
+          <div
+            class="bg-primary p-6 rounded-lg hover:bg-secondary hover:bg-opacity-20 transition duration-300 border border-secondary"
+          >
+            <div
+              class="bg-secondary p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4"
+            >
+              <i data-feather="zap"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Electrical</h3>
+            <p class="text-gray-300">
+              Led by our director:
+              <a
+                href="https://br.linkedin.com/in/nicolli-venino-santana-b84341254"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-secondary hover:text-accent transition-colors"
+                >Nicolli Venino</a
+              >.
+              <br />
+              The Electrical Area is responsible for designing and implementing electronics and power systems.
+            </p>
+          </div>
+          <div
+            class="bg-primary p-6 rounded-lg hover:bg-secondary hover:bg-opacity-20 transition duration-300 border border-secondary"
+          >
+            <div
+              class="bg-secondary p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4"
+            >
+              <i data-feather="tool"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Mechanical</h3>
+            <p class="text-gray-300">
+              Led by our vice president and director:
+              <a
+                href="https://br.linkedin.com/in/carlosicaro/pt"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-secondary hover:text-accent transition-colors"
+                >Carlos Icaro</a
+              ><br />
+              The Mechanical Area is responsible for designing and building mechanical structures and motion systems.
+            </p>
+          </div>
+          <div
+            class="bg-primary p-6 rounded-lg hover:bg-secondary hover:bg-opacity-20 transition duration-300 border border-secondary"
+          >
+            <div
+              class="bg-secondary p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4"
+            >
+              <i data-feather="share-2"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Marketing</h3>
+            <p class="text-gray-300">
+              Led by our director:
+              <a
+                href="https://br.linkedin.com/in/emanuelly-dias-2a0480305"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-secondary hover:text-accent transition-colors"
+                >Emanuelly Dias</a
+              >.
+              <br>
+              Outreach, fundraising, and social media management.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-primary">
+      <div class="container mx-auto safe-container">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 font-display">
+          PROJECTS IN DEVELOPMENT
+        </h2>
+        <p class="text-center text-gray-300 mb-16 max-w-2xl mx-auto">
+          Discover the projects currently being developed by the Artrobots team this semester
+        </p>
+        <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+
+          <!-- Lugo Bots -->
+          <div class="bg-dark p-8 rounded-xl shadow-2xl border hover:scale-105 transition-all duration-300" style="border-color:#855EDE;">
+            <div class="p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6 mx-auto" style="background:rgba(133,94,222,0.2);">
+              <i data-feather="cpu" class="w-8 h-8" style="color:#855EDE;"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-center mb-3" style="color:#855EDE;">LUGO BOTS</h3>
+            <p class="text-gray-300 text-center mb-4">
+              2D soccer simulation project focused on developing the best strategy for a virtual team.
+            </p>
+            <div class="flex justify-center flex-wrap gap-2">
+              <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background:rgba(133,94,222,0.18); color:#855EDE;">Computing</span>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background:rgba(133,94,222,0.18); color:#855EDE;">AI</span>
+            </div>
+          </div>
+
+          <!-- Hockey -->
+          <div class="bg-dark p-8 rounded-xl shadow-2xl border hover:scale-105 transition-all duration-300" style="border-color:#3B82F6;">
+            <div class="p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6 mx-auto" style="background:rgba(59,130,246,0.2);">
+              <i data-feather="target" class="w-8 h-8" style="color:#3B82F6;"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-center mb-3" style="color:#3B82F6;">HOCKEY</h3>
+            <p class="text-gray-300 text-center mb-4">
+              Dynamic with three robots in a hockey-like format: the goal is to take the puck to the opponent's goal.
+            </p>
+            <div class="flex justify-center flex-wrap gap-2">
+              <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background:rgba(59,130,246,0.18); color:#3B82F6;">Mechanics</span>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background:rgba(59,130,246,0.18); color:#3B82F6;">Electronics</span>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background:rgba(59,130,246,0.18); color:#3B82F6;">Computing</span>
+            </div>
+          </div>
+
+          <!-- Seguidor de Linha -->
+          <div class="bg-dark p-8 rounded-xl shadow-2xl border hover:scale-105 transition-all duration-300" style="border-color:#10B981;">
+            <div class="p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6 mx-auto" style="background:rgba(16,185,129,0.2);">
+              <i data-feather="navigation" class="w-8 h-8" style="color:#10B981;"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-center mb-3" style="color:#10B981;">LINE FOLLOWER</h3>
+            <p class="text-gray-300 text-center mb-4">
+              Autonomous robot project that follows a line on the ground, aiming to complete the circuit in the shortest time possible.
+            </p>
+            <div class="flex justify-center flex-wrap gap-2">
+              <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background:rgba(16,185,129,0.18); color:#10B981;">Mechanics</span>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background:rgba(16,185,129,0.18); color:#10B981;">Electronics</span>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background:rgba(16,185,129,0.18); color:#10B981;">Computing</span>
+            </div>
+          </div>
+
+          <!-- Estoura Balão -->
+          <div class="bg-dark p-8 rounded-xl shadow-2xl border hover:scale-105 transition-all duration-300" style="border-color:#FF5733;">
+            <div class="p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6 mx-auto" style="background:rgba(255,87,51,0.2);">
+              <i data-feather="zap" class="w-8 h-8" style="color:#FF5733;"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-center mb-3" style="color:#FF5733;">BALLOON POP</h3>
+            <p class="text-gray-300 text-center mb-4">
+              Competition between two robots, each with a balloon and a spike. The objective is to pop the opponent's balloon.
+            </p>
+            <div class="flex justify-center flex-wrap gap-2">
+              <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background:rgba(255,87,51,0.18); color:#FF5733;">Mechanics</span>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background:rgba(255,87,51,0.18); color:#FF5733;">Electronics</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="text-center mt-12">
+          <a href="membros-en.html" class="inline-flex items-center gap-2 bg-gradient-to-r from-secondary to-accent px-8 py-4 rounded-full text-white font-bold text-lg hover:scale-105 transition-transform duration-300 shadow-lg hover:shadow-2xl">
+            <i data-feather="users" class="w-5 h-5"></i>
+            See Teams and Members
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Competitions Section -->
+    <section id="competitions" class="py-20 bg-dark">
+      <div class="container mx-auto safe-container">
+        <h2
+          class="text-3xl md:text-4xl font-bold text-center mb-16 font-display"
+        >
+          COMPETITIONS
+        </h2>
+        <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <!-- Robo Challenge -->
+          <div
+            class="bg-gradient-to-br from-gray-800 to-gray-900 p-8 rounded-xl shadow-2xl border border-secondary hover:border-accent transition-all duration-300 transform hover:scale-105"
+          >
+            <div
+              class="bg-secondary p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6 mx-auto"
+            >
+              <i data-feather="zap" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-center mb-4">ROBO CHALLENGE</h3>
+            <p class="text-gray-300 text-center mb-4">
+              Competition with challenges like line following and robot hockey.
+            </p>
+            <div class="flex justify-center flex-wrap gap-2">
+              <span class="bg-primary text-xs px-3 py-1 rounded-full"
+                >Line Follower</span
+              >
+              <span class="bg-primary text-xs px-3 py-1 rounded-full"
+                >Hockey</span
+              >
+            </div>
+          </div>
+
+          <!-- RSM -->
+          <div
+            class="bg-gradient-to-br from-gray-800 to-gray-900 p-8 rounded-xl shadow-2xl border border-secondary hover:border-accent transition-all duration-300 transform hover:scale-105"
+          >
+            <div
+              class="bg-secondary p-4 rounded-full w-16 h-16 flex items-center justify-center mb-6 mx-auto"
+            >
+              <i data-feather="target" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-center mb-4">RSM</h3>
+            <p class="text-gray-300 text-center mb-4">
+              Competition with challenges like line following and robot hockey.
+            </p>
+            <div class="flex justify-center flex-wrap gap-2">
+              <span class="bg-primary text-xs px-3 py-1 rounded-full"
+                >Line Follower</span
+              >
+              <span class="bg-primary text-xs px-3 py-1 rounded-full"
+                >Hockey</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Sponsors Section -->
+    <section id="sponsors" class="py-20 bg-primary relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-full h-full opacity-10">
+        <div
+          class="absolute inset-0 bg-[url('assets/inteliescada.webp')] bg-cover bg-center animate-pulse"
+        ></div>
+      </div>
+      <div class="container mx-auto safe-container relative">
+        <h2
+          class="text-3xl md:text-4xl font-bold text-center mb-16 text-gradient-animated"
+        >
+          OUR PARTNERS
+        </h2>
+
+
+          <div class="sponsors-container w-full overflow-x-auto pb-4">
+          <div class="sponsors-grid inline-flex gap-12 px-4">
+            <button
+              id="openSolidworksModal"
+              type="button"
+              class="sponsor-item min-w-[300px] h-36 bg-gray-700 rounded-lg flex items-center justify-center p-3 glow-on-hover transform transition-all duration-300 hover:scale-105 text-left"
+              aria-haspopup="dialog"
+              aria-controls="solidworksModal"
+            >
+              <span class="sr-only"
+                >SolidWorks</span
+              >
+              <img
+                src="assets/solidoworks.svg"
+                alt="SolidWorks"
+                class="h-[120px] w-auto max-w-full rounded-md"
+                loading="lazy"
+              />
+            </button>
+            <button
+              id="openElipseModal"
+              type="button"
+              class="sponsor-item min-w-[300px] h-36 bg-gray-700 rounded-lg flex items-center justify-center p-3 glow-on-hover transform transition-all duration-300 hover:scale-105"
+              aria-haspopup="dialog"
+              aria-controls="elipseModal"
+            >
+              <img
+                src="assets/elipselogo.png"
+                alt="Elipse Software"
+                class="h-[120px] w-auto"
+              />
+            </button>
+            <button
+              id="openAltiumModal"
+              type="button"
+              class="sponsor-item min-w-[300px] h-36 bg-gray-700 rounded-lg flex items-center justify-center p-3 glow-on-hover transform transition-all duration-300 hover:scale-105"
+              aria-haspopup="dialog"
+              aria-controls="altiumModal"
+            >
+              <img
+                src="assets/Altium_Logo.png"
+                alt="Altium"
+                class="h-[90px] w-auto"
+                loading="lazy"
+              />
+            </button>
+            <div
+              class="sponsor-item min-w-[300px] h-36 bg-gray-700 rounded-lg flex items-center justify-center p-3 glow-on-hover transform transition-all duration-300 hover:scale-105"
+            >
+              <img
+                src="https://via.placeholder.com/200x80?text=Sponsor+4"
+                alt="Sponsor 4"
+                class="h-[120px] w-auto"
+              />
+            </div>
+            <div
+              class="sponsor-item min-w-[300px] h-36 bg-gray-700 rounded-lg flex items-center justify-center p-3 glow-on-hover transform transition-all duration-300 hover:scale-105"
+            >
+              <img
+                src="https://via.placeholder.com/200x80?text=Sponsor+5"
+                alt="Sponsor 5"
+                class="h-[120px] w-auto"
+              />
+            </div>
+            <div
+              class="sponsor-item min-w-[300px] h-36 bg-gray-700 rounded-lg flex items-center justify-center p-3 glow-on-hover transform transition-all duration-300 hover:scale-105"
+            >
+              <img
+                src="https://via.placeholder.com/200x80?text=Sponsor+6"
+                alt="Sponsor 6"
+                class="h-[120px] w-auto"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-center mt-8">
+          <button
+            class="sponsors-scroll-left bg-secondary bg-opacity-50 hover:bg-opacity-100 text-white p-3 rounded-full mr-4 transition-all duration-300 transform hover:scale-110"
+          >
+            <i data-feather="chevron-left"></i>
+          </button>
+          <button
+            class="sponsors-scroll-right bg-secondary bg-opacity-50 hover:bg-opacity-100 text-white p-3 rounded-full transition-all duration-300 transform hover:scale-110"
+          >
+            <i data-feather="chevron-right"></i>
+          </button>
+        </div>
+        <div
+          class="text-center mt-12 flex flex-col sm:flex-row gap-4 justify-center"
+        >
+          <button
+            id="openSponsorModal"
+            class="bg-secondary hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 inline-flex items-center justify-center"
+          >
+            Why sponsor? <i data-feather="help-circle" class="ml-2"></i>
+          </button>
+          <a
+            href="#contact"
+            class="bg-accent hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 inline-flex items-center justify-center"
+          >
+            Become a partner <i data-feather="briefcase" class="ml-2"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- Leadership Section -->
+    <section id="leadership" class="py-20 bg-primary">
+      <div class="container mx-auto safe-container">
+        <h2
+          class="text-3xl md:text-4xl font-bold text-center mb-4 font-display"
+        >
+          LEADERSHIP
+        </h2>
+        <p class="text-center text-gray-300 mb-16 max-w-2xl mx-auto">
+          Meet the board that leads the club and coordinates our projects
+        </p>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
+          <!-- Presidente -->
+          <div
+            class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-700"
+          >
+            <img
+              src="assets/presidente.jpeg"
+              alt="Kaian Moura"
+              class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-accent"
+            />
+            <h3 class="text-xl font-bold text-center mb-1">President</h3>
+            <p class="text-gray-300 text-center font-medium">
+              <a
+                href="https://br.linkedin.com/in/kaian-moura-56b8871b4"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover:text-secondary transition-colors"
+                >Kaian Moura</a
+              >
+            </p>
+          </div>
+
+          <!-- Vice-Presidente -->
+          <div
+            class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-700"
+          >
+            <img
+              src="assets/vice.jpeg"
+              alt="Mell Aguiar"
+              class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-secondary"
+            />
+            <h3 class="text-xl font-bold text-center mb-1">Vice President</h3>
+            <p class="text-gray-300 text-center font-medium">Mell Aguiar</p>
+          </div>
+
+          <!-- Vice President and Mechanical Director -->
+          <div
+            class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-700"
+          >
+            <img
+              src="assets/diretorMecanica.jpeg"
+              alt="Carlos Icaro"
+              class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-secondary"
+            />
+            <h3 class="text-xl font-bold text-center mb-1">
+              <span class="block">Vice President</span>
+              <span class="block text-base">Mechanical Director</span>
+            </h3>
+            <p class="text-gray-300 text-center font-medium">
+              <a
+                href="https://br.linkedin.com/in/carlosicaro/pt"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover:text-secondary transition-colors"
+                >Carlos Icaro</a
+              >
+            </p>
+          </div>
+
+          <!-- Diretor Financeiro -->
+          <div
+            class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-700"
+          >
+            <img
+              src="assets/diretorFinanceiro.jpeg"
+              alt="Luiz Gustavo"
+              class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-green-600"
+            />
+            <h3 class="text-xl font-bold text-center mb-1">Finance Director</h3>
+            <p class="text-gray-300 text-center font-medium">Luiz Gustavo</p>
+          </div>
+
+          <!-- Diretora de Elétrica -->
+          <div
+            class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-700"
+          >
+            <img
+              src="assets/diretoraELetrica.jpeg"
+              alt="Nicolli Venino"
+              class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-yellow-600"
+            />
+            <h3 class="text-xl font-bold text-center mb-1">
+              Electrical Director
+            </h3>
+            <p class="text-gray-300 text-center font-medium">
+              <a
+                href="https://br.linkedin.com/in/nicolli-venino-santana-b84341254"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover:text-secondary transition-colors"
+                >Nicolli Venino</a
+              >
+            </p>
+          </div>
+
+          <!-- Diretor de Computação -->
+          <div
+            class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-700"
+          >
+            <img
+              src="assets/diretorComputacao.jpeg"
+              alt="Felipe Caiafa"
+              class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-blue-600"
+            />
+            <h3 class="text-xl font-bold text-center mb-1">
+              Computing Director
+            </h3>
+            <p class="text-gray-300 text-center font-medium">
+              <a
+                href="https://br.linkedin.com/in/felipecaiafa"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover:text-secondary transition-colors"
+                >Felipe Caiafa</a
+              >
+            </p>
+          </div>
+
+          <!-- Diretor de Projetos -->
+          <div
+            class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-700"
+          >
+            <img
+              src="assets/diretorProjetos.jpeg"
+              alt="Gabriel Scatolin"
+              class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-teal"
+            />
+            <h3 class="text-xl font-bold text-center mb-1">
+              Projects Director
+            </h3>
+            <p class="text-gray-300 text-center font-medium">
+              Gabriel Scatolin
+            </p>
+          </div>
+
+          <!-- Marketing Director -->
+          <div
+            class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-700"
+          >
+            <img
+              src="assets/fotos%20membros/Maria%20Fernanda%20Ramos(MaFe)%20Diretora%20de%20marketing.jpg"
+              alt="Maria Fernanda Ramos"
+              class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-purple-600"
+            />
+            <h3 class="text-xl font-bold text-center mb-1">
+              Marketing Director
+            </h3>
+            <p class="text-gray-300 text-center font-medium">
+              Maria Fernanda Ramos
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Botão Ver Membros -->
+        <div class="text-center mt-12">
+          <a
+            href="membros-en.html"
+            class="inline-flex items-center gap-2 bg-gradient-to-r from-accent to-secondary px-8 py-4 rounded-full text-white font-bold text-lg hover:scale-105 transition-transform duration-300 shadow-lg hover:shadow-2xl"
+          >
+            <i data-feather="users" class="w-6 h-6"></i>
+            See Members
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Calendar Section -->
+    <section id="calendar" class="py-20 bg-dark">
+      <div class="container mx-auto safe-container">
+        <h2
+          class="text-3xl md:text-4xl font-bold text-center mb-4 font-display"
+        >
+          CALENDAR
+        </h2>
+        <p class="text-center text-gray-300 mb-12 max-w-2xl mx-auto">
+          Follow our upcoming events, competitions, and meetings
+        </p>
+
+       <div class="max-w-5xl mx-auto">
+  <!-- Calendar Grid -->
+  <div class="bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
+    <!-- Month Header -->
+    <div
+      class="bg-gradient-to-r from-secondary to-accent p-6 flex justify-between items-center"
+    >
+      <button
+        class="hover:bg-white hover:bg-opacity-20 p-2 rounded-lg transition"
+      >
+        <i data-feather="chevron-left" class="w-6 h-6"></i>
+      </button>
+      <h3 class="text-2xl font-bold">CALENDAR 2026</h3>
+      <button
+        class="hover:bg-white hover:bg-opacity-20 p-2 rounded-lg transition"
+      >
+        <i data-feather="chevron-right" class="w-6 h-6"></i>
+      </button>
+    </div>
+
+    <!-- Events List -->
+    <div class="p-6 space-y-4">
+      <!-- Event 1: 18/JUN -->
+      <div class="bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition-all duration-300 border-l-4 border-secondary">
+        <div class="flex items-start space-x-4">
+          <div class="bg-secondary rounded-lg p-3 text-center min-w-[60px]">
+            <div class="text-2xl font-bold">18</div>
+            <div class="text-xs">JUN</div>
+          </div>
+          <div>
+            <h4 class="text-lg font-bold mb-1">Project Development</h4>
+            <p class="text-gray-300 text-sm mb-2">
+              Development meeting for all ongoing projects
+            </p>
+            <div class="flex items-center text-gray-400 text-sm space-x-4">
+              <span class="flex items-center"><i data-feather="users" class="w-4 h-4 mr-1"></i>All teams</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Event 2: 25/JUN -->
+      <div class="bg-gray-700 p-4 rounded-lg hover:bg-gray-600 transition-all duration-300 border-l-4 border-accent">
+        <div class="flex items-start space-x-4">
+          <div class="bg-accent rounded-lg p-3 text-center min-w-[60px]">
+            <div class="text-2xl font-bold">25</div>
+            <div class="text-xs">JUN</div>
+          </div>
+          <div>
+            <h4 class="text-lg font-bold mb-1">Last Meeting of the Semester</h4>
+            <p class="text-gray-300 text-sm mb-2">
+              Closing activities for the first semester of 2026
+            </p>
+            <div class="flex items-center text-gray-400 text-sm space-x-4">
+              <span class="flex items-center"><i data-feather="flag" class="w-4 h-4 mr-1"></i>Semester end</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Google Calendar Integration -->
+  <div class="mt-8 text-center">
+    <a
+      href="#"
+      class="inline-flex items-center bg-secondary hover:bg-opacity-80 text-white font-bold py-3 px-8 rounded-full transition duration-300"
+    >
+      <i data-feather="calendar" class="mr-2"></i>
+      Add to Google Calendar
+    </a>
+  </div>
+</div>
+
+  </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-dark">
+      <div class="container mx-auto safe-container">
+        <h2
+          class="text-3xl md:text-4xl font-bold text-center mb-16 font-display"
+        >
+          CONTACT
+        </h2>
+        <div class="flex flex-col md:flex-row gap-12">
+          <div class="md:w-1/2">
+            <h3 class="text-xl font-bold mb-4">Get in touch</h3>
+            <p class="text-gray-300 mb-6">
+              Interested in sponsoring us, collaborating, or just learning more
+              about our work? Send us a message!
+            </p>
+
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <i data-feather="mail" class="text-secondary mr-4 mt-1"></i>
+                <div>
+                  <h4 class="font-bold">Email</h4>
+                  <p class="text-gray-300">
+                    kaian.moura@artrobots.tech - President
+                  </p>
+                  <p class="text-gray-300">
+                    mell.carneiro@artrobots.tech - Vice President
+                  </p>
+                  <p class="text-gray-300">
+                    <a href="mailto:Carlos.Paiva@sou.inteli.edu.br" class="hover:text-secondary transition">Carlos.Paiva@sou.inteli.edu.br</a> - VP &amp; Mechanics Dir.
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <i
+                  data-feather="instagram"
+                  class="text-secondary mr-4 mt-1"
+                ></i>
+                <div>
+                  <h4 class="font-bold">Instagram</h4>
+                  <a
+                    href="https://instagram.com/artrobots.inteli"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-gray-300 hover:text-accent transition"
+                  >
+                    instagram.com/artrobots.inteli
+                  </a>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <i data-feather="map-pin" class="text-secondary mr-4 mt-1"></i>
+                <div>
+                  <h4 class="font-bold">Location</h4>
+                  <p class="text-gray-300">
+                    Inteli - Institute of Technology and Leadership
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <i data-feather="clock" class="text-secondary mr-4 mt-1"></i>
+                <div>
+                  <h4 class="font-bold">Hours</h4>
+                  <p class="text-gray-300">Mon–Fri, 10:00–18:00</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="md:w-1/2">
+            <form class="space-y-6">
+              <div>
+                <label for="name" class="block mb-2">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  class="w-full bg-primary text-white border border-gray rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-secondary"
+                />
+              </div>
+              <div>
+                <label for="email" class="block mb-2">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  class="w-full bg-primary text-white border border-gray rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-secondary"
+                />
+              </div>
+              <div>
+                <label for="message" class="block mb-2">Message</label>
+                <textarea
+                  id="message"
+                  rows="4"
+                  class="w-full bg-primary text-white border border-gray rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-secondary"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="bg-secondary hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 inline-flex items-center"
+              >
+                Send message <i data-feather="send" class="ml-2"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sponsorship Modal -->
+    <div
+      id="sponsorModal"
+      class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-white text-dark rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative"
+      >
+        <button
+          id="closeSponsorModal"
+          class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition"
+        >
+          <i data-feather="x" class="w-8 h-8"></i>
+        </button>
+
+        <div class="p-8">
+          <h2
+            class="text-3xl md:text-4xl font-bold text-center mb-4 font-display text-primary"
+          >
+            Why Sponsor Us?
+          </h2>
+          <p class="text-center text-gray mb-8 max-w-2xl mx-auto">
+            See how your company can benefit from supporting Artrobots.
+          </p>
+
+          <div class="space-y-6">
+            <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-secondary">
+              <h3 class="text-2xl font-bold mb-3 text-primary">Who We Are</h3>
+              <p>
+                We are Artrobots — a team passionate about technology,
+                innovation, and learning. Our goal is to build robotics projects
+                that challenge creativity and engineering limits, compete in
+                events, and promote hands-on learning among our members.
+              </p>
+            </div>
+
+            <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-accent">
+              <h3 class="text-2xl font-bold mb-3 text-primary">What We Do</h3>
+              <ul class="space-y-2">
+                <li class="flex items-start">
+                  <i
+                    data-feather="check-circle"
+                    class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-0.5"
+                  ></i>
+                  <span
+                    ><strong>Robotics Projects:</strong> We build robots for
+                    competitions and technical challenges.</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <i
+                    data-feather="check-circle"
+                    class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-0.5"
+                  ></i>
+                  <span
+                    ><strong>Education & Training:</strong> We provide workshops
+                    and training for our members and the community.</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <i
+                    data-feather="check-circle"
+                    class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-0.5"
+                  ></i>
+                  <span
+                    ><strong>Competing:</strong> We represent our institution in
+                    major robotics events such as RSM and RoboChallenge.</span
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div
+              class="bg-gradient-to-br from-secondary to-purple p-6 rounded-lg text-white"
+            >
+              <h3 class="text-2xl font-bold mb-3">Visibility We Offer</h3>
+              <p class="mb-4">By sponsoring Artrobots, your brand gets:</p>
+              <ul class="space-y-3">
+                <li class="flex items-start">
+                  <i
+                    data-feather="award"
+                    class="w-5 h-5 mr-2 flex-shrink-0 mt-0.5"
+                  ></i>
+                  <span
+                    ><strong>Robot exposure:</strong> Your logo displayed
+                    prominently on robots used in competitions.</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <i
+                    data-feather="user"
+                    class="w-5 h-5 mr-2 flex-shrink-0 mt-0.5"
+                  ></i>
+                  <span
+                    ><strong>Team shirts:</strong> Your logo on official
+                    Artrobots shirts.</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <i
+                    data-feather="share-2"
+                    class="w-5 h-5 mr-2 flex-shrink-0 mt-0.5"
+                  ></i>
+                  <span
+                    ><strong>Social media:</strong> Promotion on our social
+                    channels, including Instagram (artrobots.inteli) and
+                    LinkedIn.</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <i
+                    data-feather="calendar"
+                    class="w-5 h-5 mr-2 flex-shrink-0 mt-0.5"
+                  ></i>
+                  <span
+                    ><strong>Events:</strong> Brand presence on banners and
+                    promotional materials at events we attend.</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <i
+                    data-feather="file-text"
+                    class="w-5 h-5 mr-2 flex-shrink-0 mt-0.5"
+                  ></i>
+                  <span
+                    ><strong>Marketing materials:</strong> Your logo included in
+                    flyers, presentations, and other promotional
+                    materials.</span
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div class="text-center pt-4">
+              <a
+                href="#contact"
+                id="modalContactBtn"
+                class="bg-accent hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 inline-flex items-center"
+              >
+                Contact us <i data-feather="mail" class="ml-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SolidWorks Modal -->
+    <div
+      id="solidworksModal"
+      class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="solidworksModalTitle"
+    >
+      <div class="bg-white text-dark rounded-xl max-w-2xl w-full relative">
+        <button
+          id="closeSolidworksModal"
+          class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition"
+          aria-label="Close"
+        >
+          <i data-feather="x" class="w-8 h-8"></i>
+        </button>
+
+        <div class="p-8">
+          <div class="flex justify-center mb-6">
+            <div class="bg-white rounded-md px-4 py-3">
+              <img
+                src="assets/solidoworks.svg"
+                alt="SolidWorks"
+                class="w-64 md:w-80 h-auto"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <h2
+            id="solidworksModalTitle"
+            class="text-2xl md:text-3xl font-bold mb-2 font-display text-primary"
+          >
+            SolidWorks
+          </h2>
+          <p class="text-gray mb-6">
+            A 3D CAD and simulation platform widely used in engineering,
+            manufacturing, and education for product development.
+          </p>
+
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <i
+                data-feather="map-pin"
+                class="w-5 h-5 mr-3 text-secondary flex-shrink-0 mt-0.5"
+              ></i>
+              <div>
+                <div class="font-bold text-primary">Location</div>
+                <div class="text-gray">Velizy-Villacoublay, France</div>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <i
+                data-feather="mail"
+                class="w-5 h-5 mr-3 text-secondary flex-shrink-0 mt-0.5"
+              ></i>
+              <div>
+                <div class="font-bold text-primary">Email</div>
+                <a
+                  href="mailto:info@3ds.com"
+                  class="text-secondary hover:text-accent underline break-all"
+                >
+                  info@3ds.com
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Elipse Modal -->
+    <div
+      id="elipseModal"
+      class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="elipseModalTitle"
+    >
+      <div class="bg-white text-dark rounded-xl max-w-2xl w-full relative">
+        <button
+          id="closeElipseModal"
+          class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition"
+          aria-label="Close"
+        >
+          <i data-feather="x" class="w-8 h-8"></i>
+        </button>
+
+        <div class="p-8">
+          <div class="flex justify-center mb-6">
+            <div class="bg-white rounded-md px-4 py-3">
+              <img
+                src="assets/elipselogo.png"
+                alt="Elipse Software"
+                class="w-64 md:w-80 h-auto"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <h2
+            id="elipseModalTitle"
+            class="text-2xl md:text-3xl font-bold mb-2 font-display text-primary"
+          >
+            Elipse Software
+          </h2>
+          <p class="text-gray mb-6">
+            A Brazilian software company focused on industrial automation and
+            supervisory systems, delivering solutions for process monitoring and
+            control.
+          </p>
+
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <i
+                data-feather="map-pin"
+                class="w-5 h-5 mr-3 text-secondary flex-shrink-0 mt-0.5"
+              ></i>
+              <div>
+                <div class="font-bold text-primary">Location</div>
+                <div class="text-gray">Porto Alegre, Rio Grande do Sul, Brazil</div>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <i
+                data-feather="mail"
+                class="w-5 h-5 mr-3 text-secondary flex-shrink-0 mt-0.5"
+              ></i>
+              <div>
+                <div class="font-bold text-primary">Email</div>
+                <a
+                  href="mailto:elipse@elipse.com.br"
+                  class="text-secondary hover:text-accent underline break-all"
+                >
+                  elipse@elipse.com.br
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Altium Modal -->
+    <div
+      id="altiumModal"
+      class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="altiumModalTitle"
+    >
+      <div class="bg-white text-dark rounded-xl max-w-2xl w-full relative">
+        <button
+          id="closeAltiumModal"
+          class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 transition"
+          aria-label="Close"
+        >
+          <i data-feather="x" class="w-8 h-8"></i>
+        </button>
+
+        <div class="p-8">
+          <div class="flex justify-center mb-6">
+            <div class="bg-gray-100 rounded-md px-4 py-3">
+              <img
+                src="assets/Altium_Logo.png"
+                alt="Altium"
+                class="w-64 md:w-80 h-auto"
+                loading="lazy"
+              />
+            </div>
+          </div>
+          <h2
+            id="altiumModalTitle"
+            class="text-2xl md:text-3xl font-bold mb-2 font-display text-primary"
+          >
+            Altium
+          </h2>
+          <p class="text-gray mb-6">
+            Global leader in software development for printed circuit board (PCB) design and manufacturing, providing cutting-edge tools for electronic engineers worldwide.
+          </p>
+
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <i
+                data-feather="map-pin"
+                class="w-5 h-5 mr-3 text-secondary flex-shrink-0 mt-0.5"
+              ></i>
+              <div>
+                <div class="font-bold text-primary">Global Headquarters</div>
+                <div class="text-gray">San Diego, California, USA</div>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <i
+                data-feather="globe"
+                class="w-5 h-5 mr-3 text-secondary flex-shrink-0 mt-0.5"
+              ></i>
+              <div>
+                <div class="font-bold text-primary">Website</div>
+                <a
+                  href="https://www.altium.com"
+                  target="_blank"
+                  class="text-secondary hover:text-accent break-all"
+                >
+                  altium.com
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <custom-footer></custom-footer>
+    <script src="components/navbar.js"></script>
+    <script src="components/team-section.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="script.js"></script>
+    <script>
+      feather.replace();
+    </script>
+  </body>
+</html>

@@ -1,16 +1,19 @@
 /*! React Bits adaptations for the existing Artrobots site.
  * Copyright (c) 2026 David Haz. MIT + Commons Clause. See THIRD_PARTY_NOTICES.md.
  */
-(function () {
-  'use strict';
+import * as shaders from './shaders.js';
+import { specularShaders } from './specular-shaders.js';
+import { mountTechText } from './tech-text.js';
+
+/** Visual-only lifecycle; React keeps ownership of content and card faces. */
+export function mountSiteEffects(root, { english = false } = {}) {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const fine = matchMedia('(hover: hover) and (pointer: fine)');
   const forced = matchMedia('(forced-colors: active)');
-  const english = document.documentElement.lang.startsWith('en');
   const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
   const rgb = hex => [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16) / 255);
   const cleanups = [];
-  const hero = document.querySelector('.brand-hero, .directory-hero');
+  const hero = root.querySelector('.brand-hero, .directory-hero');
   let paused = false;
   try { paused = sessionStorage.getItem('artrobots-effects-paused') === 'true'; } catch { /* Storage is optional. */ }
   const allowed = () => !reduced.matches && !forced.matches && !paused;
@@ -98,7 +101,7 @@
   }
 
   function gradientWaves(container) {
-    const { waveVertex, waveFragment } = window.ArtrobotsShaders;
+    const { waveVertex, waveFragment } = shaders;
     const values = { iTime: 0, iResolution: [1, 1], uSpeed: .18, uAmplitude: 2.5, uWaveScale: .6, uWaveRatio: .9, uSwell: 30, uTurbulence: 16, uTilt: 1.11, uZoom: 1, uHeight: 5.5, uFogDepth: 15, uSteps: 32, uBrightness: 1, uOpacity: .8, uGrain: 1, uGrainIntensity: .018, uMouse: [.5, .5], uParallax: .18, uEnableMouse: false, uHorizonColor: rgb('#6d35bd'), uWaveColor: rgb('#98c7ed'), uCrestColor: rgb('#eee2fc') };
     const surface = shaderSurface(container, waveVertex, waveFragment, values, 2, 1);
     const stop = visibleLoop(container, time => { values.iTime = time * .001; surface.draw(); });
@@ -154,7 +157,7 @@
     const points = Array.from({ length: 24 }, () => ({ x: 0, y: 0 })), data = new Float32Array(48);
     const values = { uResolution: [1, 1], uPoints: data, uPointCount: 24, uColor: rgb('#8250c5'), uSecondaryColor: rgb('#72b5d9'), uTrailWidth: 2.7, uTaper: .85, uGlowIntensity: 1.1, uGlowSpread: 1, uHotspot: .4, uBrightness: 1.1, uOpacity: .5, uPulseSpeed: .4, uNoiseStrength: .015, uNormalBlend: 1, uTime: 0, uFade: 0 };
     let surface;
-    try { surface = shaderSurface(container, window.ArtrobotsShaders.glowVertex, window.ArtrobotsShaders.glowFragment.replace('#define MAX_POINTS 64', '#define MAX_POINTS 24'), values, 1, .7, false); }
+    try { surface = shaderSurface(container, shaders.glowVertex, shaders.glowFragment.replace('#define MAX_POINTS 64', '#define MAX_POINTS 24'), values, 1, .7, false); }
     catch (error) { container.remove(); throw error; }
     const target = { x: 0, y: 0 }; let raf = 0, lastInput = 0, previous = 0, initialized = false;
     function draw(time) {
@@ -181,7 +184,7 @@
     const layer = document.createElement('span'); layer.className = 'rb-specular-fx'; layer.setAttribute('aria-hidden', 'true'); button.append(layer);
     const values = { uCenter: [1, 1], uHalfSize: [1, 1], uRadius: 8.8, uAngle: 2.4, uPx: 1, uLineColor: rgb('#ffffff'), uBaseColor: rgb('#623d8f'), uIntensity: 0, uShineSize: .175, uShineFade: .698, uThickness: 1, uBaseWidth: 1 };
     let surface;
-    try { surface = shaderSurface(layer, window.ArtrobotsSpecularShaders.vertex, window.ArtrobotsSpecularShaders.fragment, values, 2, 1.5); }
+    try { surface = shaderSurface(layer, specularShaders.vertex, specularShaders.fragment, values, 2, 1.5); }
     catch (error) { layer.remove(); throw error; }
     let target = 2.4, angle = 2.4, proximity = 0, bright = 0, raf = 0, previous = 0;
     function draw(time) {
@@ -212,133 +215,89 @@
     return () => { cancelAnimationFrame(raf); resize.disconnect(); document.removeEventListener('pointermove', move); document.removeEventListener('visibilitychange', visibility); button.removeEventListener('focus', focus); button.removeEventListener('blur', blur); surface.destroy(); layer.remove(); };
   }
 
-  // Actual project copy is moved once, never cloned into two accessible faces.
-  const enhancedCards = new WeakSet();
-  function flipCard(card, index) {
-    if (enhancedCards.has(card)) return;
-    const heading = card.querySelector('h3'), description = card.querySelector('.site-entry-summary') || card.querySelector('p');
-    if (!heading || !description) return;
-    enhancedCards.add(card);
-    const height = Math.min(540, Math.max(350, card.getBoundingClientRect().height + 36));
-    const front = document.createElement('div'), back = document.createElement('div'), rotor = document.createElement('div');
-    front.className = 'rb-flip-front'; back.className = 'rb-flip-back'; rotor.className = 'rb-flip-rotor';
-    while (card.firstChild) front.append(card.firstChild);
-    const backTitle = document.createElement('p'); backTitle.className = 'rb-flip-back-title'; backTitle.textContent = heading.textContent;
-    back.append(backTitle, description);
-    const details = front.querySelector('.site-entry-details'); if (details) back.append(details);
-    back.tabIndex = 0;
-    const button = document.createElement('button'); button.type = 'button'; button.className = 'rb-flip-toggle rb-specular';
-    back.id = `project-details-${card.getAttribute('data-entry-id') || index}`; button.setAttribute('aria-controls', back.id);
-    let flipped = false, grip = null;
-    function show(value) {
-      flipped = value; card.classList.toggle('is-flipped', value); back.inert = !value;
-      back.setAttribute('aria-hidden', String(!value)); front.setAttribute('aria-hidden', String(value)); front.inert = value;
-      button.setAttribute('aria-expanded', String(value));
-      button.setAttribute('aria-label', `${value ? (english ? 'Back to' : 'Voltar a') : (english ? 'Read about' : 'Ler sobre')} ${heading.textContent.trim()}`);
-      button.textContent = value ? (english ? 'Back ↶' : 'Voltar ↶') : (english ? 'About the project ↗' : 'Sobre o projeto ↗');
-    }
-    button.addEventListener('click', event => { show(!flipped); if (flipped && event.detail === 0) back.focus({ preventScroll: true }); });
-    card.addEventListener('keydown', event => { if (event.key === 'Escape' && flipped) { show(false); button.focus(); } });
-    card.addEventListener('pointerdown', event => { if (event.button === 0 && !event.target.closest('button, a')) grip = { x: event.clientX, y: event.clientY, id: event.pointerId }; });
-    card.addEventListener('pointerup', event => { if (grip?.id === event.pointerId && Math.abs(event.clientX - grip.x) > 45 && Math.abs(event.clientX - grip.x) > Math.abs(event.clientY - grip.y) * 1.5) show(!flipped); grip = null; });
-    card.addEventListener('pointercancel', () => { grip = null; });
-    card.addEventListener('pointerleave', () => { grip = null; card.style.setProperty('--flip-x', '0deg'); card.style.setProperty('--flip-y', '0deg'); });
-    card.addEventListener('pointermove', event => {
-      if (!allowed() || !fine.matches || event.pointerType !== 'mouse') return;
-      const rect = card.getBoundingClientRect(), x = clamp((event.clientX - rect.left) / rect.width), y = clamp((event.clientY - rect.top) / rect.height);
-      card.style.setProperty('--flip-x', `${(.5 - y) * 6}deg`); card.style.setProperty('--flip-y', `${(x - .5) * 6}deg`);
-      card.style.setProperty('--glare-x', `${x * 100}%`); card.style.setProperty('--glare-y', `${y * 100}%`);
-    });
-    rotor.append(front, back); card.append(rotor, button); card.classList.add('rb-flip'); card.style.minHeight = `${height}px`; show(false);
-  }
 
-  // Add ProfileCard materials to the real approved/legacy nodes and leadership.
-  document.querySelectorAll('#leadership > .container > .grid > div').forEach(card => card.setAttribute('data-profile-card', ''));
-
-  const enhancedButtons = new WeakSet();
-  function specularFallback(button) {
-    if (enhancedButtons.has(button)) return;
-    enhancedButtons.add(button);
-    button.classList.add('rb-specular');
-    button.addEventListener('pointermove', event => {
-      if (!allowed() || !fine.matches || event.pointerType !== 'mouse') return;
-      const box = button.getBoundingClientRect(); button.style.setProperty('--specular-x', `${clamp((event.clientX - box.left) / box.width) * 100}%`); button.style.setProperty('--specular-y', `${clamp((event.clientY - box.top) / box.height) * 100}%`);
-    });
+  let disposed = false;
+  const buttonSelector = '.brand-button, #about a[href="#contact"], #projects .text-center > a, #leadership .text-center > a, #sponsors .text-center > :is(a,button), #contact button[type="submit"], .rb-flip-toggle, .site-entry-link, .site-content-retry';
+  const buttons = new Set();
+  function collectButtons() {
+    root.querySelectorAll(buttonSelector).forEach(button => { button.classList.add('rb-specular'); buttons.add(button); });
+    for (const button of buttons) if (!root.contains(button)) buttons.delete(button);
   }
-  function mountEffects(root = document) {
-    root.querySelectorAll('#projects > .container > .grid > div:not(.site-content-state), #projects [data-kind="PROJECT"]').forEach(flipCard);
-    root.querySelectorAll('.brand-button, #about a[href="#contact"], #projects .text-center > a, #leadership .text-center > a, #sponsors .text-center > :is(a,button), #contact button[type="submit"], .rb-flip-toggle, .site-entry-link, .site-content-retry').forEach(specularFallback);
-    syncSponsorControls();
+  function specularPointer(event) {
+    if (!allowed() || !fine.matches || event.pointerType !== 'mouse') return;
+    const button = event.target.closest?.(buttonSelector);
+    if (!button || !root.contains(button)) return;
+    const box = button.getBoundingClientRect();
+    button.style.setProperty('--specular-x', `${clamp((event.clientX - box.left) / Math.max(box.width, 1)) * 100}%`);
+    button.style.setProperty('--specular-y', `${clamp((event.clientY - box.top) / Math.max(box.height, 1)) * 100}%`);
   }
-  function syncSponsorControls() {
-    const carousel = document.querySelector('.sponsors-container'), previous = document.querySelector('.sponsors-scroll-left'), next = document.querySelector('.sponsors-scroll-right');
-    if (!carousel || !previous || !next) return;
-    const scrollable = carousel.scrollWidth > carousel.clientWidth + 2;
-    previous.parentElement.hidden = !scrollable;
-    previous.parentElement.style.display = scrollable ? '' : 'none';
-    previous.disabled = !scrollable; next.disabled = !scrollable;
-  }
-  const sponsorContainer = document.querySelector('.sponsors-container');
-  if (sponsorContainer) { const resize = new ResizeObserver(syncSponsorControls); resize.observe(sponsorContainer); const track = sponsorContainer.querySelector('.sponsors-grid'); if (track) resize.observe(track); cleanups.push(() => resize.disconnect()); }
-  window.ArtrobotsSiteEffects = Object.freeze({ mount: mountEffects });
-  mountEffects();
+  collectButtons(); root.addEventListener('pointermove', specularPointer, { passive: true });
+  const buttonObserver = new MutationObserver(collectButtons); buttonObserver.observe(root, { childList: true, subtree: true });
+  cleanups.push(() => { buttonObserver.disconnect(); root.removeEventListener('pointermove', specularPointer); for (const button of buttons) { button.style.removeProperty('--specular-x'); button.style.removeProperty('--specular-y'); } buttons.clear(); });
 
   function scrollReveal() {
-    const entries = [...document.querySelectorAll('body > section[id] > .container > h2, body > section[id] > .container > p, #aboutText')].filter(element => !element.children.length);
+    const entries = [...root.querySelectorAll('section[id] > .container > h2, section[id] > .container > p, #aboutText')];
     const active = new Set(); let raf = 0;
-    function split(element) {
-      const parts = element.textContent.split(/(\s+)/); element.replaceChildren();
-      parts.forEach(part => { if (/^\s+$/.test(part) || !part) element.append(document.createTextNode(part)); else { const span = document.createElement('span'); span.className = 'rb-reveal-word'; span.textContent = part; element.append(span); } });
-      element.classList.add('rb-scroll-reveal');
-    }
-    entries.forEach(split);
+    entries.forEach(element => element.classList.add('rb-scroll-reveal'));
     function draw() {
       raf = 0;
       for (const element of active) {
         const progress = allowed() ? clamp((innerHeight * .94 - element.getBoundingClientRect().top) / (innerHeight * .26)) : 1;
-        const words = element.querySelectorAll('.rb-reveal-word');
-        words.forEach((word, index) => { const p = clamp(progress * 1.7 - index / Math.max(words.length, 1) * .7); word.style.opacity = String(.45 + .55 * p); word.style.filter = `blur(${(1 - p) * 1.4}px)`; });
+        const words = [...element.querySelectorAll('.rb-reveal-word')];
+        // Optional word spans are JSX-owned. Never split or replace React text.
+        (words.length ? words : [element]).forEach((word, index) => { const p = clamp(progress * 1.7 - index / Math.max(words.length, 1) * .7); word.style.opacity = String(.45 + .55 * p); word.style.filter = `blur(${(1 - p) * 1.4}px)`; });
         element.style.transform = `rotate(${(1 - progress) * .8}deg)`;
       }
     }
     const schedule = () => { if (!raf) raf = requestAnimationFrame(draw); };
-    const observer = new IntersectionObserver(entries => { entries.forEach(entry => { if (entry.isIntersecting) active.add(entry.target); else active.delete(entry.target); }); schedule(); }, { rootMargin: '80px' });
-    const aboutText = document.getElementById('aboutText');
-    const contentObserver = new MutationObserver(() => { if (aboutText && !aboutText.querySelector('.rb-reveal-word') && aboutText.textContent.trim()) { split(aboutText); schedule(); } });
-    if (aboutText) contentObserver.observe(aboutText, { childList: true });
+    const observer = new IntersectionObserver(items => { items.forEach(entry => { if (entry.isIntersecting) active.add(entry.target); else active.delete(entry.target); }); schedule(); }, { rootMargin: '80px' });
     entries.forEach(element => observer.observe(element)); window.addEventListener('scroll', schedule, { passive: true }); window.addEventListener('resize', schedule);
     document.addEventListener('artrobots-motion-change', schedule);
-    return () => { observer.disconnect(); contentObserver.disconnect(); cancelAnimationFrame(raf); window.removeEventListener('scroll', schedule); window.removeEventListener('resize', schedule); document.removeEventListener('artrobots-motion-change', schedule); };
+    return () => { observer.disconnect(); cancelAnimationFrame(raf); window.removeEventListener('scroll', schedule); window.removeEventListener('resize', schedule); document.removeEventListener('artrobots-motion-change', schedule); entries.forEach(element => { element.classList.remove('rb-scroll-reveal'); for (const node of [element, ...element.querySelectorAll('.rb-reveal-word')]) { node.style.removeProperty('opacity'); node.style.removeProperty('filter'); node.style.removeProperty('transform'); } }); };
   }
   cleanups.push(scrollReveal());
 
   let ambient = [], pause;
+  const heroLayers = [];
   if (hero) {
-    for (const kind of ['waves', 'dots']) { const layer = document.createElement('div'); layer.className = `rb-hero-${kind}`; layer.setAttribute('aria-hidden', 'true'); hero.prepend(layer); }
-    pause = document.createElement('button'); pause.type = 'button'; pause.className = 'rb-motion-toggle';
-    const actions = hero.querySelector('.brand-hero-actions') || hero.querySelector('.container'); actions.append(pause);
-    pause.addEventListener('click', () => { paused = !paused; try { sessionStorage.setItem('artrobots-effects-paused', String(paused)); } catch { /* Optional persistence. */ } configure(); });
+    for (const kind of ['waves', 'dots']) {
+      const layer = document.createElement('div'); layer.className = `rb-hero-${kind}`; layer.setAttribute('aria-hidden', 'true'); layer.dataset.effectOwned = 'true'; hero.prepend(layer); heroLayers.push(layer);
+    }
+    const actions = hero.querySelector('.brand-hero-actions') || hero.querySelector('.container');
+    if (actions) {
+      // A dedicated effect-owned slot keeps this optional control isolated.
+      const controls = document.createElement('div'); controls.className = 'rb-effect-controls';
+      pause = document.createElement('button'); pause.type = 'button'; pause.className = 'rb-motion-toggle'; controls.append(pause); actions.append(controls);
+      const toggle = () => { paused = !paused; try { sessionStorage.setItem('artrobots-effects-paused', String(paused)); } catch { /* Optional persistence. */ } configure(); };
+      pause.addEventListener('click', toggle); cleanups.push(() => { pause.removeEventListener('click', toggle); controls.remove(); });
+    }
   }
+  function clearAmbient() { ambient.forEach(stop => stop()); ambient = []; }
   function configure() {
-    ambient.forEach(stop => stop()); ambient = [];
+    if (disposed) return;
+    clearAmbient();
     document.documentElement.classList.toggle('rb-motion-disabled', !allowed());
     if (pause) { pause.hidden = reduced.matches || forced.matches; pause.setAttribute('aria-pressed', String(paused)); pause.textContent = english ? (paused ? 'Resume effects' : 'Pause effects') : (paused ? 'Ativar efeitos' : 'Pausar efeitos'); }
     document.dispatchEvent(new Event('artrobots-motion-change'));
     if (!allowed()) return;
     const factories = [glowCursor];
-    document.querySelectorAll('.brand-hero-actions .brand-button').forEach(button => factories.push(() => specularButton(button)));
+    root.querySelectorAll('.brand-hero-actions .brand-button').forEach(button => factories.push(() => specularButton(button)));
     if (hero) {
-      factories.push(() => gradientWaves(hero.querySelector('.rb-hero-waves')), () => dotField(hero.querySelector('.rb-hero-dots')));
+      factories.push(() => gradientWaves(heroLayers[0]), () => dotField(heroLayers[1]));
       const title = hero.querySelector('#home-title');
-      if (title && fine.matches && window.ArtrobotsTechText) factories.push(() => window.ArtrobotsTechText(title));
+      if (title && fine.matches) factories.push(() => mountTechText(title));
     }
-    factories.forEach(factory => { try { const stop = factory(); if (typeof stop === 'function') ambient.push(stop); } catch { /* Static gradients, title and controls remain available. */ } });
+    factories.forEach(factory => { try { const stop = factory(); if (typeof stop === 'function') ambient.push(stop); } catch { /* Readable text and static backgrounds survive unsupported WebGL. */ } });
   }
+  function pageHide() { clearAmbient(); }
+  function pageShow(event) { if (event.persisted) configure(); }
   for (const query of [reduced, fine, forced]) query.addEventListener('change', configure);
+  window.addEventListener('pagehide', pageHide); window.addEventListener('pageshow', pageShow);
   configure();
-  window.addEventListener('pagehide', event => {
-    ambient.forEach(stop => stop()); ambient = [];
-    if (!event.persisted) { cleanups.forEach(stop => stop()); for (const query of [reduced, fine, forced]) query.removeEventListener('change', configure); }
-  });
-  window.addEventListener('pageshow', event => { if (event.persisted) configure(); });
-})();
+  return { destroy() {
+    if (disposed) return; disposed = true; clearAmbient(); cleanups.forEach(stop => stop()); heroLayers.forEach(layer => layer.remove());
+    for (const query of [reduced, fine, forced]) query.removeEventListener('change', configure);
+    window.removeEventListener('pagehide', pageHide); window.removeEventListener('pageshow', pageShow);
+    document.documentElement.classList.remove('rb-motion-disabled');
+  } };
+}

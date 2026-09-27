@@ -7,8 +7,8 @@ class CustomFooter extends HTMLElement {
     const isEnglish = htmlLang.startsWith("en");
 
     const line1 = isEnglish
-      ? "&copy; 2025 Artrobots - Inteli Robotics Club"
-      : "&copy; 2025 Artrobots - Clube de Robótica do Inteli";
+      ? "&copy; 2026 Artrobots - Inteli Robotics Club"
+      : "&copy; 2026 Artrobots - Clube de Robótica do Inteli";
     const line2 = isEnglish
       ? "All rights reserved."
       : "Todos os direitos reservados.";

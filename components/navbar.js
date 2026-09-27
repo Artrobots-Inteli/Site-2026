@@ -49,131 +49,28 @@ class CustomNavbar extends HTMLElement {
     const baseHref = isHomePage ? "" : homeHref;
     const logoHref = isHomePage ? "#" : homeHref;
 
+    const themeControl = `<label class="site-theme-control"><span class="sr-only">${isEnglish ? 'Colour theme' : 'Tema de cor'}</span><select data-theme-select aria-label="${isEnglish ? 'Colour theme' : 'Tema de cor'}"><option value="dark">${isEnglish ? 'Dark' : 'Noturno'}</option><option value="light">${isEnglish ? 'Light' : 'Claro'}</option><option value="system">${isEnglish ? 'System' : 'Sistema'}</option></select></label>`;
+    const links = document.body.classList.contains('league-experience') ? [] : [
+      [baseHref + '#projects', labels.projects], [baseHref + '#competitions', labels.competitions],
+      [baseHref + '#sponsors', isEnglish ? 'Partners' : 'Parcerias'], [baseHref + '#calendar', labels.calendar],
+      [isEnglish ? 'membros-en.html' : 'membros.html', labels.members]
+    ];
+    const languageControl = `<div class="site-language-control"><a href="${ptUrl}" data-lang="pt" ${!isEnglish ? 'aria-current="page"' : ''} aria-label="Português (Brasil)">PT</a><a href="${enUrl}" data-lang="en" ${isEnglish ? 'aria-current="page"' : ''} aria-label="English">EN</a></div>`;
     this.innerHTML = `
-            <nav class="bg-primary bg-opacity-90 backdrop-blur-md fixed top-0 w-full z-40 transition-all duration-300" id="navbar">
-                <div class="container mx-auto px-6 py-4">
-                    <div class="flex justify-between items-center">
-            <a href="${logoHref}" class="flex items-center space-x-3 hover:opacity-80 transition">
-                            <img src="assets/logo_circulo.png" alt="Artrobots Logo" class="w-10 h-10" />
-                            <span class="text-2xl font-bold text-white font-display">ARTROBOTS</span>
-                        </a>
-                        <div class="desktop-navigation hidden md:flex items-center space-x-8">
-              <a href="${baseHref}#about" class="hover:text-accent transition">${
-      labels.about
-    }</a>
-              <a href="${baseHref}#areas" class="hover:text-accent transition">${
-      labels.areas
-    }</a>
-              <a href="${baseHref}#projects" class="hover:text-accent transition">${
-      labels.projects
-    }</a>
-              <a href="${baseHref}#competitions" class="hover:text-accent transition">${
-      labels.competitions
-    }</a>
-              <a href="${baseHref}#leadership" class="hover:text-accent transition">${
-      labels.leadership
-    }</a>
-              <a href="${baseHref}#calendar" class="hover:text-accent transition">${
-      labels.calendar
-    }</a>
-              <a href="${baseHref}#contact" class="hover:text-accent transition">${
-      labels.contact
-    }</a>
-
-              <a
-                href="${isEnglish ? 'membros-en.html' : 'membros.html'}"
-                class="bg-secondary hover:bg-purple text-white font-bold py-1.5 px-5 rounded-full transition duration-300 inline-flex items-center text-sm"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                ${labels.members}
-              </a>
-
-              <a href="https://artrolove.artrobots.tech" class="hover:text-accent transition">ArtroLove</a>
-              <div class="inline-flex border border-secondary rounded-full overflow-hidden">
-                <a
-                  href="${ptUrl}"
-                  data-lang="pt"
-                  class="px-3 py-1 text-sm font-semibold transition ${
-                    !isEnglish
-                      ? "bg-secondary text-white"
-                      : "text-gray-300 hover:bg-secondary hover:bg-opacity-20"
-                  }"
-                  aria-label="Português (Brasil)"
-                >PT-BR</a>
-                <a
-                  href="${enUrl}"
-                  data-lang="en"
-                  class="px-3 py-1 text-sm font-semibold transition ${
-                    isEnglish
-                      ? "bg-secondary text-white"
-                      : "text-gray-300 hover:bg-secondary hover:bg-opacity-20"
-                  }"
-                  aria-label="English"
-                >ENG</a>
-              </div>
-                        </div>
-                        <button class="navigation-toggle md:hidden text-white" aria-label="${isEnglish ? 'Open menu' : 'Abrir menu'}" onclick="toggleMenu()" aria-controls="mobile-menu" aria-expanded="false">
-                            <i data-feather="menu"></i>
-                        </button>
-                    </div>
-                    <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 overflow-hidden opacity-0 -translate-y-1 max-h-0 transition-all duration-200 ease-out">
-            <a href="https://artrolove.artrobots.tech" class="block py-2 hover:text-accent">ArtroLove</a>
-            <a href="${baseHref}#about" class="block py-2 hover:text-accent">${
-      labels.about
-    }</a>
-            <a href="${baseHref}#areas" class="block py-2 hover:text-accent">${
-      labels.areas
-    }</a>
-            <a href="${baseHref}#projects" class="block py-2 hover:text-accent">${
-      labels.projects
-    }</a>
-            <a href="${baseHref}#competitions" class="block py-2 hover:text-accent">${
-      labels.competitions
-    }</a>
-            <a href="${baseHref}#leadership" class="block py-2 hover:text-accent">${
-      labels.leadership
-    }</a>
-            <a href="${baseHref}#calendar" class="block py-2 hover:text-accent">${
-      labels.calendar
-    }</a>
-            <a href="${baseHref}#contact" class="block py-2 hover:text-accent">${
-      labels.contact
-    }</a>
-
-            <a
-              href="${isEnglish ? 'membros-en.html' : 'membros.html'}"
-              class="mt-2 inline-flex items-center bg-secondary hover:bg-purple text-white font-bold py-2 px-5 rounded-full transition duration-300 text-sm"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-              ${labels.members}
-            </a>
-
-            <div class="mt-4 inline-flex border border-secondary rounded-full overflow-hidden">
-              <a
-                href="${ptUrl}"
-                data-lang="pt"
-                class="px-3 py-1 text-sm font-semibold transition ${
-                  !isEnglish
-                    ? "bg-secondary text-white"
-                    : "text-gray-300 hover:bg-secondary hover:bg-opacity-20"
-                }"
-                aria-label="Português (Brasil)"
-              >PT-BR</a>
-              <a
-                href="${enUrl}"
-                data-lang="en"
-                class="px-3 py-1 text-sm font-semibold transition ${
-                  isEnglish
-                    ? "bg-secondary text-white"
-                    : "text-gray-300 hover:bg-secondary hover:bg-opacity-20"
-                }"
-                aria-label="English"
-              >ENG</a>
-            </div>
-                    </div>
-                </div>
-            </nav>
-        `;
+      <nav id="navbar" class="site-navigation" aria-label="${isEnglish ? 'Main navigation' : 'Navegação principal'}">
+        <div class="site-navigation-bar"><a class="site-navigation-brand" href="${logoHref}" aria-label="Artrobots"><img src="assets/logo_circulo.png" alt="" width="36" height="36" /><span>ARTROBOTS</span></a>
+          <div class="desktop-navigation">${links.map(([href,label]) => `<a href="${href}">${label}</a>`).join('')}<a class="site-community-nav" href="https://artrolove.artrobots.tech">ArtroLove ↗</a>${languageControl}${themeControl}</div>
+          <button type="button" class="navigation-toggle" aria-controls="mobile-menu" aria-expanded="false" aria-label="${isEnglish ? 'Open menu' : 'Abrir menu'}">${isEnglish ? 'Menu' : 'Menu'} <span aria-hidden="true">☰</span></button>
+        </div>
+        <div id="mobile-menu" class="site-mobile-menu" hidden>${links.map(([href,label]) => `<a href="${href}">${label}</a>`).join('')}<a href="https://artrolove.artrobots.tech">ArtroLove ↗</a><div class="site-mobile-preferences">${languageControl}${themeControl}</div></div>
+      </nav>`;
+    const button = this.querySelector('.navigation-toggle');
+    const menu = this.querySelector('#mobile-menu');
+    function closeMenu() { menu.hidden = true; button.setAttribute('aria-expanded', 'false'); }
+    button.addEventListener('click', () => { menu.hidden = !menu.hidden; button.setAttribute('aria-expanded', String(!menu.hidden)); });
+    menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+    this.addEventListener('keydown', (event) => { if (event.key === 'Escape') { closeMenu(); button.focus(); } });
+    if (globalThis.ArtrobotsTheme?.apply) globalThis.ArtrobotsTheme.apply(globalThis.ArtrobotsTheme.read());
 
     // Persist manual language choice
     this.querySelectorAll("a[data-lang]").forEach((link) => {
@@ -202,53 +99,3 @@ class CustomNavbar extends HTMLElement {
 }
 
 customElements.define("custom-navbar", CustomNavbar);
-
-function toggleMenu() {
-  const menu = document.getElementById("mobile-menu");
-
-  if (!menu) return;
-
-  const navbarToggleButton = document.querySelector(
-    'button[aria-controls="mobile-menu"]'
-  );
-
-  const transitionMs = 200;
-  const prefersReducedMotion =
-    window.matchMedia &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  if (menu.classList.contains("hidden")) {
-    menu.classList.remove("hidden");
-    if (navbarToggleButton)
-      navbarToggleButton.setAttribute("aria-expanded", "true");
-
-    if (prefersReducedMotion) {
-      menu.classList.add("opacity-100", "translate-y-0", "max-h-96");
-      menu.classList.remove("opacity-0", "-translate-y-1", "max-h-0");
-      return;
-    }
-
-    // Next frame so the browser can apply the initial (closed) styles.
-    requestAnimationFrame(() => {
-      menu.classList.add("opacity-100", "translate-y-0", "max-h-96");
-      menu.classList.remove("opacity-0", "-translate-y-1", "max-h-0");
-    });
-  } else {
-    if (navbarToggleButton)
-      navbarToggleButton.setAttribute("aria-expanded", "false");
-
-    if (prefersReducedMotion) {
-      menu.classList.add("hidden");
-      menu.classList.remove("opacity-100", "translate-y-0", "max-h-96");
-      menu.classList.add("opacity-0", "-translate-y-1", "max-h-0");
-      return;
-    }
-
-    menu.classList.add("opacity-0", "-translate-y-1", "max-h-0");
-    menu.classList.remove("opacity-100", "translate-y-0", "max-h-96");
-
-    window.setTimeout(() => {
-      menu.classList.add("hidden");
-    }, transitionMs);
-  }
-}

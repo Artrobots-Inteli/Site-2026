@@ -288,3 +288,68 @@ body.artrobots-site {
   }
   .artrobots-site .member-card:hover, .artrobots-site .member-card:hover .member-photo { transform: none; }
 }
+
+/* Shared colour preference. Dark is the initial engineering workspace; light
+   remains available and the automatic option follows the operating system. */
+:root {
+  --brand-ink: #f2edf9; --brand-muted: #beb2ce; --brand-violet: #c09aff;
+  --brand-violet-deep: #d0b0ff; --brand-paper: #141119;
+  --brand-lavender: #1d1728; --brand-line: #3c304c; --site-surface: #241d31;
+}
+html[data-theme="light"] {
+  --brand-ink: #371554; --brand-muted: #533574; --brand-violet: #6927b5;
+  --brand-violet-deep: #512098; --brand-paper: #f5f8fc;
+  --brand-lavender: #eee9fa; --brand-line: #d8cce9; --site-surface: #e9e3f2;
+}
+html { background: var(--brand-paper); }
+.artrobots-site #navbar.site-navigation { position: fixed; top: 0; width: 100%; z-index: 40; background: rgb(20 17 25 / 93%); border-color: var(--brand-line); box-shadow: none; backdrop-filter: blur(16px); }
+html[data-theme="light"] .artrobots-site #navbar.site-navigation { background: rgb(248 249 255 / 94%); }
+.site-navigation-bar { max-width: 1600px; margin: auto; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; padding: 1.1rem clamp(1.5rem, 3vw, 4rem); }
+.site-navigation-brand { display: flex; gap: .65rem; align-items: center; white-space: nowrap; font-family: "Oswald", sans-serif; font-size: 1.4rem; font-weight: 500; letter-spacing: -.02em; }
+.site-navigation-brand img { width: 36px; height: 36px; }
+.site-navigation .desktop-navigation { align-items: center; gap: 1.4rem !important; }
+.site-language-control { display: flex; gap: .6rem; font-size: .68rem; }
+.site-language-control a { min-height: 32px; min-width: 28px; display: inline-flex; align-items: center; justify-content: center; }
+.site-language-control [aria-current] { border-bottom: 1px solid currentColor; color: var(--brand-violet); }
+.site-theme-control select { font-family: inherit; font-size: .7rem; background: var(--site-surface); color: var(--brand-ink); padding: .6rem .4rem; border: 1px solid var(--brand-line); border-radius: 3px; min-height: 36px; max-width: 95px; }
+.artrobots-site .site-community-nav { color: var(--brand-violet); }
+.artrobots-site .site-mobile-menu { padding: 0 1.5rem 1.5rem; overflow-y: auto; max-height: calc(100svh - 5rem); }
+.artrobots-site .site-mobile-menu[hidden] { display: none !important; }
+.artrobots-site .site-mobile-menu > a { display: block; font-size: 1.2rem; padding: .65rem 0; border-bottom: 1px solid var(--brand-line); }
+.site-mobile-preferences { display: flex; align-items: center; justify-content: space-between; padding-top: 1rem; }
+.artrobots-site #navbar .navigation-toggle { font-size: .8rem; background: var(--site-surface); border: 1px solid var(--brand-line); color: var(--brand-ink); min-height: 42px; padding: .6rem 1rem; }
+.artrobots-site #navbar .navigation-toggle > span { margin-left: .5rem; }
+html:not([data-theme="light"]) .artrobots-site .bg-gray-700,
+html:not([data-theme="light"]) .artrobots-site .bg-gray-800,
+html:not([data-theme="light"]) .artrobots-site .bg-gray-900,
+html:not([data-theme="light"]) .artrobots-site .bg-gradient-to-br.from-gray-800,
+html:not([data-theme="light"]) .artrobots-site .bg-gradient-to-br.from-gray-900 { background: var(--site-surface); }
+html:not([data-theme="light"]) .artrobots-site .directory-hero { background: radial-gradient(ellipse at 96% 8%, #49316c 0, transparent 48%), linear-gradient(120deg, #182735, #30203e); border-color: var(--brand-line); }
+html:not([data-theme="light"]) .artrobots-site .directory-hero p { color: #cfbeda; }
+html:not([data-theme="light"]) .artrobots-site .directory-hero + section { background: radial-gradient(ellipse at 3% 12%, #172633, transparent 35%), radial-gradient(ellipse at 96% 40%, #32223e, transparent 40%), #17131e; }
+html:not([data-theme="light"]) .artrobots-site .team-header,
+html:not([data-theme="light"]) .artrobots-site .member-card { background: linear-gradient(135deg, rgb(57 42 76 / 86%), rgb(30 25 40 / 84%)) !important; border: 1px solid rgb(178 154 214 / 26%) !important; box-shadow: inset 0 1px 0 rgb(232 211 255 / 10%), 0 6px 22px rgb(0 0 0 / 15%); }
+html:not([data-theme="light"]) .artrobots-site .member-card p[style],
+html:not([data-theme="light"]) .artrobots-site .connected-member-position { color: #ceafea !important; }
+html:not([data-theme="light"]) .artrobots-site .team-badge { color: #ddc4f4 !important; background: #463454 !important; }
+html:not([data-theme="light"]) .artrobots-site .captain-badge { color: #ecd5a5; background: #463c26; border-color: #71613d; }
+html:not([data-theme="light"]) .artrobots-site .member-profile-heading { background: linear-gradient(115deg, #1f2b3b, #3b244f); }
+html:not([data-theme="light"]) .artrobots-site .member-profile-history li { background: var(--site-surface); }
+html:not([data-theme="light"]) .artrobots-site footer { background: #1e1728; }
+html:not([data-theme="light"]) .artrobots-site :is(input, textarea) { background: #251d30; border-color: #67517c; color: var(--brand-ink); }
+html:not([data-theme="light"]) .artrobots-site .text-accent { color: #ffb097; }
+html:not([data-theme="light"]) .artrobots-site .text-teal { color: #9acbda; }
+.artrobots-site .bg-secondary { background-color: #7543bb; }
+.artrobots-site :is(a, button).bg-secondary:hover { background-color: #623497; }
+.artrobots-site .site-navigation .desktop-navigation > a { font-size: .74rem !important; font-weight: 500 !important; }
+@media (min-width: 1280px) { .artrobots-site .site-mobile-menu { display: none; } }
+@media (max-width: 1279px) { .artrobots-site .site-mobile-menu:not([hidden]) { display: block; } }
+@media (prefers-reduced-transparency: reduce) {
+  html:not([data-theme="light"]) .artrobots-site .member-card,
+  html:not([data-theme="light"]) .artrobots-site .team-header { background: #291f35 !important; backdrop-filter: none; }
+  .artrobots-site #navbar.site-navigation { backdrop-filter: none; background: var(--brand-paper); }
+}
+@media (forced-colors: active) {
+  html:not([data-theme="light"]) .artrobots-site .member-card,
+  html:not([data-theme="light"]) .artrobots-site .team-header { background: Canvas !important; border-color: CanvasText !important; }
+}

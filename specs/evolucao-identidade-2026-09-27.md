@@ -18,6 +18,7 @@ O ponto de comparação é a versão `0edcea4`. Recolorir somente o fundo manter
 | VIS-04 | Contato informa segunda a sexta, 10h às 18h; inglês informa Mon–Fri, 10:00–18:00. | Busca nas duas páginas e página publicada. |
 | VIS-05 | Feed aprovado, retirada de perfis, links de projeto, troca de idioma e origem HTTPS não mudam. | `node --test tests/member-directory.test.cjs`. |
 | VIS-06 | Exportação contém todos os estilos usados e não expõe especificações/testes. | `node deploy/build.cjs` e conferência de `dist`. |
+| VIS-07 | Cards e painéis de categorias da área de membros usam vidro translúcido azul/lavanda, reflexos estáticos e sombra discreta. A faixa roxa vertical da esquerda desaparece. Sem suporte a backdrop-filter ou com transparência reduzida, usar superfície opaca legível. | Diff, teste do diretório, build e inspeção no navegador. |
 
 Rastreabilidade: referências da gestão → VIS-01/02/03 → `identity.css`, páginas PT/EN e componentes de navegação/rodapé; pedido de horário → VIS-04 → `index.html`/`index-en.html`; contrato público existente → VIS-05 → testes de diretório; publicação estática existente → VIS-06 → exportação.
 
@@ -42,3 +43,11 @@ O primeiro QA desktop (1280px) encontrou título, subtítulo e link da apresenta
 Correção: remover `text-white` e `bg-dark` do `body` nas seis páginas, definir os tokens do corpo em `body.artrobots-site` e explicitar a cor nos dois tipos de apresentação. Cartões herdam o texto do corpo corrigido; botões violeta mantêm regra própria para texto branco.
 
 Os valores de contraste acima são cálculos entre tokens, não medições do estilo computado do DOM. A primeira captura demonstrou que tokens corretos não garantem aplicação correta. Validação visual/computed após esta correção ainda pendente e necessária antes da publicação.
+
+## Vidro translúcido na área de membros
+
+Fonte: solicitação posterior da gestão para aplicar efeito “liquid glass” aos cards e retirar a lateral indicada na captura. O elemento apontado é a borda esquerda de 5px de `.team-header`, herdada de `components/member-directory.css`. A mudança substitui essa faixa por uma borda fina uniforme e aplica vidro aos painéis de categoria e aos cards públicos, históricos e conectados.
+
+Decisão: reflexos por gradientes estáticos, camada translúcida azul/lavanda, blur moderado do fundo e sombra fina. O diretório recebe um fundo claro suave que permite perceber o vidro. Sem animação contínua, distorção de texto ou filtro nas fotos. Fallback opaco quando `backdrop-filter` não está disponível, quando a preferência `prefers-reduced-transparency` é reconhecida ou em cores forçadas.
+
+Fontes preservadas: nomes, fotos e histórico públicos continuam no HTML original; perfis novos continuam vindo exclusivamente do snapshot aprovado da ArtroLove. Este ajuste altera CSS, não informações pessoais, classificação, links nem aprovação. A inspeção visual/computed do vidro após implementação permanece pendente neste commit.

@@ -55,3 +55,13 @@ Fontes preservadas: nomes, fotos e histórico públicos continuam no HTML origin
 ![Cards desktop, versão local](evidencias-identidade/membros-glass-desktop-local.png)
 
 ![Cards móveis, versão local em 390px](evidencias-identidade/membros-glass-mobile-local.png)
+
+## Publicação e comparação
+
+Render institucional, serviço estático `srv-das2cnojo6nc739uabeg`, branch `feat/perfis-membros-aprovados`. Release `5a0b18db5c65713710892b2abfd364455e2d8ad4`, deploy `dep-dasbbj0jo6nc73b2ch70`, iniciado em 27/09/2026 às 06:21:00 UTC e concluído como `Deploy succeeded | Live` em 14,3s. Domínio oficial: https://artrobots.tech. Não houve alteração de plano, DNS ou dados.
+
+Após recarregar https://artrobots.tech/membros.html, o navegador confirmou o novo estilo, vidro `blur(12px) saturate(1.15)`, texto `rgb(55, 21, 84)`, borda branca uniforme e largura do documento de 1265px em viewport de 1280px. Capturas da mesma aba, viewport e posição de rolagem comparam a versão anterior `0edcea4` e a release nova. O registro documental posterior não altera os arquivos exportados.
+
+![Antes, versão publicada anterior](evidencias-identidade/membros-desktop-antes-producao.png)
+
+![Depois, release nova no domínio oficial](evidencias-identidade/membros-desktop-depois-producao.png)

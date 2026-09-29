@@ -2,7 +2,7 @@ import type { CSSProperties } from 'react';
 import { MemberCard, MemberIcon } from '../components/MemberCard';
 import { legacyTeams, type LegacyTeam } from '../data/legacy-members';
 import { usePublicMembers } from '../hooks/usePublicMembers';
-import type { DirectoryGroup, PublicMember } from '../lib/public-members';
+import { orderedLeadership, type DirectoryGroup, type PublicMember } from '../lib/public-members';
 
 function LegacySection({ team, linked, english }: { team: LegacyTeam; linked: Set<string>; english: boolean }) {
   const members = team.members.filter(member => !linked.has(member.siteKey));
@@ -18,7 +18,7 @@ function LegacySection({ team, linked, english }: { team: LegacyTeam; linked: Se
   </section>;
 }
 function ConnectedSection({ group, members, origin, english }: { group: DirectoryGroup; members: PublicMember[]; origin: string; english: boolean }) {
-  const listed = members.filter(member => member.directoryGroup === group);
+  const listed = group === 'leadership' ? orderedLeadership(members) : members.filter(member => member.directoryGroup === group);
   if (!listed.length) return null;
   const labels = english ? {
     leadership: ['CLUB LEADERSHIP', 'Members leading the club today.', '#F59E0B'],

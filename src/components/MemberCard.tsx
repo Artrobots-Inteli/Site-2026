@@ -92,19 +92,34 @@ export function MemberCard(props: MemberCardProps) {
   const name = member?.name ?? legacy!.name;
   const photo = member ? `${props.origin}${member.photoPath}` : legacy!.photo;
   const href = member ? `${props.origin}${member.profilePath}${english ? '?lang=en' : ''}` : `${english ? 'membro-en.html' : 'membro.html'}?perfil=${legacy!.siteKey}`;
-  return <a ref={ref} href={href} data-site-key={legacy?.siteKey} data-public-profile-id={member?.id}
-    className={`member-card member-profile-card ${member ? 'connected-member-card ' : ''}bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5`}
+  if (member) return <a ref={ref} href={href} data-public-profile-id={member.id}
+    className="member-card member-profile-card connected-member-card"
+    style={{ '--team-color': color } as CSSProperties}
+    aria-label={english ? `View ${name}'s profile` : `Ver perfil de ${name}`}>
+    <div className="connected-member-portrait" aria-hidden="true">
+      <img src={failedPhoto === photo ? 'assets/logo_circulo.png' : photo} alt="" width={480} height={640}
+        loading="lazy" decoding="async" referrerPolicy="no-referrer"
+        onError={() => setFailedPhoto(photo)} />
+    </div>
+    <div className="connected-member-content">
+      <div><h3 title={name}>{name}</h3><p className="connected-member-position">{member.position}</p></div>
+      {member.projects.length ? <div className="connected-member-projects"><ProjectRelations projects={member.projects} english={english} /></div> : null}
+      {member.description ? <p className="connected-member-description">{member.description}</p> : null}
+      <span className="connected-member-link">{english ? 'View profile' : 'Ver perfil'}<span aria-hidden="true">↗</span></span>
+    </div>
+    <span className="mpc-shine" aria-hidden="true" /><span className="mpc-glare" aria-hidden="true" />
+  </a>;
+  return <a ref={ref} href={href} data-site-key={legacy.siteKey}
+    className="member-card member-profile-card bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border overflow-hidden text-center p-5"
     style={{ borderColor: `${color}4d`, '--team-color': color } as CSSProperties}
     aria-label={english ? `View ${name}'s profile` : `Ver perfil de ${name}`}>
     {legacy?.captain ? <div className="captain-badge mx-auto w-fit"><MemberIcon name="star" className="w-3 h-3 inline mr-0.5" />{english ? 'CAPTAIN' : 'CAPITÃO'}</div> : null}
     <div className="mpc-photo-frame w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-4" style={{ borderColor: color }}>
-      {failedPhoto === photo && member ? null : <img src={failedPhoto === photo ? 'assets/logo_circulo.png' : photo} alt={name} width={96} height={96} loading="lazy" referrerPolicy="no-referrer" className="member-photo w-full h-full object-cover" onError={() => setFailedPhoto(photo)} />}
+      <img src={failedPhoto === photo ? 'assets/logo_circulo.png' : photo} alt={name} width={96} height={96} loading="lazy" referrerPolicy="no-referrer" className="member-photo w-full h-full object-cover" onError={() => setFailedPhoto(photo)} />
     </div>
     <h3 className="font-bold text-base leading-tight mb-0.5">{name}</h3>
-    <p className="connected-member-position text-xs font-semibold" style={{ color }}>{member?.position ?? legacy!.position}</p>
-    {legacy ? <div className="team-badge" style={{ background: `${color}1f`, color }}><MemberIcon name={legacy.icon} className="w-3 h-3" /><span>{legacy.badge}</span></div> : null}
-    {member?.description ? <p className="mt-3 text-sm text-gray-300 whitespace-pre-wrap break-words">{member.description}</p> : null}
-    {member ? <ProjectRelations projects={member.projects} english={english} /> : null}
+    <p className="connected-member-position text-xs font-semibold" style={{ color }}>{legacy.position}</p>
+    <div className="team-badge" style={{ background: `${color}1f`, color }}><MemberIcon name={legacy.icon} className="w-3 h-3" /><span>{legacy.badge}</span></div>
     <span className="member-profile-label">{english ? 'View profile →' : 'Ver perfil →'}</span>
     <span className="mpc-shine" aria-hidden="true" /><span className="mpc-glare" aria-hidden="true" />
   </a>;

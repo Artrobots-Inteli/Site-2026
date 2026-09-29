@@ -20,6 +20,9 @@ Referências técnicas: [React](https://react.dev/learn/build-a-react-app-from-s
 | MEM-03 | Perfis canônicos, relações de projetos/histórico explícitas, sem inferir identidade pelo nome | Fixtures e navegação real |
 | MEM-04 | Loading, vazio, indisponibilidade, nova tentativa e retirada; atualizar dados ao voltar à página e periodicamente | Testes de transição e navegador |
 | MEM-05 | Preservar o padrão dos cards; comunidade sem projeto ativo ao final; histórico identificado sem confundir cargo vigente | Fixtures PT/EN |
+| MEM-06 | Exibir o retrato público aprovado em proporção vertical e em cor no card, sem reduzir a foto a um avatar de 96 px nem ampliar uma miniatura; hover/foco acrescentam destaque, mantendo nome/cargo legíveis, link, teclado e movimento reduzido | Dimensões da resposta pública, inspeção desktop/celular e testes do diretório |
+| MEM-07 | Na seção de liderança já validada, ordenar presidente, vices e diretores, sem inferir mandato a partir do texto da planilha | Fixture com feed fora de ordem e checagem da DOM |
+| MEM-08 | A liderança da página inicial consumir o mesmo feed aprovado do diretório, sem cards ou afirmações de cargo fixos que sobrevivam à mudança de gestão; falha da API não ressuscita dirigentes antigos | Fixture PT/EN com líder aprovado, título comunitário e indisponibilidade |
 
 ## Contrato e responsabilidades
 
@@ -38,6 +41,12 @@ Os 27 registros já publicados no site são mantidos como acervo legado tipado, 
 O pedido da vice-presidência é exibir os membros ativos no site. O feed acrescenta `directoryMode: "active"` quando a ArtroLove registra a primeira decisão de publicação do cadastro. Nesse modo, a página mostra somente retratos públicos revisados; os 27 cards anteriores deixam de representar cargos ou membros atuais. Páginas individuais sem vínculo explícito mostram um aviso histórico, sem reexpor a ficha antiga. A transição ocorre após aprovação em lote na ArtroLove e permanece ativa mesmo se os retratos forem retirados. O HTML e os dados legados permanecem versionados para eventual reconciliação, sem sincronização reversa com a planilha.
 
 Os antigos controladores por custom elements e testes dependentes de HTML fixo foram substituídos por componentes e testes React. Os motores licenciados de Canvas/WebGL permanecem bibliotecas JavaScript com fronteira tipada e ciclo de vida controlado pelo React, sem scripts CDN ou montagem automática.
+
+### Retratos nos cards públicos, 29/09/2026
+
+O feedback visual mostrou fotos pouco nítidas no avatar circular pequeno. Três respostas reais do endpoint público mediram 1086 × 1448 px, WebP, aproximadamente 99 a 116 KB; não há evidência de baixa resolução do arquivo. A decisão é usar o mesmo retrato aprovado em um card vertical, com `object-fit: contain`, nome/cargo no topo e ação no rodapé, seguindo a composição já usada na ArtroLove. A foto permanece colorida; hover/foco aumentam relevo, saturação e brilho, sem alterar o arquivo armazenado ou a API. O fallback público continua sendo a aranha para quem não tem retrato. A seção de liderança ordena apenas os membros classificados como liderança pela ArtroLove; o texto de cargo não promove outros membros. Critério de aceite: 22 perfis e links preservados, imagem natural maior que a área renderizada, sem distorção, conteúdo legível, liderança ordenada e build/testes verdes.
+
+A home ainda continha oito líderes fixos, nomes de dirigentes nas descrições das áreas e contatos pessoais ligados a cargos. Esses dados envelhecem fora da fonte oficial. A seção de liderança passa a ler o mesmo feed público aprovado, em PT/EN; na falta dele, informa indisponibilidade sem mostrar uma gestão antiga. As áreas descrevem competências sem nomear responsáveis. O contato mostra o endereço institucional do clube, independente de mandatos. A classificação de liderança continua sendo decisão da ArtroLove; a página não eleva títulos da planilha a autoridade.
 
 ## Entrega e reversão
 

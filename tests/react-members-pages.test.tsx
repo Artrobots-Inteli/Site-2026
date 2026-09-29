@@ -46,6 +46,20 @@ describe('member directory integration', () => {
     expect(container.querySelectorAll('[data-public-profile-id]')).toHaveLength(1);
     expect(screen.queryByText('Kaian Moura')).toBeNull();
   });
+  it('orders confirmed leadership as president, vice, then directors without promoting community titles', async () => {
+    const approved = [
+      { ...publicMember('director', 'leadership'), position: 'Diretor de Elétrica' },
+      { ...publicMember('unconfirmed-vice', 'community'), position: 'Vice Presidente' },
+      { ...publicMember('vice', 'leadership'), position: 'Vice-presidente' },
+      { ...publicMember('president', 'leadership'), position: 'Presidente' },
+    ];
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(response(approved, [], 'active')));
+    const { container } = render(<MembersPage english={false} />);
+    await screen.findByRole('link', { name: 'Ver perfil de Pessoa president' });
+    expect([...container.querySelectorAll('[data-directory-group="leadership"] [data-public-profile-id]')]
+      .map(card => card.getAttribute('data-public-profile-id'))).toEqual(['president', 'vice', 'director']);
+    expect(container.querySelector('[data-directory-group="community"] [data-public-profile-id]')?.getAttribute('data-public-profile-id')).toBe('unconfirmed-vice');
+  });
   it('does not revive old directory cards after every current publication is withdrawn', async () => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue(response([], [], 'active')));
     const { container } = render(<MembersPage english={false} />);

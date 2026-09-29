@@ -32,15 +32,24 @@ beforeEach(() => {
 afterEach(() => { cleanup(); vi.unstubAllGlobals(); vi.restoreAllMocks(); });
 
 describe('published home interactions survive React ownership', () => {
-  it.each([false, true])('retains all eight leadership ProfileCards in language english=%s', english => {
+  it.each([false, true])('shows only approved leaders in mandate order, language english=%s', async english => {
+    const member = (id: string, position: string, directoryGroup = 'leadership') => ({ id, name: id, position, description: '',
+      photoPath: `/api/public/members/${id}/photo`, profilePath: `/membros/${id}`, siteKey: null, directoryGroup, projects: [] });
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => ({ directoryMode: 'active', linkedSiteKeys: [], members: [
+      member('William', 'Diretor de Elétrica'), member('Mell', 'Vice Presidente', 'community'),
+      member('Carlos', 'Vice-presidente'), member('Kaian', 'Presidente'),
+    ] }) }));
     const { container, unmount } = render(<HomePage english={english} />);
-    const cards = container.querySelectorAll<HTMLElement>('#leadership [data-profile-card]');
-    expect(cards).toHaveLength(8);
-    expect(container.querySelector('#leadership .member-profile-grid')).not.toBeNull();
+    await waitFor(() => expect(container.querySelectorAll('#leadership [data-public-profile-id]')).toHaveLength(3));
+    const cards = container.querySelectorAll<HTMLElement>('#leadership [data-public-profile-id]');
+    expect([...cards].map(card => card.getAttribute('data-public-profile-id'))).toEqual(['Kaian', 'Carlos', 'William']);
+    expect(container.querySelector('#leadership [data-current-leadership]')).not.toBeNull();
+    expect(container.querySelector('#leadership')?.textContent).not.toContain('Nicolli Venino');
+    expect(container.querySelector('#leadership')?.textContent).not.toContain('Mell Aguiar');
     for (const card of cards) {
       expect(card.classList.contains('member-profile-card')).toBe(true);
       expect(card.querySelectorAll('.mpc-shine, .mpc-glare')).toHaveLength(2);
-      expect(card.querySelector('.member-photo')?.getAttribute('src')).toMatch(/^assets\//);
+      expect(card.querySelector('.connected-member-portrait img')?.getAttribute('src')).toMatch(/^https:\/\/artrolove\.artrobots\.tech\/api\/public\/members\//);
     }
     const mouse = new Event('pointermove', { bubbles: true });
     Object.assign(mouse, { pointerType: 'mouse', clientX: 30, clientY: 40 });
@@ -49,6 +58,14 @@ describe('published home interactions survive React ownership', () => {
     expect(requestAnimationFrame).toHaveBeenCalled();
     unmount();
     expect(cancelAnimationFrame).toHaveBeenCalledWith(1);
+  });
+
+  it('does not resurrect former leaders when the public feed is unavailable', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('offline')));
+    const { container } = render(<HomePage english={false} />);
+    await waitFor(() => expect(container.querySelector('#leadership')?.textContent).toContain('A diretoria está temporariamente indisponível.'));
+    expect(container.querySelector('#leadership [data-public-profile-id]')).toBeNull();
+    expect(container.querySelector('#leadership')?.textContent).not.toContain('Nicolli Venino');
   });
 
   it('shows sponsor controls only while published partners actually overflow and releases observers', async () => {

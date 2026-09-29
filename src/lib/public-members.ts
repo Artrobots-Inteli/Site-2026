@@ -10,6 +10,18 @@ export interface PublicMember {
   directoryGroup: DirectoryGroup; projects: PublicMemberProject[];
 }
 export interface PublicMembersFeed { members: PublicMember[]; linkedSiteKeys: string[]; directoryMode: 'active' | 'legacy' }
+/** Sorting only applies after the server has confirmed a member belongs to leadership. */
+export function orderedLeadership(members: PublicMember[]): PublicMember[] {
+  const rank = (position: string) => {
+    const title = position.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+    if (/^presidente\b/.test(title)) return 0;
+    if (/^vice[\s-]*presidente\b/.test(title)) return 1;
+    if (/^diretor(a)?\b/.test(title)) return 2;
+    return 3;
+  };
+  return members.filter(member => member.directoryGroup === 'leadership')
+    .sort((a, b) => rank(a.position) - rank(b.position) || a.name.localeCompare(b.name, 'pt-BR'));
+}
 const idPattern = /^[a-zA-Z0-9-]{1,100}$/;
 export const validSiteKey = (value: unknown): value is string => typeof value === 'string' && value.length <= 80 && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value);
 const record = (value: unknown): Record<string, unknown> => {

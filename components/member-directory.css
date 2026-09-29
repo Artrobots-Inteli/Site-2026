@@ -70,7 +70,108 @@ artrobots-member-directory, artrobots-member-profile { display: block; }
   color: var(--team-color); font-size: 1.75rem;
 }
 .connected-member-card { border-color: color-mix(in srgb, var(--team-color) 30%, transparent); }
-.connected-member-card > div:first-child { border-color: var(--team-color); }
+.artrobots-site .connected-member-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: .718;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #c9ccff30;
+  border-radius: 30px;
+  background: linear-gradient(155deg, #111626 5%, #303655 55%, #123149);
+  box-shadow: 0 18px 45px -25px #050716aa;
+  text-align: center;
+  isolation: isolate;
+}
+.artrobots-site .connected-member-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, #1116267a 0%, transparent 32%, transparent 59%, #10162ba8 100%);
+}
+.artrobots-site .member-profile-card.connected-member-card > .connected-member-portrait {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.artrobots-site .connected-member-card .connected-member-portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  image-rendering: auto;
+  filter: contrast(1.02) saturate(1.04);
+  mask-image: linear-gradient(to bottom, transparent 8%, #000 45%, #000 100%);
+  transition: filter .3s ease;
+}
+.artrobots-site .connected-member-card .connected-member-content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(20px, 2.2vw, 32px) 20px 20px;
+  color: #f0edff;
+}
+.connected-member-content h3 {
+  margin: 0;
+  font-size: clamp(20px, 1.8vw, 27px);
+  line-height: 1.13;
+  font-weight: 650;
+  letter-spacing: -.8px;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+.artrobots-site .connected-member-card .connected-member-content .connected-member-position {
+  margin: 7px 0 0;
+  color: #c0c7e5 !important;
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 500;
+}
+.connected-member-projects { max-height: 4.5rem; overflow: hidden; margin-top: 8px; color: #d6dcf1; font-size: 11px; line-height: 1.35; }
+.connected-member-projects ul { margin: 0; padding: 0; list-style: none; }
+.connected-member-projects li + li { margin-top: 3px; }
+.connected-member-description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin: auto 0 12px;
+  padding: 7px 10px;
+  border-radius: 10px;
+  background: #10162bb3;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.connected-member-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: auto;
+  padding: 12px 14px;
+  border: 1px solid #ffffff24;
+  border-radius: 14px;
+  background: #10162b80;
+  backdrop-filter: blur(12px);
+  color: #f0edff;
+  font-size: 12px;
+  font-weight: 600;
+}
+.artrobots-site .connected-member-card:is(:hover, :focus-visible) {
+  border-color: #bca9fa;
+  box-shadow: 0 24px 60px -20px #9867e089, 0 0 0 1px #8ddbf080;
+}
+.artrobots-site .connected-member-card:is(:hover, :focus-visible) .connected-member-portrait img {
+  filter: contrast(1.07) saturate(1.18) brightness(1.05);
+}
 .member-profile-shell { max-width: 54rem; margin: 0 auto; padding: 8rem 1.5rem 5rem; min-height: 75vh; }
 .member-profile-back { display: inline-block; color: #AED6F1; margin-bottom: 2rem; }
 .member-profile-heading { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; }
@@ -85,4 +186,5 @@ artrobots-member-directory, artrobots-member-profile { display: block; }
 @media (prefers-reduced-motion: reduce) {
   .member-card, .member-photo { transition: none; }
   .member-card:hover, .member-card:hover .member-photo { transform: none; }
+  .artrobots-site .connected-member-card .connected-member-portrait img { transition: none; }
 }

@@ -3,10 +3,14 @@ import { AboutCarousel } from '../components/AboutCarousel';
 import { Icon } from '../components/Icon';
 import { SiteContent } from '../components/SiteContent';
 import { SponsorDialogs } from '../components/SponsorDialogs';
-import { ProfileCardFrame } from '../components/ProfileCardFrame';
+import { MemberCard } from '../components/MemberCard';
+import { usePublicMembers } from '../hooks/usePublicMembers';
+import { orderedLeadership } from '../lib/public-members';
 
 /** Published home content, preserving the two existing languages and section anchors. */
 export function HomePage({ english }: { english: boolean }) {
+  const { feed: membersFeed, origin: membersOrigin, status: membersStatus, retry: retryMembers } = usePublicMembers();
+  const currentLeadership = orderedLeadership(membersFeed?.members ?? []);
   const [sponsorOpen, setSponsorOpen] = useState(false);
   const [contactRequested, setContactRequested] = useState(false);
   const sponsorsRef = useRef<HTMLDivElement>(null);
@@ -85,13 +89,7 @@ export function HomePage({ english }: { english: boolean }) {
                 {english ? "Computing" : "Computação"}
               </h3>
               <p className="text-gray-300">
-                {english ? " Led by our director: " : " Liderado pelo nosso diretor: "}
-                <a href="https://br.linkedin.com/in/felipecaiafa" target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-accent transition-colors">
-                  {"Felipe Caiafa"}
-                </a>
-                {". "}
-                <br />
-                {english ? " The Computing Area is responsible for developing the logic of the robots, computer vision, and artificial intelligence. " : " A Área de computação é responśavel pelo desenvolvimento das lógica dos robôs, visão computacional e inteligência artificial. "}
+                {english ? "Computing develops robot logic, computer vision, and artificial intelligence." : "Computação desenvolve a lógica dos robôs, visão computacional e inteligência artificial."}
               </p>
             </div>
             <div className="bg-primary p-6 rounded-lg hover:bg-secondary hover:bg-opacity-20 transition duration-300 border border-secondary">
@@ -102,13 +100,7 @@ export function HomePage({ english }: { english: boolean }) {
                 {english ? "Electrical" : "Elétrica"}
               </h3>
               <p className="text-gray-300">
-                {english ? " Led by our director: " : " Liderado pela nossa diretora: "}
-                <a href="https://br.linkedin.com/in/nicolli-venino-santana-b84341254" target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-accent transition-colors">
-                  {"Nicolli Venino"}
-                </a>
-                {". "}
-                <br />
-                {english ? " The Electrical Area is responsible for designing and implementing electronics and power systems. " : " A Área de elétrica é responsável pelo projeto e implementação de circuitos eletrônicos e sistemas de potência. "}
+                {english ? "Electrical designs and builds electronic circuits and power systems." : "Elétrica projeta e implementa circuitos eletrônicos e sistemas de potência."}
               </p>
             </div>
             <div className="bg-primary p-6 rounded-lg hover:bg-secondary hover:bg-opacity-20 transition duration-300 border border-secondary">
@@ -118,26 +110,7 @@ export function HomePage({ english }: { english: boolean }) {
               <h3 className="text-xl font-bold mb-2">
                 {english ? "Mechanical" : "Mecânica"}
               </h3>
-              {english ? (<>
-                <p className="text-gray-300">
-                  {" Led by our vice president and director: "}
-                  <a href="https://br.linkedin.com/in/carlosicaro/pt" target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-accent transition-colors">
-                    {"Carlos Icaro"}
-                  </a>
-                  <br />
-                  {" The Mechanical Area is responsible for designing and building mechanical structures and motion systems. "}
-                </p>
-              </>) : (<>
-                <p className="text-gray-300">
-                  {" Liderado por nosso vice-presidente e diretor: "}
-                  <a href="https://br.linkedin.com/in/carlosicaro/pt" target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-accent transition-colors">
-                    {"Carlos Icaro"}
-                  </a>
-                  {". "}
-                  <br />
-                  {" A área de mecânica é responsável pelo projeto e fabricação de estruturas mecânicas e sistemas de movimento. "}
-                </p>
-              </>)}
+              <p className="text-gray-300">{english ? "Mechanical designs and builds structures and motion systems." : "Mecânica projeta e fabrica estruturas e sistemas de movimento."}</p>
             </div>
             <div className="bg-primary p-6 rounded-lg hover:bg-secondary hover:bg-opacity-20 transition duration-300 border border-secondary">
               <div className="bg-secondary p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4">
@@ -146,21 +119,7 @@ export function HomePage({ english }: { english: boolean }) {
               <h3 className="text-xl font-bold mb-2">
                 {"Marketing"}
               </h3>
-              {english ? (<>
-                <p className="text-gray-300">
-                  {" Led by our director: "}
-                  <a href="https://br.linkedin.com/in/emanuelly-dias-2a0480305" target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-accent transition-colors">
-                    {"Emanuelly Dias"}
-                  </a>
-                  {". "}
-                  <br />
-                  {" Outreach, fundraising, and social media management. "}
-                </p>
-              </>) : (<>
-                <p className="text-gray-300">
-                  {" Divulgação da equipe, captação de recursos e gestão de redes sociais. "}
-                </p>
-              </>)}
+              <p className="text-gray-300">{english ? "Outreach, fundraising, and social media management." : "Divulgação do clube, captação de recursos e gestão de redes sociais."}</p>
             </div>
           </div>
         </div>
@@ -233,94 +192,13 @@ export function HomePage({ english }: { english: boolean }) {
           <p className="text-center text-gray-300 mb-16 max-w-2xl mx-auto">
             {english ? " Meet the board that leads the club and coordinates our projects " : " Conheça a diretoria que lidera o clube e coordena nossos projetos "}
           </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto member-profile-grid">
-            <ProfileCardFrame className="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-700">
-              <img src="assets/presidente.jpeg" alt="Kaian Moura" className="member-photo w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-accent" />
-              <h3 className="text-xl font-bold text-center mb-1">
-                {english ? "President" : "Presidente"}
-              </h3>
-              <p className="text-gray-300 text-center font-medium">
-                <a href="https://br.linkedin.com/in/kaian-moura-56b8871b4" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">
-                  {"Kaian Moura"}
-                </a>
-              </p>
-            </ProfileCardFrame>
-            <ProfileCardFrame className="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-700">
-              <img src="assets/vice.jpeg" alt="Mell Aguiar" className="member-photo w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-secondary" />
-              <h3 className="text-xl font-bold text-center mb-1">
-                {english ? "Vice President" : "Vice-Presidente"}
-              </h3>
-              <p className="text-gray-300 text-center font-medium">
-                {"Mell Aguiar"}
-              </p>
-            </ProfileCardFrame>
-            <ProfileCardFrame className="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-700">
-              <img src="assets/diretorMecanica.jpeg" alt="Carlos Icaro" className="member-photo w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-secondary" />
-              <h3 className="text-xl font-bold text-center mb-1">
-                <span className="block">
-                  {english ? "Vice President" : "Vice-Presidente"}
-                </span>
-                <span className="block text-base">
-                  {english ? "Mechanical Director" : "Diretor de Mecânica"}
-                </span>
-              </h3>
-              <p className="text-gray-300 text-center font-medium">
-                <a href="https://br.linkedin.com/in/carlosicaro/pt" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">
-                  {"Carlos Icaro"}
-                </a>
-              </p>
-            </ProfileCardFrame>
-            <ProfileCardFrame className="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-700">
-              <img src="assets/diretorFinanceiro.jpeg" alt="Luiz Gustavo" className="member-photo w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-green-600" />
-              <h3 className="text-xl font-bold text-center mb-1">
-                {english ? "Finance Director" : " Diretor Financeiro "}
-              </h3>
-              <p className="text-gray-300 text-center font-medium">
-                {"Luiz Gustavo"}
-              </p>
-            </ProfileCardFrame>
-            <ProfileCardFrame className="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-700">
-              <img src="assets/diretoraELetrica.jpeg" alt="Nicolli Venino" className="member-photo w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-yellow-600" />
-              <h3 className="text-xl font-bold text-center mb-1">
-                {english ? " Electrical Director " : " Diretora de Elétrica "}
-              </h3>
-              <p className="text-gray-300 text-center font-medium">
-                <a href="https://br.linkedin.com/in/nicolli-venino-santana-b84341254" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">
-                  {"Nicolli Venino"}
-                </a>
-              </p>
-            </ProfileCardFrame>
-            <ProfileCardFrame className="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-700">
-              <img src="assets/diretorComputacao.jpeg" alt="Felipe Caiafa" className="member-photo w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-blue-600" />
-              <h3 className="text-xl font-bold text-center mb-1">
-                {english ? " Computing Director " : " Diretor de Computação "}
-              </h3>
-              <p className="text-gray-300 text-center font-medium">
-                <a href="https://br.linkedin.com/in/felipecaiafa" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">
-                  {"Felipe Caiafa"}
-                </a>
-              </p>
-            </ProfileCardFrame>
-            <ProfileCardFrame className="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-700">
-              <img src="assets/diretorProjetos.jpeg" alt="Gabriel Scatolin" className="member-photo w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-teal" />
-              <h3 className="text-xl font-bold text-center mb-1">
-                {english ? " Projects Director " : " Diretor de Projetos "}
-              </h3>
-              <p className="text-gray-300 text-center font-medium">
-                {" Gabriel Scatolin "}
-              </p>
-            </ProfileCardFrame>
-            <ProfileCardFrame className="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-gray-700">
-              <img src="assets/fotos%20membros/Maria%20Fernanda%20Ramos(MaFe)%20Diretora%20de%20marketing.jpg" alt="Maria Fernanda Ramos" className="member-photo w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-purple-600" />
-              <h3 className="text-xl font-bold text-center mb-1">
-                {english ? " Marketing Director " : " Diretora de Marketing "}
-              </h3>
-              <p className="text-gray-300 text-center font-medium">
-                {" Maria Fernanda Ramos "}
-              </p>
-            </ProfileCardFrame>
-          </div>
-          <div className="text-center mt-12">
+          {membersStatus === 'error' ? <div className="text-center text-gray-300" role="status">
+            <p>{english ? 'Leadership is temporarily unavailable.' : 'A diretoria está temporariamente indisponível.'}</p>
+            <button type="button" onClick={retryMembers} className="mt-4 rounded-lg border border-secondary px-4 py-2">{english ? 'Try again' : 'Tentar novamente'}</button>
+          </div> : membersStatus === 'loading' ? <p className="text-center text-gray-300" role="status">{english ? 'Loading leadership…' : 'Carregando diretoria…'}</p>
+            : currentLeadership.length ? <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto member-profile-grid" data-current-leadership="">
+              {currentLeadership.map(member => <MemberCard key={member.id} member={member} origin={membersOrigin} english={english} color="#855EDE" />)}
+            </div> : <p className="text-center text-gray-300" role="status">{english ? 'No leadership profiles are published yet.' : 'Ainda não há perfis de diretoria publicados.'}</p>}          <div className="text-center mt-12">
             <a href={english ? "membros-en.html" : "membros.html"} className="inline-flex items-center gap-2 bg-gradient-to-r from-accent to-secondary px-8 py-4 rounded-full text-white font-bold text-lg hover:scale-105 transition-transform duration-300 shadow-lg hover:shadow-2xl">
               <Icon name="users" className="w-6 h-6" />
               {english ? " See Members " : " Ver Membros "}
@@ -368,18 +246,7 @@ export function HomePage({ english }: { english: boolean }) {
                     <h4 className="font-bold">
                       {"Email"}
                     </h4>
-                    <p className="text-gray-300">
-                      {english ? " kaian.moura@artrobots.tech - President " : " kaian.moura@artrobots.tech - Presidente "}
-                    </p>
-                    <p className="text-gray-300">
-                      {english ? " mell.carneiro@artrobots.tech - Vice President " : " mell.carneiro@artrobots.tech - Vice-Presidente "}
-                    </p>
-                    <p className="text-gray-300">
-                      <a href="mailto:Carlos.Paiva@sou.inteli.edu.br" className="hover:text-secondary transition">
-                        {"Carlos.Paiva@sou.inteli.edu.br"}
-                      </a>
-                      {english ? " - VP & Mechanics Dir. " : " - VP & Dir. Mecânica "}
-                    </p>
+                    <p className="text-gray-300"><a href="mailto:artrobots@inteli.edu.br" className="hover:text-secondary transition">artrobots@inteli.edu.br</a></p>
                   </div>
                 </div>
                 <div className="flex items-start">

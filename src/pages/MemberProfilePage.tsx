@@ -28,6 +28,7 @@ export function MemberProfilePage({ english, profileKey }: { english: boolean; p
   else if (status === 'error') message = english ? 'We could not load this profile. Please try again.' : 'Não foi possível carregar este perfil. Tente novamente.';
   else if (state?.kind === 'connected') message = english ? 'Opening profile…' : 'Abrindo perfil…';
   else if (state?.kind === 'withdrawn') message = english ? 'This profile is not publicly available.' : 'Este perfil não está disponível publicamente.';
+  else if (state?.kind === 'historical') message = english ? 'This historical profile is not part of the current member directory.' : 'Este perfil histórico não faz parte do diretório atual de membros.';
   else if (!legacy) message = english ? 'This profile could not be found.' : 'Este perfil não foi encontrado.';
   return <main className="member-profile-shell">
     <a href={directory} className="member-profile-back">{english ? '← Back to members' : '← Voltar para membros'}</a>

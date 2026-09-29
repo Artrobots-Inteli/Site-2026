@@ -26,6 +26,10 @@ describe('public member contract and privacy', () => {
     expect(profileState(result, 'kaian-moura').kind).toBe('withdrawn');
     expect(profileState(result, 'mell-aguiar').kind).toBe('legacy');
   });
+  it('marks an unlinked legacy profile historical once the current directory is active', () => {
+    const result = validateMembersFeed({ members: [], linkedSiteKeys: [], directoryMode: 'active' });
+    expect(profileState(result, 'mell-aguiar').kind).toBe('historical');
+  });
   it.each([
     (value: ReturnType<typeof feed>) => { value.members.push(member()); },
     (value: ReturnType<typeof feed>) => { value.linkedSiteKeys = []; },

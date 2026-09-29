@@ -42,7 +42,8 @@ function ConnectedSection({ group, members, origin, english }: { group: Director
 export function MembersPage({ english }: { english: boolean }) {
   const { feed, origin, status, retry } = usePublicMembers();
   const teams = legacyTeams(english), linked = new Set(feed?.linkedSiteKeys ?? []);
-  const empty = feed && !feed.members.length && teams.every(team => team.members.every(member => linked.has(member.siteKey)));
+  const currentDirectory = feed?.directoryMode === 'active';
+  const empty = feed && !feed.members.length && (currentDirectory || teams.every(team => team.members.every(member => linked.has(member.siteKey))));
   return <main>
     <section className="directory-hero relative min-h-[40vh] flex items-center justify-center bg-gradient-to-b from-primary to-dark" style={{ paddingTop: 100 }}>
       <div className="container mx-auto px-6 text-center"><h1 className="text-5xl md:text-7xl font-bold mb-4 font-display">{english ? 'MEMBERS' : 'MEMBROS'}</h1>
@@ -56,9 +57,9 @@ export function MembersPage({ english }: { english: boolean }) {
       {status === 'error' ? <button type="button" onClick={retry} className="mb-8 rounded-lg border border-secondary px-4 py-2 text-sm">{english ? 'Try again' : 'Tentar novamente'}</button> : null}
       {feed ? <>
         <ConnectedSection group="leadership" members={feed.members} origin={origin} english={english} />
-        {teams.filter(team => !team.isProject).map(team => <LegacySection key={team.id} team={team} linked={linked} english={english} />)}
+        {!currentDirectory && teams.filter(team => !team.isProject).map(team => <LegacySection key={team.id} team={team} linked={linked} english={english} />)}
         <ConnectedSection group="projects" members={feed.members} origin={origin} english={english} />
-        {teams.filter(team => team.isProject).map(team => <LegacySection key={team.id} team={team} linked={linked} english={english} />)}
+        {!currentDirectory && teams.filter(team => team.isProject).map(team => <LegacySection key={team.id} team={team} linked={linked} english={english} />)}
         <ConnectedSection group="community" members={feed.members} origin={origin} english={english} />
       </> : null}
     </div></section>

@@ -33,6 +33,10 @@ A primeira entrega de ingestão mantém o cadastro histórico privado e preserva
 
 Os 27 registros já publicados no site são mantidos como acervo legado tipado, até associação explícita por `siteKey`. Uma associação retirada continua ocultando o registro legado. Na falha da API, o diretório oferece nova tentativa e oculta suas fichas, pois não consegue verificar retiradas recentes. Não há cache persistente de perfis no navegador ou no build.
 
+### Diretório atual, 29/09/2026
+
+O pedido da vice-presidência é exibir os membros ativos no site. O feed acrescenta `directoryMode: "active"` quando a ArtroLove registra a primeira decisão de publicação do cadastro. Nesse modo, a página mostra somente retratos públicos revisados; os 27 cards anteriores deixam de representar cargos ou membros atuais. Páginas individuais sem vínculo explícito mostram um aviso histórico, sem reexpor a ficha antiga. A transição ocorre após aprovação em lote na ArtroLove e permanece ativa mesmo se os retratos forem retirados. O HTML e os dados legados permanecem versionados para eventual reconciliação, sem sincronização reversa com a planilha.
+
 Os antigos controladores por custom elements e testes dependentes de HTML fixo foram substituídos por componentes e testes React. Os motores licenciados de Canvas/WebGL permanecem bibliotecas JavaScript com fronteira tipada e ciclo de vida controlado pelo React, sem scripts CDN ou montagem automática.
 
 ## Entrega e reversão

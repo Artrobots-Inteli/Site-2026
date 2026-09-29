@@ -9,7 +9,7 @@ export interface PublicMember {
   photoPath: string; profilePath: string; siteKey: string | null;
   directoryGroup: DirectoryGroup; projects: PublicMemberProject[];
 }
-export interface PublicMembersFeed { members: PublicMember[]; linkedSiteKeys: string[] }
+export interface PublicMembersFeed { members: PublicMember[]; linkedSiteKeys: string[]; directoryMode: 'active' | 'legacy' }
 const idPattern = /^[a-zA-Z0-9-]{1,100}$/;
 export const validSiteKey = (value: unknown): value is string => typeof value === 'string' && value.length <= 80 && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value);
 const record = (value: unknown): Record<string, unknown> => {
@@ -45,6 +45,7 @@ function parseProject(input: unknown): PublicMemberProject {
 export function validateMembersFeed(input: unknown): PublicMembersFeed {
   const data = record(input);
   if (!Array.isArray(data.members) || !Array.isArray(data.linkedSiteKeys) || data.members.length > 2000 || data.linkedSiteKeys.length > 2000) throw new Error('Invalid public feed');
+  if (data.directoryMode !== undefined && data.directoryMode !== 'active' && data.directoryMode !== 'legacy') throw new Error('Invalid directory mode');
   const linkedSiteKeys: string[] = [];
   const linked = new Set<string>();
   for (const key of data.linkedSiteKeys) {
@@ -70,7 +71,7 @@ export function validateMembersFeed(input: unknown): PublicMembersFeed {
       photoPath: member.photoPath as string, profilePath: member.profilePath as string, siteKey: member.siteKey as string | null,
       directoryGroup: member.directoryGroup as DirectoryGroup, projects };
   });
-  return { members, linkedSiteKeys };
+  return { members, linkedSiteKeys, directoryMode: data.directoryMode === 'active' ? 'active' : 'legacy' };
 }
 export const DEFAULT_ARTROLOVE_ORIGIN = 'https://artrolove.artrobots.tech';
 export function configuredMembersOrigin(): string {
@@ -88,5 +89,5 @@ export async function loadMembersFeed(origin: string, signal: AbortSignal): Prom
 }
 export function profileState(feed: PublicMembersFeed, key: string) {
   const member = feed.members.find(item => item.siteKey === key);
-  return member ? { kind: 'connected' as const, member } : { kind: feed.linkedSiteKeys.includes(key) ? 'withdrawn' as const : 'legacy' as const };
+  return member ? { kind: 'connected' as const, member } : { kind: feed.linkedSiteKeys.includes(key) ? 'withdrawn' as const : feed.directoryMode === 'active' ? 'historical' as const : 'legacy' as const };
 }

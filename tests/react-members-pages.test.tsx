@@ -11,7 +11,7 @@ const publicMember = (id = 'public-1', directoryGroup = 'projects') => ({ id, na
   photoPath: `/api/public/members/${id}/photo`, profilePath: `/membros/${id}`, siteKey: null, directoryGroup,
   projects: [{ id: 'robot-1', title: 'Robô', titleEn: 'Robot', url: 'https://artrobots.tech/#projects', status: 'COMPLETED', membership: 'PAST' }],
   email: 'private@example.test', notes: 'private notes' });
-const response = (members: unknown[] = [], linkedSiteKeys: string[] = []) => ({ ok: true, json: async () => ({ members, linkedSiteKeys }) }) as Response;
+const response = (members: unknown[] = [], linkedSiteKeys: string[] = [], directoryMode?: 'active' | 'legacy') => ({ ok: true, json: async () => ({ members, linkedSiteKeys, directoryMode }) }) as Response;
 afterEach(() => { vi.unstubAllGlobals(); vi.useRealTimers(); });
 describe('member directory integration', () => {
   it('SSR renders safe loading markup without fetching or requiring DOM', () => {
@@ -37,6 +37,20 @@ describe('member directory integration', () => {
     expect(groups.at(-1)?.getAttribute('data-directory-group')).toBe('community');
     expect(screen.getByRole('link', { name: 'Ver perfil de Pessoa public-1' }).getAttribute('href')).toBe('https://artrolove.artrobots.tech/membros/public-1');
     expect(fetcher.mock.calls[0][1]).toMatchObject({ credentials: 'omit', cache: 'no-store', signal: expect.any(AbortSignal) });
+  });
+  it('shows only reviewed active members when ArtroLove activates the current directory', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(response([publicMember('reg-ART-0027', 'community')], [], 'active')));
+    const { container } = render(<MembersPage english={false} />);
+    await screen.findByRole('link', { name: 'Ver perfil de Pessoa reg-ART-0027' });
+    expect(container.querySelectorAll('[data-site-key]')).toHaveLength(0);
+    expect(container.querySelectorAll('[data-public-profile-id]')).toHaveLength(1);
+    expect(screen.queryByText('Kaian Moura')).toBeNull();
+  });
+  it('does not revive old directory cards after every current publication is withdrawn', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(response([], [], 'active')));
+    const { container } = render(<MembersPage english={false} />);
+    await screen.findByText('Ainda não há perfis de membros disponíveis publicamente.');
+    expect(container.querySelectorAll('.member-card')).toHaveLength(0);
   });
   it('renders a real empty state and no legacy resurrection after withdrawal', async () => {
     const fetcher = vi.fn().mockResolvedValueOnce(response([publicMember()], keys)).mockResolvedValue(response([], keys));

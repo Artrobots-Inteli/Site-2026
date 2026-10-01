@@ -23,6 +23,8 @@ export function orderedLeadership(members: PublicMember[]): PublicMember[] {
     .sort((a, b) => rank(a.position) - rank(b.position) || a.name.localeCompare(b.name, 'pt-BR'));
 }
 const idPattern = /^[a-zA-Z0-9-]{1,100}$/;
+export const validProfileKey = (value: unknown): value is string => typeof value === 'string' && idPattern.test(value);
+export const memberProfileHref = (member: PublicMember, english: boolean) => `${english ? 'membro-en.html' : 'membro.html'}?perfil=${encodeURIComponent(member.id)}`;
 export const validSiteKey = (value: unknown): value is string => typeof value === 'string' && value.length <= 80 && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value);
 const record = (value: unknown): Record<string, unknown> => {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new Error('Invalid public record');
@@ -100,6 +102,6 @@ export async function loadMembersFeed(origin: string, signal: AbortSignal): Prom
   return validateMembersFeed(await response.json());
 }
 export function profileState(feed: PublicMembersFeed, key: string) {
-  const member = feed.members.find(item => item.siteKey === key);
+  const member = feed.members.find(item => item.id === key) ?? feed.members.find(item => item.siteKey === key);
   return member ? { kind: 'connected' as const, member } : { kind: feed.linkedSiteKeys.includes(key) ? 'withdrawn' as const : feed.directoryMode === 'active' ? 'historical' as const : 'legacy' as const };
 }

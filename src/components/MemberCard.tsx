@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { Icon as MemberIcon } from './Icon';
 export { Icon as MemberIcon } from './Icon';
 import type { LegacyMember } from '../data/legacy-members';
-import type { PublicMember, PublicMemberProject } from '../lib/public-members';
+import { memberProfileHref, type PublicMember, type PublicMemberProject } from '../lib/public-members';
 
 const clamp = (value: number, low: number, high: number) => Math.min(high, Math.max(low, value));
 type Pointer = { x: number; y: number; rx: number; ry: number };
@@ -84,14 +84,25 @@ export function ProjectRelations({ projects, english, links = false }: { project
     </li>)}
   </ul>;
 }
-type MemberCardProps = { english: boolean; color?: string } & ({ legacy: LegacyMember; member?: never; origin?: never } | { member: PublicMember; origin: string; legacy?: never });
+export type MemberView = 'compact' | 'list' | 'cards';
+type MemberCardProps = { english: boolean; color?: string; view?: MemberView } & ({ legacy: LegacyMember; member?: never; origin?: never } | { member: PublicMember; origin: string; legacy?: never });
 export function MemberCard(props: MemberCardProps) {
-  const { english, color = '#855EDE', member, legacy } = props;
+  const { english, color = '#855EDE', member, legacy, view = 'cards' } = props;
   const ref = useProfileCard();
   const [failedPhoto, setFailedPhoto] = useState<string | null>(null);
   const name = member?.name ?? legacy!.name;
   const photo = member ? `${props.origin}${member.photoPath}` : legacy!.photo;
-  const href = member ? `${props.origin}${member.profilePath}${english ? '?lang=en' : ''}` : `${english ? 'membro-en.html' : 'membro.html'}?perfil=${legacy!.siteKey}`;
+  const href = member ? memberProfileHref(member, english) : `${english ? 'membro-en.html' : 'membro.html'}?perfil=${legacy!.siteKey}`;
+  if (view !== 'cards') return <a href={href} data-public-profile-id={member?.id} data-site-key={legacy?.siteKey}
+    className={`member-card member-summary member-summary-${view}`} style={{ '--team-color': color } as CSSProperties}
+    aria-label={english ? `View ${name}'s profile` : `Ver perfil de ${name}`}>
+    <img className="member-summary-photo" src={failedPhoto === photo ? 'assets/logo_circulo.png' : photo} alt="" width={64} height={64}
+      loading="lazy" decoding="async" referrerPolicy="no-referrer" onError={() => setFailedPhoto(photo)} />
+    <div className="member-summary-copy"><h3>{name}</h3><p className="connected-member-position">{member?.position ?? legacy!.position}</p>
+      {member?.projects.length ? <div className="member-summary-projects"><ProjectRelations projects={member.projects} english={english} /></div> : null}
+    </div>
+    <span className="member-summary-link" aria-hidden="true">→</span>
+  </a>;
   if (member) return <a ref={ref} href={href} data-public-profile-id={member.id}
     className="member-card member-profile-card connected-member-card"
     style={{ '--team-color': color } as CSSProperties}

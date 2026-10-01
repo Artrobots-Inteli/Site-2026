@@ -35,7 +35,7 @@ describe('member directory integration', () => {
     const groups = Array.from(container.querySelectorAll('.team-section'));
     expect(groups[0].getAttribute('data-directory-group')).toBe('leadership');
     expect(groups.at(-1)?.getAttribute('data-directory-group')).toBe('community');
-    expect(screen.getByRole('link', { name: 'Ver perfil de Pessoa public-1' }).getAttribute('href')).toBe('https://artrolove.artrobots.tech/membros/public-1');
+    expect(screen.getByRole('link', { name: 'Ver perfil de Pessoa public-1' }).getAttribute('href')).toBe('membro.html?perfil=public-1');
     expect(fetcher.mock.calls[0][1]).toMatchObject({ credentials: 'omit', cache: 'no-store', signal: expect.any(AbortSignal) });
   });
   it('shows only reviewed active members when ArtroLove activates the current directory', async () => {

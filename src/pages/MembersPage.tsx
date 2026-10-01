@@ -1,10 +1,10 @@
-import type { CSSProperties } from 'react';
-import { MemberCard, MemberIcon } from '../components/MemberCard';
+import { useEffect, useState, type CSSProperties } from 'react';
+import { MemberCard, MemberIcon, type MemberView } from '../components/MemberCard';
 import { legacyTeams, type LegacyTeam } from '../data/legacy-members';
 import { usePublicMembers } from '../hooks/usePublicMembers';
 import { orderedLeadership, type DirectoryGroup, type PublicMember } from '../lib/public-members';
 
-function LegacySection({ team, linked, english }: { team: LegacyTeam; linked: Set<string>; english: boolean }) {
+function LegacySection({ team, linked, english, view }: { team: LegacyTeam; linked: Set<string>; english: boolean; view: MemberView }) {
   const members = team.members.filter(member => !linked.has(member.siteKey));
   if (!members.length) return null;
   return <section className="team-section" data-legacy-team="" data-legacy-project={team.isProject ? '' : undefined} id={team.id}>
@@ -14,10 +14,10 @@ function LegacySection({ team, linked, english }: { team: LegacyTeam; linked: Se
       </div>
       <div><h2 className="text-3xl font-bold font-display" style={{ color: team.color }}>{team.title}</h2><p className="text-gray-400 text-sm mt-1">{team.description}</p></div>
     </div>
-    <div className={`${team.gridClass} member-profile-grid`}>{members.map(member => <MemberCard key={member.siteKey} legacy={member} color={team.color} english={english} />)}</div>
+    <div className="member-collection member-profile-grid" data-member-view={view}>{members.map(member => <MemberCard key={`${view}-${member.siteKey}`} legacy={member} color={team.color} english={english} view={view} />)}</div>
   </section>;
 }
-function ConnectedSection({ group, members, origin, english }: { group: DirectoryGroup; members: PublicMember[]; origin: string; english: boolean }) {
+function ConnectedSection({ group, members, origin, english, view }: { group: DirectoryGroup; members: PublicMember[]; origin: string; english: boolean; view: MemberView }) {
   const listed = group === 'leadership' ? orderedLeadership(members) : members.filter(member => member.directoryGroup === group);
   if (!listed.length) return null;
   const labels = english ? {
@@ -34,33 +34,46 @@ function ConnectedSection({ group, members, origin, english }: { group: Director
     <div className="team-header"><div className="member-section-icon" aria-hidden="true">{group === 'leadership' ? '✦' : group === 'projects' ? '⌘' : '○'}</div>
       <div><h2 className="text-3xl font-bold font-display">{title}</h2><p className="text-gray-400 text-sm mt-1">{description}</p></div>
     </div>
-    <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 member-profile-grid">
-      {listed.map(member => <MemberCard key={member.id} member={member} origin={origin} english={english} color={color} />)}
+    <div className="member-collection member-profile-grid" data-member-view={view}>
+      {listed.map(member => <MemberCard key={`${view}-${member.id}`} member={member} origin={origin} english={english} color={color} view={view} />)}
     </div>
   </section>;
 }
 export function MembersPage({ english }: { english: boolean }) {
   const { feed, origin, status, retry } = usePublicMembers();
+  const [view, setView] = useState<MemberView>('compact');
+  useEffect(() => {
+    try { const saved = localStorage.getItem('artrobots_member_view'); if (saved === 'compact' || saved === 'list' || saved === 'cards') setView(saved); }
+    catch { /* A blocked store does not prevent choosing a view. */ }
+  }, []);
+  const chooseView = (next: MemberView) => { setView(next); try { localStorage.setItem('artrobots_member_view', next); } catch { /* Optional preference. */ } };
   const teams = legacyTeams(english), linked = new Set(feed?.linkedSiteKeys ?? []);
   const currentDirectory = feed?.directoryMode === 'active';
   const empty = feed && !feed.members.length && (currentDirectory || teams.every(team => team.members.every(member => linked.has(member.siteKey))));
   return <main>
     <section className="directory-hero relative min-h-[40vh] flex items-center justify-center bg-gradient-to-b from-primary to-dark" style={{ paddingTop: 100 }}>
-      <div className="container mx-auto px-6 text-center"><h1 className="text-5xl md:text-7xl font-bold mb-4 font-display">{english ? 'MEMBERS' : 'MEMBROS'}</h1>
+      <div className="container mx-auto px-6 text-center"><a className="directory-home-link" href={english ? 'index-en.html#leadership' : 'index.html#leadership'}>{english ? '← Back to Artrobots' : '← Voltar ao site Artrobots'}</a><h1 className="text-5xl md:text-7xl font-bold mb-4 font-display">{english ? 'MEMBERS' : 'MEMBROS'}</h1>
         <p className="text-xl text-gray-300">{english ? 'Meet all Artrobots members, organized by teams' : 'Conheça todos os membros do Artrobots, organizados por equipes'}</p>
       </div>
     </section>
     <section className="py-20 bg-dark"><div className="container mx-auto px-6" data-legacy-directory="" aria-busy={status === 'loading'}>
+      <div className="member-directory-toolbar"><p>{english ? 'Choose how to browse' : 'Escolha como visualizar'}</p>
+        <div role="group" aria-label={english ? 'Member view' : 'Visualização dos membros'} className="member-view-switch">
+          {(['compact', 'list', 'cards'] as const).map(option => <button key={option} type="button" aria-pressed={view === option} onClick={() => chooseView(option)}>
+            {option === 'compact' ? (english ? 'Compact' : 'Compacto') : option === 'list' ? (english ? 'List' : 'Lista') : 'Cards'}
+          </button>)}
+        </div>
+      </div>
       <p className="text-sm text-gray-400 mb-4" role="status" hidden={status === 'ready' && !empty}>{status === 'loading' ? (english ? 'Loading members…' : 'Carregando membros…')
         : status === 'error' ? (english ? 'We could not load member profiles. Please try again.' : 'Não foi possível carregar os perfis. Tente novamente.')
           : empty ? (english ? 'No member profiles are publicly available yet.' : 'Ainda não há perfis de membros disponíveis publicamente.') : ''}</p>
       {status === 'error' ? <button type="button" onClick={retry} className="mb-8 rounded-lg border border-secondary px-4 py-2 text-sm">{english ? 'Try again' : 'Tentar novamente'}</button> : null}
       {feed ? <>
-        <ConnectedSection group="leadership" members={feed.members} origin={origin} english={english} />
-        {!currentDirectory && teams.filter(team => !team.isProject).map(team => <LegacySection key={team.id} team={team} linked={linked} english={english} />)}
-        <ConnectedSection group="projects" members={feed.members} origin={origin} english={english} />
-        {!currentDirectory && teams.filter(team => team.isProject).map(team => <LegacySection key={team.id} team={team} linked={linked} english={english} />)}
-        <ConnectedSection group="community" members={feed.members} origin={origin} english={english} />
+        <ConnectedSection group="leadership" members={feed.members} origin={origin} english={english} view={view} />
+        {!currentDirectory && teams.filter(team => !team.isProject).map(team => <LegacySection key={team.id} team={team} linked={linked} english={english} view={view} />)}
+        <ConnectedSection group="projects" members={feed.members} origin={origin} english={english} view={view} />
+        {!currentDirectory && teams.filter(team => team.isProject).map(team => <LegacySection key={team.id} team={team} linked={linked} english={english} view={view} />)}
+        <ConnectedSection group="community" members={feed.members} origin={origin} english={english} view={view} />
       </> : null}
     </div></section>
   </main>;

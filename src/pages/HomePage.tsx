@@ -3,7 +3,7 @@ import { AboutCarousel } from '../components/AboutCarousel';
 import { Icon } from '../components/Icon';
 import { SiteContent } from '../components/SiteContent';
 import { SponsorDialogs } from '../components/SponsorDialogs';
-import { MemberCard } from '../components/MemberCard';
+import { MemberCarousel } from '../components/MemberCarousel';
 import { usePublicMembers } from '../hooks/usePublicMembers';
 import { orderedLeadership } from '../lib/public-members';
 
@@ -196,9 +196,8 @@ export function HomePage({ english }: { english: boolean }) {
             <p>{english ? 'Leadership is temporarily unavailable.' : 'A diretoria está temporariamente indisponível.'}</p>
             <button type="button" onClick={retryMembers} className="mt-4 rounded-lg border border-secondary px-4 py-2">{english ? 'Try again' : 'Tentar novamente'}</button>
           </div> : membersStatus === 'loading' ? <p className="text-center text-gray-300" role="status">{english ? 'Loading leadership…' : 'Carregando diretoria…'}</p>
-            : currentLeadership.length ? <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto member-profile-grid" data-current-leadership="">
-              {currentLeadership.map(member => <MemberCard key={member.id} member={member} origin={membersOrigin} english={english} color="#855EDE" />)}
-            </div> : <p className="text-center text-gray-300" role="status">{english ? 'No leadership profiles are published yet.' : 'Ainda não há perfis de diretoria publicados.'}</p>}          <div className="text-center mt-12">
+            : currentLeadership.length ? <MemberCarousel members={currentLeadership} origin={membersOrigin} english={english} />
+              : <p className="text-center text-gray-300" role="status">{english ? 'No leadership profiles are published yet.' : 'Ainda não há perfis de diretoria publicados.'}</p>}          <div className="text-center mt-12">
             <a href={english ? "membros-en.html" : "membros.html"} className="inline-flex items-center gap-2 bg-gradient-to-r from-accent to-secondary px-8 py-4 rounded-full text-white font-bold text-lg hover:scale-105 transition-transform duration-300 shadow-lg hover:shadow-2xl">
               <Icon name="users" className="w-6 h-6" />
               {english ? " See Members " : " Ver Membros "}

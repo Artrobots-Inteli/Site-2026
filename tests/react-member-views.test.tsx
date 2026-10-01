@@ -75,4 +75,3 @@ describe('manual member carousel', () => {
     unmount(); expect(disconnect).toHaveBeenCalledTimes(1);
   });
 });
-

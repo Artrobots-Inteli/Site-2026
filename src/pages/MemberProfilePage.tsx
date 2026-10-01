@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { legacyTeams } from '../data/legacy-members';
 import { usePublicMembers } from '../hooks/usePublicMembers';
-import { profileState, validSiteKey } from '../lib/public-members';
+import { profileState, validProfileKey } from '../lib/public-members';
+import { ProjectRelations } from '../components/MemberCard';
 
 export function MemberProfilePage({ english, profileKey }: { english: boolean; profileKey?: string | null }) {
   const [key, setKey] = useState<string | null>(profileKey ?? null);
@@ -13,26 +14,37 @@ export function MemberProfilePage({ english, profileKey }: { english: boolean; p
     setKey(new URLSearchParams(window.location.search).get('perfil')); setQueryReady(true);
   }, [profileKey]);
   const directory = english ? 'membros-en.html' : 'membros.html';
-  const state = feed && validSiteKey(key) ? profileState(feed, key) : null;
-  const connectedPath = state?.kind === 'connected' ? state.member.profilePath : null;
-  useEffect(() => {
-    if (connectedPath) window.location.replace(`${origin}${connectedPath}${english ? '?lang=en' : ''}`);
-  }, [origin, connectedPath, english]);
+  const state = feed && validProfileKey(key) ? profileState(feed, key) : null;
+  const connected = state?.kind === 'connected' ? state.member : null;
   const records = state?.kind === 'legacy' ? legacyTeams(english).flatMap(team => team.members.filter(member => member.siteKey === key).map(member => ({ ...member, team: team.title, teamId: team.id }))) : [];
   const first = records[0];
   const legacy = first && records.every(member => member.name === first.name && member.photo === first.photo) ? first : null;
-  useEffect(() => { if (legacy) document.title = `${legacy.name} - Artrobots`; }, [legacy?.name]);
+  useEffect(() => { setHiddenPhoto(false); }, [key, connected?.photoPath]);
+  useEffect(() => { const name = connected?.name ?? legacy?.name; if (name) document.title = `${name} - Artrobots`; }, [connected?.name, legacy?.name]);
   let message = '';
   if (!queryReady || status === 'loading') message = english ? 'Loading profile…' : 'Carregando perfil…';
-  else if (!validSiteKey(key)) message = english ? 'This profile could not be found.' : 'Este perfil não foi encontrado.';
+  else if (!validProfileKey(key)) message = english ? 'This profile could not be found.' : 'Este perfil não foi encontrado.';
   else if (status === 'error') message = english ? 'We could not load this profile. Please try again.' : 'Não foi possível carregar este perfil. Tente novamente.';
-  else if (state?.kind === 'connected') message = english ? 'Opening profile…' : 'Abrindo perfil…';
   else if (state?.kind === 'withdrawn') message = english ? 'This profile is not publicly available.' : 'Este perfil não está disponível publicamente.';
   else if (state?.kind === 'historical') message = english ? 'This historical profile is not part of the current member directory.' : 'Este perfil histórico não faz parte do diretório atual de membros.';
-  else if (!legacy) message = english ? 'This profile could not be found.' : 'Este perfil não foi encontrado.';
+  else if (!legacy && !connected) message = english ? 'This profile could not be found.' : 'Este perfil não foi encontrado.';
   return <main className="member-profile-shell">
-    <a href={directory} className="member-profile-back">{english ? '← Back to members' : '← Voltar para membros'}</a>
-    <p role="status" className="text-gray-300">{message}</p>
+    <nav className="member-return-navigation" aria-label={english ? 'Profile navigation' : 'Navegação do perfil'}>
+      <a href={directory} className="member-profile-back">{english ? '← Back to members' : '← Voltar para membros'}</a>
+      <a href={english ? 'index-en.html#leadership' : 'index.html#leadership'} className="member-profile-back">{english ? 'Back to Artrobots' : 'Voltar ao site Artrobots'}</a>
+    </nav>
+    {message ? <p role="status" className="text-gray-300">{message}</p> : null}
+    {connected && status === 'ready' ? <article className="site-member-profile">
+      <div className="member-profile-heading">
+        <img src={hiddenPhoto ? 'assets/logo_circulo.png' : `${origin}${connected.photoPath}`} alt={connected.name} width={160} height={160} className="member-profile-photo" referrerPolicy="no-referrer" onError={() => setHiddenPhoto(true)} />
+        <div><p className="text-sm text-light mb-2">{english ? 'ARTROBOTS COMMUNITY' : 'COMUNIDADE ARTROBOTS'}</p>
+          <h1 className="text-4xl font-bold font-display">{connected.name}</h1><p className="site-member-position">{connected.position}</p>
+        </div>
+      </div>
+      {connected.description ? <p className="site-member-description">{connected.description}</p> : null}
+      {connected.projects.length ? <section><h2 className="text-xl font-bold">{english ? 'Projects' : 'Projetos'}</h2><ProjectRelations projects={connected.projects} english={english} links /></section> : null}
+      <a className="brand-button brand-button-secondary" href={`${origin}${connected.profilePath}/comunidade${english ? '?lang=en' : ''}`}>{english ? 'View in ArtroLove' : 'Ver na ArtroLove'}</a>
+    </article> : null}
     {legacy && status === 'ready' ? <div>
       <div className="member-profile-heading">
         {!hiddenPhoto ? <img src={legacy.photo} alt={legacy.name} width={96} height={96} className="member-profile-photo" onError={() => setHiddenPhoto(true)} /> : null}

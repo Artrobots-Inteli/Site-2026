@@ -38,8 +38,9 @@ body.artrobots-site {
 .artrobots-site .bg-gradient-to-br.from-secondary {
   background: linear-gradient(120deg, #e2d6f7, #d8ecfb);
 }
-.artrobots-site a.bg-gradient-to-r { background: var(--brand-violet); color: #fff; }
-.artrobots-site a.bg-gradient-to-r:hover { background: var(--brand-violet-deep); }
+/* Match the gradient color class so the link surface wins over pastel panels. */
+.artrobots-site a.bg-gradient-to-r:is(.from-secondary, .from-accent) { background: var(--brand-violet); color: #fff; }
+.artrobots-site a.bg-gradient-to-r:is(.from-secondary, .from-accent):hover { background: var(--brand-violet-deep); }
 .artrobots-site .shadow-xl, .artrobots-site .shadow-2xl { box-shadow: 0 8px 24px rgb(49 14 80 / 8%); }
 .artrobots-site .text-white { color: var(--brand-ink); }
 .artrobots-site .text-gray, .artrobots-site .text-gray-300, .artrobots-site .text-gray-400 {

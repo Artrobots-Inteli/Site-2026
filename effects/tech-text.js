@@ -1,5 +1,4 @@
 /*! React Bits TechText, copyright (c) 2026 David Haz. MIT + Commons Clause. See THIRD_PARTY_NOTICES.md. */
-(function () {
 'use strict';
 const LABEL_FONT = '10px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
 const FALLOFF_STEPS = 8;
@@ -34,7 +33,7 @@ const noise = (...values) => {
 const signed = value => (value > 0 ? `+${value}` : value < 0 ? `−${-value}` : '0');
 
 
-window.ArtrobotsTechText = function (container) {
+export function mountTechText(container) {
   const css = getComputedStyle(container);
   const settingsRef = { current: { text: container.textContent.trim(), fontFamily: css.fontFamily, fontWeight: 600, fontSize: parseFloat(css.fontSize), letterSpacing: -.045, color: css.color, accentColor: '#6927b5', reach: 170, softness: .7, dashLength: 4, dashGap: 2, strokeWidth: 1, lineStyle: 'dashed', reveal: 'letter', specks: 12, selection: true, labels: true, draggable: false, sweep: true, speed: .7 } };
   const wakeRef = { current() {} };
@@ -45,7 +44,7 @@ window.ArtrobotsTechText = function (container) {
     const ctx = canvas?.getContext('2d');
     const scratch = document.createElement('canvas');
     const scratchCtx = scratch.getContext('2d');
-    if (!container || !canvas || !ctx || !scratchCtx) return undefined;
+    if (!container || !canvas || !ctx || !scratchCtx) { canvas.remove(); return () => {}; }
 
     const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     let width = 1;
@@ -616,4 +615,3 @@ window.ArtrobotsTechText = function (container) {
     };
 
 };
-})();

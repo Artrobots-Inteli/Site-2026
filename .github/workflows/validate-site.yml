@@ -2,7 +2,7 @@ name: Validate site
 
 on:
   push:
-    branches: [feat/reactbits-publicado]
+    branches: [feat/reactbits-publicado, feat/react-membros-integrados]
   pull_request:
   workflow_dispatch:
 
@@ -17,5 +17,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --test tests/*.test.cjs
-      - run: node deploy/build.cjs
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - run: npm audit --omit=dev

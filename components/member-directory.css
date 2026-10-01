@@ -215,7 +215,6 @@ artrobots-member-directory, artrobots-member-profile { display: block; }
 .member-summary-copy { flex: 1; min-width: 0; }
 .artrobots-site .member-summary h3 { margin: 0; font-size: 1rem; line-height: 1.35; overflow-wrap: anywhere; }
 .artrobots-site .member-summary .connected-member-position { margin: .3rem 0 0; color: #62447b !important; font-size: .85rem; line-height: 1.4; }
-.member-summary-link { color: #684493; font-size: 1.2rem; flex: 0 0 auto; }
 .member-summary-projects { font-size: .75rem; color: #50396c; }
 .member-summary-projects ul { margin: .4rem 0 0; font-size: inherit; }
 .member-carousel { min-width: 0; max-width: 1200px; margin-inline: auto; }

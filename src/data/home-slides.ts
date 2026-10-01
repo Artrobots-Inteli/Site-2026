@@ -2,7 +2,7 @@
 export const homeSlides = {
   "pt": [
     {
-      "src": "assets/MEMBROS.jpg",
+      "src": "assets/membros-inteli-2026.jpg",
       "alt": "Membros do Artrobots",
       "title": "O clube (e quem faz acontecer)",
       "text": "Somos a Artrobots, o clube de robótica do Inteli. A gente aprende na prática: do primeiro protótipo até robôs prontos para competir, sempre com trabalho em equipe e muita mão na massa.",
@@ -39,7 +39,7 @@ export const homeSlides = {
   ],
   "en": [
     {
-      "src": "assets/MEMBROS.jpg",
+      "src": "assets/membros-inteli-2026.jpg",
       "alt": "Artrobots members",
       "title": "The club (and the people behind it)",
       "text": "We are Artrobots, Inteli's robotics club. We learn by doing: from the first prototype to competition-ready robots — always with teamwork and lots of hands-on building.",

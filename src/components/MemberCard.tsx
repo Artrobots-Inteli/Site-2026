@@ -101,7 +101,6 @@ export function MemberCard(props: MemberCardProps) {
     <div className="member-summary-copy"><h3>{name}</h3><p className="connected-member-position">{member?.position ?? legacy!.position}</p>
       {member?.projects.length ? <div className="member-summary-projects"><ProjectRelations projects={member.projects} english={english} /></div> : null}
     </div>
-    <span className="member-summary-link" aria-hidden="true">→</span>
   </a>;
   if (member) return <a ref={ref} href={href} data-public-profile-id={member.id}
     className="member-card member-profile-card connected-member-card"
@@ -116,7 +115,7 @@ export function MemberCard(props: MemberCardProps) {
       <div><h3 title={name}>{name}</h3><p className="connected-member-position">{member.position}</p></div>
       {member.projects.length ? <div className="connected-member-projects"><ProjectRelations projects={member.projects} english={english} /></div> : null}
       {member.description ? <p className="connected-member-description">{member.description}</p> : null}
-      <span className="connected-member-link">{english ? 'View profile' : 'Ver perfil'}<span aria-hidden="true">↗</span></span>
+      <span className="connected-member-link">{english ? 'View profile' : 'Ver perfil'}</span>
     </div>
     <span className="mpc-shine" aria-hidden="true" /><span className="mpc-glare" aria-hidden="true" />
   </a>;
@@ -131,7 +130,7 @@ export function MemberCard(props: MemberCardProps) {
     <h3 className="font-bold text-base leading-tight mb-0.5">{name}</h3>
     <p className="connected-member-position text-xs font-semibold" style={{ color }}>{legacy.position}</p>
     <div className="team-badge" style={{ background: `${color}1f`, color }}><MemberIcon name={legacy.icon} className="w-3 h-3" /><span>{legacy.badge}</span></div>
-    <span className="member-profile-label">{english ? 'View profile →' : 'Ver perfil →'}</span>
+    <span className="member-profile-label">{english ? 'View profile' : 'Ver perfil'}</span>
     <span className="mpc-shine" aria-hidden="true" /><span className="mpc-glare" aria-hidden="true" />
   </a>;
 }

@@ -2,7 +2,7 @@ name: Validate site
 
 on:
   push:
-    branches: [feat/reactbits-publicado, feat/react-membros-integrados]
+    branches: [main, develop, feat/reactbits-publicado, feat/react-membros-integrados]
   pull_request:
   workflow_dispatch:
 

@@ -1,6 +1,7 @@
 services:
   - type: web
     name: artrobots-site
+    branch: main
     runtime: static
     buildCommand: node deploy/build.cjs
     staticPublishPath: dist

@@ -1,3 +1,5 @@
+import { normalizePublicHttpsUrl } from './public-https-url';
+
 export const directoryGroups = ['leadership', 'projects', 'community'] as const;
 export type DirectoryGroup = typeof directoryGroups[number];
 export interface PublicMemberProject {
@@ -40,13 +42,10 @@ const identifier = (value: unknown): string => {
   return id;
 };
 function publicUrl(value: unknown): string {
-  const text = string(value, 2048);
-  if (!text) return '';
-  if (!text.startsWith('https://') || /[\s\\\u0000-\u001f]/.test(text)) throw new Error('Invalid public link');
-  const url = new URL(text);
-  if (url.protocol !== 'https:' || url.username || url.password || /^(localhost|127\.|0\.|10\.|192\.168\.|169\.254\.|172\.(1[6-9]|2\d|3[01])\.)/.test(url.hostname)
-    || url.hostname.startsWith('[') || !url.hostname.includes('.')) throw new Error('Invalid public link');
-  return text;
+  if (value === '') return '';
+  const normalized = normalizePublicHttpsUrl(value);
+  if (!normalized) throw new Error('Invalid public link');
+  return normalized;
 }
 function parseProject(input: unknown): PublicMemberProject {
   const data = record(input);

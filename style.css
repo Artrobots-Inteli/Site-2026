@@ -17,41 +17,9 @@ html {
   scroll-behavior: smooth;
 }
 
-/*
-  Content safe area for the floating spider mascot.
-  - On large screens, reserve space on the right so it doesn't overlap content.
-  - On small screens the mascot is hidden, so no extra spacing is needed.
-*/
-:root {
-  --spider-safe-right: 56px;
-  --spider-right: 6px;
-  /* Half of mascot width (w-32 = 128px) */
-  --spider-web-center-offset: 64px;
-}
-
-@media (max-width: 480px) {
-  :root {
-    --spider-safe-right: 24px;
-    --spider-right: -10px;
-  }
-}
-
-/* When the mascot is scaled down (see rule below), half-width becomes 32px */
-@media (max-width: 768px) {
-  :root {
-    --spider-web-center-offset: 32px;
-  }
-}
-
-@media (min-width: 1024px) {
-  :root {
-    --spider-safe-right: 100px;
-  }
-}
-
 .safe-container {
   padding-left: 1.5rem;
-  padding-right: calc(1.5rem + var(--spider-safe-right));
+  padding-right: 1.5rem;
 }
 
 /* Fade in animation */
@@ -68,67 +36,6 @@ html {
 
 .animate-fade-in {
   animation: fadeIn 1s ease-out;
-}
-
-/* Floating animation for hero section */
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-.floating {
-  animation: float 6s ease-in-out infinite;
-}
-
-/* Slow bounce animation for mascot */
-@keyframes bounce-slow {
-  0%,
-  100% {
-    transform: translateY(0) rotate(-5deg);
-  }
-  50% {
-    transform: translateY(-30px) rotate(5deg);
-  }
-}
-
-.animate-bounce-slow {
-  animation: bounce-slow 4s ease-in-out infinite;
-}
-
-/* Spider web styling */
-#spider-web {
-  position: fixed;
-  top: 0;
-  right: calc(var(--spider-right) + var(--spider-web-center-offset) - 2px);
-  height: 0px;
-  transition: height 0.05s linear;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
-    0 0 20px rgba(255, 255, 255, 0.5);
-}
-
-#spider-mascot {
-  right: var(--spider-right);
-  top: 80px;
-  transition: top 0.05s linear;
-  will-change: top;
-}
-
-/* Ajuste responsivo para o tamanho da aranha */
-@media (max-width: 768px) {
-  #spider-mascot {
-    transform: scale(0.5); /* Reduz o tamanho da aranha em telas menores */
-    transform-origin: top right;
-  }
-}
-
-/* Parallax effect */
-.hero-parallax {
-  transition: transform 0.1s ease-out;
 }
 
 /* Gradient text animation */
@@ -210,10 +117,7 @@ a {
 }
 
 /* Sponsor modal subtle transitions (fade backdrop + scale panel) */
-#sponsorModal,
-#curtoCircuitoModal,
-#solidworksModal,
-#elipseModal {
+#sponsorModal {
   position: fixed;
   inset: 0;
   align-items: center;
@@ -222,39 +126,24 @@ a {
   transition: opacity 0.2s ease-out;
 }
 
-#sponsorModal > div,
-#curtoCircuitoModal > div,
-#solidworksModal > div,
-#elipseModal > div {
+#sponsorModal > div {
   opacity: 0;
   transform: translateY(6px) scale(0.98);
   transition: opacity 0.2s ease-out, transform 0.2s ease-out;
 }
 
-#sponsorModal.is-open,
-#curtoCircuitoModal.is-open,
-#solidworksModal.is-open,
-#elipseModal.is-open {
+#sponsorModal.is-open {
   opacity: 1;
 }
 
-#sponsorModal.is-open > div,
-#curtoCircuitoModal.is-open > div,
-#solidworksModal.is-open > div,
-#elipseModal.is-open > div {
+#sponsorModal.is-open > div {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
 
 @media (prefers-reduced-motion: reduce) {
   #sponsorModal,
-  #sponsorModal > div,
-  #curtoCircuitoModal,
-  #curtoCircuitoModal > div,
-  #solidworksModal,
-  #solidworksModal > div,
-  #elipseModal,
-  #elipseModal > div {
+  #sponsorModal > div {
     transition: none;
   }
 }

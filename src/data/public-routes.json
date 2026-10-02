@@ -1,0 +1,8 @@
+{
+  "index.html": { "page": "home", "english": false },
+  "index-en.html": { "page": "home", "english": true },
+  "membros.html": { "page": "members", "english": false },
+  "membros-en.html": { "page": "members", "english": true },
+  "membro.html": { "page": "profile", "english": false },
+  "membro-en.html": { "page": "profile", "english": true }
+}

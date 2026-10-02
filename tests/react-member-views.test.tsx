@@ -15,6 +15,17 @@ beforeEach(() => {
 afterEach(() => { vi.unstubAllGlobals(); vi.restoreAllMocks(); localStorage.clear(); });
 
 describe('member browsing and return journey', () => {
+  it.each([false, true])('preserves all historical relationships in compact/list/cards, english=%s', async english => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: true, json: async () => ({ members: [], linkedSiteKeys: [], directoryMode: 'legacy' }) }));
+    const { container } = render(<MembersPage english={english} />);
+    await screen.findByRole('link', { name: english ? 'View Kaian Moura\'s profile' : 'Ver perfil de Kaian Moura' });
+    const original = [...container.querySelectorAll<HTMLAnchorElement>('[data-site-key]')].map(link => [link.dataset.siteKey, link.href]);
+    expect(original).toHaveLength(27);
+    for (const label of [english ? 'List' : 'Lista', 'Cards', english ? 'Compact' : 'Compacto']) {
+      fireEvent.click(screen.getByRole('button', { name: label }));
+      expect([...container.querySelectorAll<HTMLAnchorElement>('[data-site-key]')].map(link => [link.dataset.siteKey, link.href])).toEqual(original);
+    }
+  });
   it.each([false, true])('keeps the same public identities across every view and offers a home link, english=%s', async english => {
     const { container } = render(<MembersPage english={english} />);
     await screen.findByRole('link', { name: english ? "View Pessoa 0's profile" : 'Ver perfil de Pessoa 0' });

@@ -17,7 +17,7 @@ describe('member directory integration', () => {
   it('SSR renders safe loading markup without fetching or requiring DOM', () => {
     const fetcher = vi.fn(); vi.stubGlobal('fetch', fetcher);
     expect(renderToString(<MembersPage english={false} />)).toContain('Carregando membros');
-    expect(renderToString(<MemberProfilePage english={true} />)).toContain('Loading profile');
+    expect(renderToString(<MemberProfilePage english={true} profileKey={null} queryReady={false} />)).toContain('Loading profile');
     expect(fetcher).not.toHaveBeenCalled();
   });
   it('replaces only explicit linked identities and puts unallocated community last', async () => {

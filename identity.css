@@ -9,7 +9,6 @@
   --brand-paper: #f5f8fc;
   --brand-lavender: #eee9fa;
   --brand-line: #d8cce9;
-  --spider-safe-right: 0px;
 }
 
 body.artrobots-site {
@@ -168,7 +167,6 @@ body.artrobots-site {
 .artrobots-site .directory-hero p { color: #50396c; }
 
 /* A quieter reading surface for content, photographs and partner marks. */
-.artrobots-site > section[id] { border-bottom: 1px solid #e0d8ea; }
 .artrobots-site :is(#about, #sponsors, #leadership) { background: #f3effa; }
 .artrobots-site :is(#areas, #competitions, #calendar, #contact) { background: #f8fbff; }
 .artrobots-site #projects { background: #eaf2fc; }
@@ -186,8 +184,7 @@ body.artrobots-site {
   color: var(--brand-violet-deep); background: none;
   -webkit-text-fill-color: currentColor; animation: none;
 }
-.artrobots-site :is(.floating, .animate-bounce-slow, .animate-pulse) { animation: none; }
-.artrobots-site #spider-web, .artrobots-site #spider-mascot { display: none; }
+.artrobots-site .animate-pulse { animation: none; }
 .artrobots-site footer { background: #e4def1; }
 .artrobots-site #splash { background: var(--brand-lavender); }
 

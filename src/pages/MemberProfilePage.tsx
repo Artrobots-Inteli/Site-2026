@@ -4,17 +4,12 @@ import { usePublicMembers } from '../hooks/usePublicMembers';
 import { profileState, validProfileKey } from '../lib/public-members';
 import { ProjectRelations } from '../components/MemberCard';
 
-export function MemberProfilePage({ english, profileKey }: { english: boolean; profileKey?: string | null }) {
-  const [key, setKey] = useState<string | null>(profileKey ?? null);
-  const [queryReady, setQueryReady] = useState(profileKey !== undefined);
+export function MemberProfilePage({ english, profileKey = null, queryReady = true }: { english: boolean; profileKey?: string | null; queryReady?: boolean }) {
+  const key = profileKey;
   const [hiddenPhoto, setHiddenPhoto] = useState(false);
   const { feed, origin, status, retry } = usePublicMembers();
-  useEffect(() => {
-    if (profileKey !== undefined) { setKey(profileKey); setQueryReady(true); return; }
-    setKey(new URLSearchParams(window.location.search).get('perfil')); setQueryReady(true);
-  }, [profileKey]);
   const directory = english ? 'membros-en.html' : 'membros.html';
-  const state = feed && validProfileKey(key) ? profileState(feed, key) : null;
+  const state = queryReady && feed && validProfileKey(key) ? profileState(feed, key) : null;
   const connected = state?.kind === 'connected' ? state.member : null;
   const records = state?.kind === 'legacy' ? legacyTeams(english).flatMap(team => team.members.filter(member => member.siteKey === key).map(member => ({ ...member, team: team.title, teamId: team.id }))) : [];
   const first = records[0];

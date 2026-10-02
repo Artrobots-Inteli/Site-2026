@@ -1,3 +1,5 @@
+import { normalizePublicHttpsUrl } from './public-https-url';
+
 /** Public, allowlisted editorial contract. Private source IDs never enter the UI. */
 export const SITE_CONTENT_URL = 'https://artrolove.artrobots.tech/api/public/site-content';
 export const CONTENT_KINDS = ['PROJECT', 'COMPETITION', 'PARTNERSHIP', 'EVENT'] as const;
@@ -11,15 +13,7 @@ export interface SiteFeed { schemaVersion: 1; initialized: boolean; updatedAt: s
 const APP_ORIGINS = ['https://artrolove.artrobots.tech', 'https://artrolove.onrender.com'];
 
 export function publicUrl(value: unknown): string | null {
-  if (typeof value !== 'string' || !value || value.length > 2000 || /[\u0000-\u0020\u007f\\]/.test(value) || !/^https:\/\/[^/]/i.test(value)) return null;
-  try {
-    const url = new URL(value), host = url.hostname.toLowerCase().replace(/^\[|\]$/g, '');
-    if (url.protocol !== 'https:' || url.username || url.password || !host || host === 'localhost'
-      || /\.(?:localhost|local|internal)$/.test(host) || !host.includes('.') && !host.includes(':')) return null;
-    if (/^(?:0\.|10\.|127\.|169\.254\.|192\.168\.|172\.(?:1[6-9]|2\d|3[01])\.)/.test(host)
-      || host === '::' || host === '::1' || /^(?:fc|fd|fe[89ab])/.test(host) && host.includes(':') || host.startsWith('::ffff:')) return null;
-    return url.href;
-  } catch { return null; }
+  return normalizePublicHttpsUrl(value);
 }
 export function publicImage(value: unknown): string | null {
   const safe = publicUrl(value); if (!safe) return null;

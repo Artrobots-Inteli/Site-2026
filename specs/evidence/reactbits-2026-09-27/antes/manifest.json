@@ -1,0 +1,74 @@
+[
+  {
+    "file": "artrobots-completa-desktop.png",
+    "url": "https://artrobots.tech/",
+    "phase": "antes",
+    "device": "desktop",
+    "width": 1424,
+    "height": 7110,
+    "format": "JPEG",
+    "bytes": 652633,
+    "savedAt": "2026-09-27T05:42:53.829144-03:00",
+    "sha256": "bd6c0709653e9cb3435bc833d15316d5fb2cb52f506e7d17accf533586782628"
+  },
+  {
+    "file": "artrobots-completa-mobile.png",
+    "url": "https://artrobots.tech/",
+    "phase": "antes",
+    "device": "mobile",
+    "width": 375,
+    "height": 12209,
+    "format": "JPEG",
+    "bytes": 479579,
+    "savedAt": "2026-09-27T05:42:55.263652-03:00",
+    "sha256": "6dd925a810b1fbdd6bfdce890caa88987861c3bca3b4a440b19313f2b60526de"
+  },
+  {
+    "file": "artrobots-desktop.png",
+    "url": "https://artrobots.tech/",
+    "phase": "antes",
+    "device": "desktop",
+    "width": 1425,
+    "height": 990,
+    "format": "JPEG",
+    "bytes": 98945,
+    "savedAt": "2026-09-27T05:47:48.871475-03:00",
+    "sha256": "de84b1f76f755d30111f941a7dfee93f9302a2dd89cb970dde0124e5612fdad5"
+  },
+  {
+    "file": "artrobots-mobile.png",
+    "url": "https://artrobots.tech/",
+    "phase": "antes",
+    "device": "mobile",
+    "width": 375,
+    "height": 811,
+    "format": "JPEG",
+    "bytes": 32951,
+    "savedAt": "2026-09-27T05:47:54.646617-03:00",
+    "sha256": "7a256b12c4a7b4702a927375ced599aa38f252b60a0fc085b8de775eaa31b4d1"
+  },
+  {
+    "file": "membros-desktop.png",
+    "url": "https://artrobots.tech/membros.html",
+    "phase": "antes",
+    "device": "desktop",
+    "width": 1425,
+    "height": 990,
+    "format": "JPEG",
+    "bytes": 98078,
+    "savedAt": "2026-09-27T05:42:57.582379-03:00",
+    "sha256": "cab8fcffc1c515d0e50441f9b9b7ada8b22977469d532f2e9400844d18f88b59"
+  },
+  {
+    "file": "membros-mobile.png",
+    "url": "https://artrobots.tech/membros.html",
+    "phase": "antes",
+    "device": "mobile",
+    "width": 375,
+    "height": 811,
+    "format": "JPEG",
+    "bytes": 29711,
+    "savedAt": "2026-09-27T05:42:58.059546-03:00",
+    "sha256": "0cf9927e9bcf637634ab4c98a0e707a4dd71eb6ceb4c8444abc5349e0a22c431"
+  }
+]

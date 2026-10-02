@@ -1,0 +1,245 @@
+      .member-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .member-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      }
+      .member-photo {
+        transition: transform 0.3s ease;
+      }
+      .member-card:hover .member-photo {
+        transform: scale(1.06);
+      }
+      .team-section {
+        margin-bottom: 5rem;
+      }
+      .team-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.25rem;
+        margin-bottom: 2rem;
+        padding: 1.25rem 1.75rem;
+        border-radius: 1rem;
+        border-left: 5px solid;
+      }
+      .team-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.2rem 0.65rem;
+        border-radius: 9999px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        margin-top: 0.4rem;
+        letter-spacing: 0.02em;
+      }
+      .captain-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.15rem 0.55rem;
+        border-radius: 9999px;
+        font-size: 0.65rem;
+        font-weight: 700;
+        background: rgba(255, 215, 0, 0.15);
+        color: #FFD700;
+        border: 1px solid rgba(255, 215, 0, 0.4);
+        margin-bottom: 0.35rem;
+        letter-spacing: 0.03em;
+      }
+
+/* Match the directory's existing team presentation for every connected profile. */
+[hidden] { display: none !important; }
+.member-card { display: block; color: inherit; text-decoration: none; }
+.member-card:focus-visible, .member-profile-back:focus-visible {
+  outline: 3px solid #AED6F1;
+  outline-offset: 5px;
+}
+.member-profile-label { display: block; margin-top: 1rem; font-size: .75rem; color: #AED6F1; }
+.connected-member-section .team-header {
+  border-color: var(--team-color);
+  background: color-mix(in srgb, var(--team-color) 6%, transparent);
+}
+.connected-member-section h2, .connected-member-position { color: var(--team-color); }
+.member-section-icon {
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  width: 3.5rem; height: 3.5rem; margin-top: .125rem; border-radius: 9999px;
+  background: color-mix(in srgb, var(--team-color) 18%, transparent);
+  color: var(--team-color); font-size: 1.75rem;
+}
+.connected-member-card { border-color: color-mix(in srgb, var(--team-color) 30%, transparent); }
+.artrobots-site .connected-member-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: .718;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #c9ccff30;
+  border-radius: 30px;
+  background: linear-gradient(155deg, #111626 5%, #303655 55%, #123149);
+  box-shadow: 0 18px 45px -25px #050716aa;
+  text-align: center;
+  isolation: isolate;
+}
+.artrobots-site .connected-member-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, #1116267a 0%, transparent 32%, transparent 59%, #10162ba8 100%);
+}
+.artrobots-site .member-profile-card.connected-member-card > .connected-member-portrait {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.artrobots-site .connected-member-card .connected-member-portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  image-rendering: auto;
+  filter: contrast(1.02) saturate(1.04);
+  mask-image: linear-gradient(to bottom, transparent 8%, #000 45%, #000 100%);
+  transition: filter .3s ease;
+}
+.artrobots-site .connected-member-card .connected-member-content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(20px, 2.2vw, 32px) 20px 20px;
+  color: #f0edff;
+}
+.connected-member-content h3 {
+  margin: 0;
+  font-size: clamp(20px, 1.8vw, 27px);
+  line-height: 1.13;
+  font-weight: 650;
+  letter-spacing: -.8px;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+.artrobots-site .connected-member-card .connected-member-content .connected-member-position {
+  margin: 7px 0 0;
+  color: #c0c7e5 !important;
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 500;
+}
+.connected-member-projects { max-height: 4.5rem; overflow: hidden; margin-top: 8px; color: #d6dcf1; font-size: 11px; line-height: 1.35; }
+.connected-member-projects ul { margin: 0; padding: 0; list-style: none; }
+.connected-member-projects li + li { margin-top: 3px; }
+.connected-member-description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin: auto 0 12px;
+  padding: 7px 10px;
+  border-radius: 10px;
+  background: #10162bb3;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.connected-member-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: auto;
+  padding: 12px 14px;
+  border: 1px solid #ffffff24;
+  border-radius: 14px;
+  background: #10162b80;
+  backdrop-filter: blur(12px);
+  color: #f0edff;
+  font-size: 12px;
+  font-weight: 600;
+}
+.artrobots-site .connected-member-card:is(:hover, :focus-visible) {
+  border-color: #bca9fa;
+  box-shadow: 0 24px 60px -20px #9867e089, 0 0 0 1px #8ddbf080;
+}
+.artrobots-site .connected-member-card:is(:hover, :focus-visible) .connected-member-portrait img {
+  filter: contrast(1.07) saturate(1.18) brightness(1.05);
+}
+.member-profile-shell { max-width: 54rem; margin: 0 auto; padding: 8rem 1.5rem 5rem; min-height: 75vh; }
+.member-profile-back { display: inline-block; color: #AED6F1; margin-bottom: 2rem; }
+.member-profile-heading { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; }
+.member-profile-photo { width: 6rem; height: 6rem; border: 4px solid #855EDE; border-radius: 9999px; object-fit: cover; flex-shrink: 0; }
+.member-profile-history { display: grid; gap: 1rem; margin-top: 1.5rem; }
+.member-profile-history li { padding: 1.25rem; border: 1px solid #855EDE66; border-radius: 1rem; background: linear-gradient(135deg, #111827, #1F2937); }
+@media (max-width: 480px) {
+  .member-profile-heading { align-items: flex-start; gap: 1rem; }
+  .member-profile-heading h1 { font-size: 1.875rem; overflow-wrap: anywhere; }
+  .team-header { padding: 1.25rem; gap: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .member-card, .member-photo { transition: none; }
+  .member-card:hover, .member-card:hover .member-photo { transform: none; }
+  .artrobots-site .connected-member-card .connected-member-portrait img { transition: none; }
+}
+
+/* The directory and the home carousel use the same approved public feed. */
+.artrobots-site .directory-hero { min-height: 0; padding: 6.5rem 0 1.5rem !important; }
+.artrobots-site .directory-hero h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); margin-bottom: .5rem; }
+.artrobots-site .directory-hero p { font-size: 1rem; }
+.artrobots-site .directory-hero + section { padding-top: 2.5rem; }
+.artrobots-site .member-directory-toolbar + [role="status"] { margin-bottom: 0; }
+.artrobots-site .connected-member-section .team-header { padding: 1rem 1.25rem; margin-bottom: 1rem; align-items: center; }
+.artrobots-site .connected-member-section .team-header h2 { font-size: 1.5rem; }
+.artrobots-site .connected-member-section .member-section-icon { width: 2.5rem; height: 2.5rem; font-size: 1.3rem; }
+.directory-home-link { display: inline-flex; margin-bottom: 1rem; color: #51306b; font-weight: 600; font-size: .95rem; }
+.directory-home-link:hover { text-decoration: underline; }
+.directory-home-link:focus-visible, .member-view-switch button:focus-visible,
+.member-carousel button:focus-visible, .member-carousel-track:focus-visible { outline: 3px solid #7149a4; outline-offset: 4px; }
+.member-directory-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+.member-directory-toolbar > p, .member-carousel-toolbar > p { margin: 0; color: #50396c; font-size: .9rem; }
+.member-view-switch { display: flex; border: 1px solid #d6cbe5; padding: .25rem; border-radius: .85rem; background: #fff9; }
+.member-view-switch button { padding: .6rem 1rem; border-radius: .6rem; font-weight: 600; color: #51306b; min-height: 44px; }
+.member-view-switch button[aria-pressed="true"] { background: #51306b; color: #fff; }
+.member-collection { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 1rem; }
+.member-collection[data-member-view="list"] { grid-template-columns: 1fr; gap: .6rem; }
+.member-collection[data-member-view="cards"] { grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 1.25rem; }
+.artrobots-site .member-summary { display: flex; align-items: center; gap: 1rem; padding: 1.1rem; min-width: 0; text-align: left; color: #30213f; }
+.artrobots-site .member-summary-photo { width: 64px; height: 64px; flex: 0 0 64px; border-radius: 50%; object-fit: contain; background: #ebe4f6; }
+.member-summary-copy { flex: 1; min-width: 0; }
+.artrobots-site .member-summary h3 { margin: 0; font-size: 1rem; line-height: 1.35; overflow-wrap: anywhere; }
+.artrobots-site .member-summary .connected-member-position { margin: .3rem 0 0; color: #62447b !important; font-size: .85rem; line-height: 1.4; }
+.member-summary-projects { font-size: .75rem; color: #50396c; }
+.member-summary-projects ul { margin: .4rem 0 0; font-size: inherit; }
+.member-carousel { min-width: 0; max-width: 1200px; margin-inline: auto; }
+.member-carousel-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: .4rem; }
+.member-carousel-controls { display: flex; gap: .5rem; }
+.member-carousel-controls button { width: 44px; height: 44px; border: 1px solid #bca9d7; border-radius: 50%; color: #51306b; background: #fffc; font-size: 1.3rem; }
+.member-carousel-controls button:disabled { opacity: .35; cursor: default; }
+.member-carousel-controls button:not(:disabled):hover { background: #e8def5; }
+.member-carousel-track { display: grid; grid-auto-flow: column; grid-auto-columns: clamp(220px, 22vw, 260px); gap: 1rem; padding: 1rem .4rem 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: .4rem; overscroll-behavior-x: contain; scrollbar-width: thin; scrollbar-color: #b7a3ce transparent; }
+.member-carousel-track > .member-card { scroll-snap-align: start; }
+.member-return-navigation { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
+.artrobots-site .site-member-profile .member-profile-photo { width: 9rem; height: 9rem; object-fit: contain; background: #ede6f6; }
+.site-member-position { margin-top: .6rem; color: #62447b; font-size: 1.05rem; }
+.site-member-description { white-space: pre-wrap; overflow-wrap: anywhere; color: #50396c; line-height: 1.8; margin-bottom: 2rem; }
+.site-member-profile > .brand-button { margin-top: 2rem; }
+.artrobots-site #leadership h2 { color: #30213f; }
+.artrobots-site #leadership > .container > p { color: #50396c; }
+@media (min-width: 768px) {
+  .member-summary-list .member-summary-copy { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: .5rem 2rem; }
+  .member-summary-list .member-summary-projects { grid-column: 1 / -1; }
+  .artrobots-site .member-summary-list .connected-member-position { margin: 0; }
+}
+@media (max-width: 600px) {
+  .member-directory-toolbar { align-items: flex-start; }
+  .member-view-switch { width: 100%; }
+  .member-view-switch button { flex: 1; padding-inline: .75rem; }
+  .member-carousel-track { grid-auto-columns: min(260px, 84%); }
+  .artrobots-site .site-member-profile .member-profile-heading { flex-direction: column; align-items: flex-start; padding: 1.25rem; }
+}

@@ -1,0 +1,98 @@
+[
+  {
+    "file": "artrobots-completa-desktop.png",
+    "url": "https://artrobots.tech/",
+    "phase": "depois",
+    "device": "desktop",
+    "width": 1424,
+    "height": 7770,
+    "format": "JPEG",
+    "bytes": 699336,
+    "savedAt": "2026-09-27T06:11:02.810085-03:00",
+    "sha256": "be60744ad51a78e327a60b8810979a98c645b886aa7bd637ed8679ffaa893996"
+  },
+  {
+    "file": "artrobots-completa-mobile.png",
+    "url": "https://artrobots.tech/",
+    "phase": "depois",
+    "device": "mobile",
+    "width": 375,
+    "height": 13164,
+    "format": "JPEG",
+    "bytes": 512709,
+    "savedAt": "2026-09-27T06:11:59.985377-03:00",
+    "sha256": "9175b4f9407fbf15595b545608dafba8f8fb9e034f6987beb4795ccd631cbc35"
+  },
+  {
+    "file": "artrobots-desktop.png",
+    "url": "https://artrobots.tech/",
+    "phase": "depois",
+    "device": "desktop",
+    "width": 1425,
+    "height": 990,
+    "format": "JPEG",
+    "bytes": 92712,
+    "savedAt": "2026-09-27T06:10:33.160859-03:00",
+    "sha256": "a532597659ed1e501f93e8933f2ef7a9d4818cbadfd30f829966243e862987f5"
+  },
+  {
+    "file": "artrobots-mobile.png",
+    "url": "https://artrobots.tech/",
+    "phase": "depois",
+    "device": "mobile",
+    "width": 375,
+    "height": 811,
+    "format": "JPEG",
+    "bytes": 30873,
+    "savedAt": "2026-09-27T06:11:47.649132-03:00",
+    "sha256": "713998036c51f9c689081db479cd51ec39971bce3c2c691804e00d8ebfcd2611"
+  },
+  {
+    "file": "flipcard-desktop.png",
+    "url": "https://artrobots.tech/#projects",
+    "phase": "depois",
+    "device": "desktop",
+    "width": 1425,
+    "height": 990,
+    "format": "JPEG",
+    "bytes": 78923,
+    "savedAt": "2026-09-27T06:11:19.028972-03:00",
+    "sha256": "b50bdf617872256b7ddee75288cb8a7bcaba30b61d73db87f14fa4f963429bca"
+  },
+  {
+    "file": "flipcard-mobile.png",
+    "url": "https://artrobots.tech/#projects",
+    "phase": "depois",
+    "device": "mobile",
+    "width": 375,
+    "height": 811,
+    "format": "JPEG",
+    "bytes": 32479,
+    "savedAt": "2026-09-27T06:12:07.498106-03:00",
+    "sha256": "e539cecd0b96448268fa3625baff4f5e3af87f9d99815062d50e1cabffbd25ff"
+  },
+  {
+    "file": "membros-desktop.png",
+    "url": "https://artrobots.tech/membros.html",
+    "phase": "depois",
+    "device": "desktop",
+    "width": 1425,
+    "height": 990,
+    "format": "JPEG",
+    "bytes": 98524,
+    "savedAt": "2026-09-27T06:11:28.156258-03:00",
+    "sha256": "8c81239761e35981ef6d3cc8473b95ca5860f8647a4917b6b621cb10d343ea36"
+  },
+  {
+    "file": "membros-mobile.png",
+    "url": "https://artrobots.tech/membros.html",
+    "phase": "depois",
+    "device": "mobile",
+    "width": 375,
+    "height": 811,
+    "format": "JPEG",
+    "bytes": 28585,
+    "savedAt": "2026-09-27T06:11:35.06727-03:00",
+    "sha256": "27faef25f1df8bf2793adca14184ec2b41e1cf880128e5fba6a7d17c4bf08e04"
+  }
+]
